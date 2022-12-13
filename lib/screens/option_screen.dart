@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:smartgrid/screens/AccountCreationScreen.dart';
-import 'package:smartgrid/screens/DeviceCreationScreen.dart';
+
+import 'account_creation_screen.dart';
+import 'device_creation_screen.dart';
 
 class OptionScreen extends StatelessWidget {
   const OptionScreen({super.key});

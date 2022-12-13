@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:smartgrid/screens/ChargePlanListScreen.dart';
-import 'package:smartgrid/screens/ChargeRequestCreationScreen.dart';
-import 'package:smartgrid/screens/OptionScreen.dart';
+import 'charge_plan_list_screen.dart';
+import 'charge_request_creation_screen.dart';
+import 'option_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});

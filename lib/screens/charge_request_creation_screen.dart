@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:smartgrid/screens/DashboardScreen.dart';
 
-class AccountCreationScreen extends StatelessWidget {
-  const AccountCreationScreen({super.key});
+class ChargeRequestCreationScreen extends StatelessWidget {
+  const ChargeRequestCreationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Konto erstellen",
-        ),
+        title: const Text("Ladeantrag erstellen"),
       ),
       body: ListView(
         padding: const EdgeInsets.symmetric(
@@ -19,16 +16,19 @@ class AccountCreationScreen extends StatelessWidget {
         ),
         children: [
           const Icon(
-            Icons.person,
+            Icons.battery_charging_full,
             size: 200.0,
             color: Colors.green,
           ),
+          const SizedBox(
+            height: 12.0,
+          ),
           const TextField(
             decoration: InputDecoration(
-              suffixIcon: Icon(Icons.numbers),
+              suffixIcon: Icon(Icons.electrical_services),
               border: OutlineInputBorder(),
               label: Text(
-                "Kundennummer",
+                "Geräteprofil",
               ),
             ),
           ),
@@ -37,26 +37,10 @@ class AccountCreationScreen extends StatelessWidget {
           ),
           const TextField(
             decoration: InputDecoration(
-              suffixIcon: Icon(Icons.numbers),
+              suffixIcon: Icon(Icons.access_time),
               border: OutlineInputBorder(),
               label: Text(
-                "HUB-Nummer",
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 12.0,
-          ),
-          const Divider(),
-          const SizedBox(
-            height: 12.0,
-          ),
-          const TextField(
-            decoration: InputDecoration(
-              suffixIcon: Icon(Icons.location_pin),
-              border: OutlineInputBorder(),
-              label: Text(
-                "Straße",
+                "Abfahrtszeit",
               ),
             ),
           ),
@@ -65,10 +49,11 @@ class AccountCreationScreen extends StatelessWidget {
           ),
           const TextField(
             decoration: InputDecoration(
-              suffixIcon: Icon(Icons.location_pin),
+              suffixText: "kW",
+              suffixIcon: Icon(Icons.electric_car),
               border: OutlineInputBorder(),
               label: Text(
-                "Hausnummer",
+                "Maximale Leistung des Verbrauchers",
               ),
             ),
           ),
@@ -77,22 +62,11 @@ class AccountCreationScreen extends StatelessWidget {
           ),
           const TextField(
             decoration: InputDecoration(
-              suffixIcon: Icon(Icons.location_pin),
+              suffixText: "kW/h",
+              suffixIcon: Icon(Icons.electric_bolt),
               border: OutlineInputBorder(),
               label: Text(
-                "Postleitzahl",
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 12.0,
-          ),
-          const TextField(
-            decoration: InputDecoration(
-              suffixIcon: Icon(Icons.location_pin),
-              border: OutlineInputBorder(),
-              label: Text(
-                "Ort",
+                "Benötigte Kapazität",
               ),
             ),
           ),
@@ -101,11 +75,7 @@ class AccountCreationScreen extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => const DashboardScreen(),
-                ),
-              );
+              Navigator.of(context).pop();
             },
             child: const Text(
               "Fertig",

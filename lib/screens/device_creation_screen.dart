@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:smartgrid/screens/DashboardScreen.dart';
 
-import 'OptionScreen.dart';
+import 'dashboard_screen.dart';
 
-class ChargeRequestCreationScreen extends StatelessWidget {
-  const ChargeRequestCreationScreen({super.key});
+class DeviceCreationScreen extends StatelessWidget {
+  const DeviceCreationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Ladeantrag erstellen"),
+        title: const Text("Geräte Profil erstellen"),
       ),
       body: ListView(
         padding: const EdgeInsets.symmetric(
@@ -19,7 +18,7 @@ class ChargeRequestCreationScreen extends StatelessWidget {
         ),
         children: [
           const Icon(
-            Icons.battery_charging_full,
+            Icons.electrical_services,
             size: 200.0,
             color: Colors.green,
           ),
@@ -28,10 +27,10 @@ class ChargeRequestCreationScreen extends StatelessWidget {
           ),
           const TextField(
             decoration: InputDecoration(
-              suffixIcon: Icon(Icons.electrical_services),
+              suffixIcon: Icon(Icons.electric_meter),
               border: OutlineInputBorder(),
               label: Text(
-                "Geräteprofil",
+                "HUB-Anschluss",
               ),
             ),
           ),
@@ -40,10 +39,10 @@ class ChargeRequestCreationScreen extends StatelessWidget {
           ),
           const TextField(
             decoration: InputDecoration(
-              suffixIcon: Icon(Icons.access_time),
+              suffixIcon: Icon(Icons.edit),
               border: OutlineInputBorder(),
               label: Text(
-                "Abfahrtszeit",
+                "Bezeichnung",
               ),
             ),
           ),
@@ -53,23 +52,10 @@ class ChargeRequestCreationScreen extends StatelessWidget {
           const TextField(
             decoration: InputDecoration(
               suffixText: "kW",
-              suffixIcon: Icon(Icons.electric_car),
-              border: OutlineInputBorder(),
-              label: Text(
-                "Maximale Leistung des Verbrauchers",
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 12.0,
-          ),
-          const TextField(
-            decoration: InputDecoration(
-              suffixText: "kW/h",
               suffixIcon: Icon(Icons.electric_bolt),
               border: OutlineInputBorder(),
               label: Text(
-                "Benötigte Kapazität",
+                "Maximale Leistung",
               ),
             ),
           ),
@@ -78,7 +64,11 @@ class ChargeRequestCreationScreen extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => const DashboardScreen(),
+                ),
+              );
             },
             child: const Text(
               "Fertig",
