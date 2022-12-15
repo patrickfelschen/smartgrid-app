@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'dashboard_screen.dart';
+import 'app/pages/dashboard/dashboard_screen.dart';
 
-class App extends StatelessWidget {
-  const App({super.key});
+class MainApp extends StatelessWidget {
+  const MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {

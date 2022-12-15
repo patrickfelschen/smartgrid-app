@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'charge_plan_list_screen.dart';
-import 'charge_request_creation_screen.dart';
-import 'option_screen.dart';
+import '../charge_plan/charge_plan_list_screen.dart';
+import '../charge_request/charge_request_creation_screen.dart';
+import '../option/option_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});

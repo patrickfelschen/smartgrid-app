@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:smartgrid/screens/dashboard_screen.dart';
+
+import '../dashboard/dashboard_screen.dart';
 
 class AccountCreationScreen extends StatelessWidget {
   const AccountCreationScreen({super.key});

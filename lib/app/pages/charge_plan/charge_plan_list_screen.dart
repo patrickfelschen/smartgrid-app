@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:smartgrid/screens/charge_plan_screen.dart';
+
+import 'charge_plan_screen.dart';
 
 class ChargePlanListScreen extends StatelessWidget {
   const ChargePlanListScreen({super.key});
