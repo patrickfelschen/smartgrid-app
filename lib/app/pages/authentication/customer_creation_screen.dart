@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../dashboard/dashboard_screen.dart';
 
-class AccountCreationScreen extends StatelessWidget {
-  const AccountCreationScreen({super.key});
+class CustomerCreationScreen extends StatelessWidget {
+  const CustomerCreationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

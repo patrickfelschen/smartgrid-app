@@ -1,15 +1,15 @@
-import 'package:smartgrid/domain/entities/account_entity.dart';
+import 'package:smartgrid/domain/entities/customer_entity.dart';
 import 'package:smartgrid/domain/repositories/auth_repository.dart';
 
 class CustomerAuthRepository extends AuthRepository {
   @override
-  Stream<AccountEntity?> authStateChanges() {
+  Stream<CustomerEntity?> authStateChanges() {
     // TODO: implement authStateChanges
     throw UnimplementedError();
   }
 
   @override
-  Future<AccountEntity> signInAnonymously() {
+  Future<CustomerEntity> signInAnonymously() {
     // TODO: implement signInAnonymously
     throw UnimplementedError();
   }

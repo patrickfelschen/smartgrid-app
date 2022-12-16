@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../authentication/account_creation_screen.dart';
+import '../authentication/customer_creation_screen.dart';
 import '../device/device_creation_screen.dart';
 
 class OptionScreen extends StatelessWidget {
@@ -18,7 +18,7 @@ class OptionScreen extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (_) => const AccountCreationScreen(),
+                  builder: (_) => const CustomerCreationScreen(),
                 ),
               );
             },

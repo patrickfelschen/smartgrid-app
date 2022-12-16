@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class AccountCreationController extends StatelessWidget {
-  const AccountCreationController({super.key});
+class CustomerCreationController extends StatelessWidget {
+  const CustomerCreationController({super.key});
 
   @override
   Widget build(BuildContext context) {

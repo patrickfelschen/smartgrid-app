@@ -1,9 +1,9 @@
-import 'package:smartgrid/domain/entities/account_entity.dart';
+import 'package:smartgrid/domain/entities/customer_entity.dart';
 
 abstract class AuthRepository {
-  Stream<AccountEntity?> authStateChanges();
+  Stream<CustomerEntity?> authStateChanges();
 
-  Future<AccountEntity> signInAnonymously();
+  Future<CustomerEntity> signInAnonymously();
 
   Future<void> signOut();
 }
