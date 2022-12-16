@@ -42,8 +42,6 @@ class CustomerAuthRepository implements AuthRepository {
       builder: (data) => CustomerEntity.fromMap(data, data.id),
     );
 
-    //await Future.delayed(const Duration(seconds: 1));
-    //print(customerEntity);
     return createdEntity;
   }
 
