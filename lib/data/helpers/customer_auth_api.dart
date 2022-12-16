@@ -32,6 +32,7 @@ class CustomerAuthApi {
       );
 
   // GET Ladeplan erhalten
+  // PATCH Ladeplan abbrechen
   Uri chargePlans(int customerId) => _buildUri(
         endpoint: "customers/$customerId/charge-plans/",
       );
