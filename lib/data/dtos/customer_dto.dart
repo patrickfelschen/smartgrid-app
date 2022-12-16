@@ -1,1 +1,1 @@
-class AccountDTO {}
+class CustomerDTO {}
