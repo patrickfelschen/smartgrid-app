@@ -24,13 +24,23 @@ class CustomerCreationScreen extends ConsumerWidget {
       await ref
           .read(customerCreationControllerProvider.notifier)
           .signUp(creationDTO);
-
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (_) => const DashboardScreen(),
-        ),
-      );
     }
+
+    ref.listen<AsyncValue>(customerCreationControllerProvider, (_, state) {
+      if (!state.isRefreshing && state.hasValue) {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (_) => const DashboardScreen(),
+          ),
+        );
+      }
+
+      if (!state.isRefreshing && state.hasError) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(state.error.toString())),
+        );
+      }
+    });
 
     return Scaffold(
       appBar: AppBar(
