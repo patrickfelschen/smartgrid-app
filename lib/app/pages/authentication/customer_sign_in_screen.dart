@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:smartgrid/app/pages/authentication/customer_creation_controller.dart';
+import 'package:smartgrid/app/pages/authentication/customer_creation_screen.dart';
 import 'package:smartgrid/app/pages/authentication/customer_sign_in_controller.dart';
 
 import '../dashboard/dashboard_screen.dart';
@@ -15,6 +15,14 @@ class CustomerSignInScreen extends ConsumerWidget {
     void signIn() async {
       int id = 1;
       await ref.read(customerSignInControllerProvider.notifier).signIn(id);
+    }
+
+    void signUp() {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (_) => const CustomerCreationScreen(),
+        ),
+      );
     }
 
     ref.listen<AsyncValue>(customerSignInControllerProvider, (_, state) {
@@ -64,6 +72,10 @@ class CustomerSignInScreen extends ConsumerWidget {
             child: state.isLoading
                 ? const CircularProgressIndicator()
                 : const Text("Anmelden"),
+          ),
+          ElevatedButton(
+            onPressed: state.isLoading ? null : () => signUp(),
+            child: const Text("Neues Konto erstellen"),
           )
         ],
       ),
