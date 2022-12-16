@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smartgrid/app/services/customer_service.dart';
-import 'package:smartgrid/data/dtos/customer_creation_dto.dart';
 
 class CustomerSignInController extends StateNotifier<AsyncValue<void>> {
   CustomerSignInController({required this.customerService})
