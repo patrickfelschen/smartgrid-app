@@ -65,7 +65,7 @@ class CustomerAuthRepository implements AuthRepository {
     required Uri uri,
     required T Function(dynamic data) builder,
   }) async {
-    print(uri);
+    print("GET $uri");
     try {
       final response = await client.get(uri);
       switch (response.statusCode) {
@@ -93,7 +93,7 @@ class CustomerAuthRepository implements AuthRepository {
     required Object body,
     required T Function(dynamic data) builder,
   }) async {
-    print(uri);
+    print("POST $uri BODY $body");
     try {
       final response = await client.post(
         uri,
