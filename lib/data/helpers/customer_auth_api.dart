@@ -6,23 +6,20 @@ class CustomerAuthApi {
   static const String _apiPath = "/api/v1/";
 
   Uri customers() => _buildUri(
-        endpoint: "customers",
+        endpoint: "customers/",
       );
 
   Uri customer(int customerId) => _buildUri(
-        endpoint: "customers",
-        pathSegments: ["$customerId"],
+        endpoint: "customers/$customerId",
       );
 
   Uri _buildUri({
     required String endpoint,
-    Iterable<String>? pathSegments,
   }) {
     return Uri(
       scheme: "http",
       host: _apiBaseUrl,
       path: "$_apiPath$endpoint",
-      pathSegments: pathSegments,
     );
   }
 }
