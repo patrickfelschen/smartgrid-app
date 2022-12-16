@@ -10,13 +10,15 @@ class CustomerCreationController extends StateNotifier<AsyncValue<void>> {
 
   Future<void> signUp(CustomerCreationDTO creationDTO) async {
     state = const AsyncLoading<void>();
-    state =
-        await AsyncValue.guard<void>(() => customerService.signUp(creationDTO));
+    state = await AsyncValue.guard<void>(
+      () => customerService.signUp(creationDTO),
+    );
   }
 }
 
 final customerCreationControllerProvider = StateNotifierProvider.autoDispose<
     CustomerCreationController, AsyncValue<void>>((ref) {
   return CustomerCreationController(
-      customerService: ref.watch(customerServiceProvider));
+    customerService: ref.watch(customerServiceProvider),
+  );
 });

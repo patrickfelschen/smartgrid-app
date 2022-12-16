@@ -9,12 +9,15 @@ class CustomerSignInController extends StateNotifier<AsyncValue<void>> {
 
   Future<void> signIn(int id) async {
     state = const AsyncLoading<void>();
-    state = await AsyncValue.guard<void>(() => customerService.signIn(id));
+    state = await AsyncValue.guard<void>(
+      () => customerService.signIn(id),
+    );
   }
 }
 
 final customerSignInControllerProvider = StateNotifierProvider.autoDispose<
     CustomerSignInController, AsyncValue<void>>((ref) {
   return CustomerSignInController(
-      customerService: ref.watch(customerServiceProvider));
+    customerService: ref.watch(customerServiceProvider),
+  );
 });
