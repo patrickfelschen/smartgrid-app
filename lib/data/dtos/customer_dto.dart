@@ -1,1 +1,15 @@
-class CustomerDTO {}
+class CustomerDTO {
+  final int id;
+  final String street;
+  final String number;
+  final String postalcode;
+  final String city;
+
+  CustomerDTO({
+    required this.id,
+    required this.street,
+    required this.number,
+    required this.postalcode,
+    required this.city,
+  });
+}

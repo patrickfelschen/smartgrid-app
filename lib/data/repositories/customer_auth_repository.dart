@@ -10,13 +10,30 @@ class CustomerAuthRepository extends AuthRepository {
   }
 
   @override
-  Future<CustomerEntity> signUp() {
-    // TODO: implement signUp
-    throw UnimplementedError();
+  Future<CustomerEntity> signUp(
+    int id,
+    String street,
+    String number,
+    String postalcode,
+    String city,
+  ) async {
+    CustomerEntity customerEntity = CustomerEntity(
+      id: id,
+      street: street,
+      number: number,
+      postalcode: postalcode,
+      city: city,
+    );
+
+    await Future.delayed(const Duration(seconds: 1));
+
+    print(customerEntity);
+
+    return customerEntity;
   }
 
   @override
-  Future<CustomerEntity> signIn() {
+  Future<CustomerEntity> signIn(int id) {
     // TODO: implement signIn
     throw UnimplementedError();
   }
@@ -27,3 +44,9 @@ class CustomerAuthRepository extends AuthRepository {
     throw UnimplementedError();
   }
 }
+
+final customerAuthRepositoryProvider = Provider<CustomerAuthRepository>((ref) {
+  final customerAuthRepository = CustomerAuthRepository();
+  ref.onDispose(() => customerAuthRepository.signOut());
+  return customerAuthRepository;
+});

@@ -3,9 +3,10 @@ import 'package:smartgrid/domain/entities/customer_entity.dart';
 abstract class AuthRepository {
   Stream<CustomerEntity?> authStateChanges();
 
-  Future<CustomerEntity> signUp();
+  Future<CustomerEntity> signUp(
+      int id, String street, String number, String postalcode, String city);
 
-  Future<CustomerEntity> signIn();
+  Future<CustomerEntity> signIn(int id);
 
   Future<void> signOut();
 }

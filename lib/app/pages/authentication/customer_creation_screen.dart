@@ -1,12 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:smartgrid/app/pages/authentication/customer_creation_controller.dart';
+import 'package:smartgrid/data/dtos/customer_creation_dto.dart';
 
 import '../dashboard/dashboard_screen.dart';
 
-class CustomerCreationScreen extends StatelessWidget {
+class CustomerCreationScreen extends ConsumerWidget {
   const CustomerCreationScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final AsyncValue<void> state =
+        ref.watch(customerCreationControllerProvider);
+
+    void signUp() async {
+      CustomerCreationDTO creationDTO = CustomerCreationDTO(
+        id: 1,
+        street: "Straße",
+        number: "5",
+        postalcode: "12345",
+        city: "Entenhausen",
+      );
+      await ref
+          .read(customerCreationControllerProvider.notifier)
+          .signUp(creationDTO);
+
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (_) => const DashboardScreen(),
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -101,16 +126,10 @@ class CustomerCreationScreen extends StatelessWidget {
             height: 12.0,
           ),
           ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => const DashboardScreen(),
-                ),
-              );
-            },
-            child: const Text(
-              "Fertig",
-            ),
+            onPressed: state.isLoading ? null : () => signUp(),
+            child: state.isLoading
+                ? const CircularProgressIndicator()
+                : const Text("Fertig"),
           ),
         ],
       ),
