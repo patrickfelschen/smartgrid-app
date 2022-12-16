@@ -4,7 +4,12 @@ abstract class AuthRepository {
   Stream<CustomerEntity?> authStateChanges();
 
   Future<CustomerEntity> signUp(
-      int id, String street, String number, String postalcode, String city);
+    int id,
+    String street,
+    String number,
+    String postalcode,
+    String city,
+  );
 
   Future<CustomerEntity> signIn(int id);
 
