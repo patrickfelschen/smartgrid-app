@@ -33,9 +33,20 @@ class CustomerAuthRepository extends AuthRepository {
   }
 
   @override
-  Future<CustomerEntity> signIn(int id) {
-    // TODO: implement signIn
-    throw UnimplementedError();
+  Future<CustomerEntity> signIn(int id) async {
+    CustomerEntity customerEntity = CustomerEntity(
+      id: id,
+      street: "Musterweg",
+      number: "5",
+      postalcode: "12345",
+      city: "Musterstadt",
+    );
+
+    await Future.delayed(const Duration(seconds: 1));
+
+    print(customerEntity);
+
+    return customerEntity;
   }
 
   @override
