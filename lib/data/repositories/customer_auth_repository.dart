@@ -2,11 +2,14 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:smartgrid/data/dtos/customer_creation_dto.dart';
 import 'package:smartgrid/data/helpers/customer_auth_api.dart';
 import 'package:smartgrid/domain/entities/customer_entity.dart';
 import 'package:smartgrid/domain/repositories/auth_repository.dart';
 
 import 'package:http/http.dart' as http;
+
+import '../dtos/customer_dto.dart';
 
 class CustomerAuthRepository implements AuthRepository {
   CustomerAuthRepository({required this.api, required this.client});
@@ -28,7 +31,7 @@ class CustomerAuthRepository implements AuthRepository {
     String postalcode,
     String city,
   ) async {
-    CustomerEntity customerEntity = CustomerEntity(
+    CustomerCreationDTO customerCreationDTO = CustomerCreationDTO(
       id: id,
       street: street,
       number: number,
@@ -36,21 +39,23 @@ class CustomerAuthRepository implements AuthRepository {
       city: city,
     );
 
-    CustomerEntity createdEntity = await _postData(
+    CustomerDTO customerDTO = await _postData(
       uri: api.customers(),
-      body: customerEntity.toMap(),
-      builder: (data) => CustomerEntity.fromMap(data, data.id),
+      body: customerCreationDTO.toMap(),
+      builder: (data) => CustomerDTO.fromMap(data),
     );
 
-    return createdEntity;
+    return CustomerDTO.fromDTO(customerDTO);
   }
 
   @override
-  Future<CustomerEntity> signIn(int id) {
-    return _getData(
+  Future<CustomerEntity> signIn(int id) async {
+    CustomerDTO customerDTO = await _getData(
       uri: api.customer(id),
-      builder: (data) => CustomerEntity.fromMap(data, data.id),
+      builder: (data) => CustomerDTO.fromMap(data),
     );
+
+    return CustomerDTO.fromDTO(customerDTO);
   }
 
   @override

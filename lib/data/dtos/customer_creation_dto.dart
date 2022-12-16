@@ -12,4 +12,24 @@ class CustomerCreationDTO {
     required this.postalcode,
     required this.city,
   });
+
+  factory CustomerCreationDTO.fromMap(Map<String, dynamic> map) {
+    return CustomerCreationDTO(
+      id: map["id"],
+      street: map["street"],
+      number: map["number"],
+      postalcode: map["postalcode"],
+      city: map["city"],
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      "id": id,
+      "street": street,
+      "number": number,
+      "postalcode": postalcode,
+      "city": city
+    };
+  }
 }
