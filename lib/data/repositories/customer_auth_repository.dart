@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smartgrid/data/dtos/customer_creation_dto.dart';
-import 'package:smartgrid/data/helpers/customer_auth_api.dart';
+import 'package:smartgrid/data/helpers/smart_grid_api.dart';
 import 'package:smartgrid/domain/entities/customer_entity.dart';
 import 'package:smartgrid/domain/repositories/auth_repository.dart';
 
@@ -14,7 +14,7 @@ import '../dtos/customer_dto.dart';
 class CustomerAuthRepository implements AuthRepository {
   CustomerAuthRepository({required this.api, required this.client});
 
-  final CustomerAuthApi api;
+  final SmartGridApi api;
   final http.Client client;
 
   @override
@@ -125,7 +125,7 @@ class CustomerAuthRepository implements AuthRepository {
 
 final customerAuthRepositoryProvider = Provider<CustomerAuthRepository>((ref) {
   final customerAuthRepository = CustomerAuthRepository(
-    api: CustomerAuthApi(),
+    api: SmartGridApi(),
     client: http.Client(),
   );
   // ref.onDispose(() => customerAuthRepository.signOut());

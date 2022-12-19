@@ -1,7 +1,7 @@
 import '../constants.dart';
 
 /// Uri builder class for the Smart Grid API
-class CustomerAuthApi {
+class SmartGridApi {
   static const String _apiBaseUrl = kSmartGridApiBaseUrl;
   static const String _apiPath = "/api/v1/";
 
