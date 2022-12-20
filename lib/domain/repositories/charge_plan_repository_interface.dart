@@ -10,4 +10,8 @@ abstract class ChargePlanRepositoryInterface {
     double capacity,
     DateTime deadline,
   );
+
+  Future<List<ChargePlanEntity>> getAllChargePlans();
+
+  Future<ChargePlanEntity> getChargePlan();
 }
