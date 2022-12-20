@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smartgrid/data/dtos/charge_request_creation_dto.dart';
-import 'package:smartgrid/data/repositories/charge_plan_repository.dart';
-import 'package:smartgrid/data/repositories/customer_auth_repository.dart';
+import 'package:smartgrid/data/repositories/charge_repository.dart';
+import 'package:smartgrid/data/repositories/customer_repository.dart';
 import 'package:smartgrid/domain/entities/charge_plan_entity.dart';
 import 'package:smartgrid/domain/entities/charge_request_entity.dart';
 import 'package:smartgrid/domain/entities/customer_entity.dart';
@@ -16,10 +16,10 @@ class ChargePlanService {
     ChargeRequestCreationDTO creationDto,
   ) async {
     CustomerEntity? currentCustomer =
-        await ref.read(customerAuthRepositoryProvider).getCurrentUser();
+        await ref.read(customerRepositoryProvider).getCurrentUser();
 
     ChargeRequestEntity chargeRequestEntity =
-        await ref.read(chargePlanRepositoryProvider).createChargeRequest(
+        await ref.read(chargeRepositoryProvider).createChargeRequest(
               currentCustomer!.id,
               deviceId,
               creationDto.maxRequiredPower,
@@ -32,14 +32,14 @@ class ChargePlanService {
 
   Future<List<ChargePlanEntity>> getAllChargePlans() async {
     List<ChargePlanEntity> chargePlans =
-        await ref.read(chargePlanRepositoryProvider).getAllChargePlans();
+        await ref.read(chargeRepositoryProvider).getAllChargePlans();
 
     return chargePlans;
   }
 
   Future<ChargePlanEntity> getChargePlan(int id) async {
     ChargePlanEntity chargePlanEntity =
-        await ref.read(chargePlanRepositoryProvider).getChargePlan(id);
+        await ref.read(chargeRepositoryProvider).getChargePlan(id);
     return chargePlanEntity;
   }
 }

@@ -7,10 +7,10 @@ import 'package:smartgrid/domain/entities/charge_plan_time_entity.dart';
 import 'package:smartgrid/domain/entities/charge_request_entity.dart';
 import 'package:smartgrid/domain/entities/device_entity.dart';
 import 'package:smartgrid/domain/entities/charge_plan_entity.dart';
-import 'package:smartgrid/domain/repositories/charge_plan_repository_interface.dart';
+import 'package:smartgrid/domain/repositories/charge_repository_interface.dart';
 
-class ChargePlanRepository implements ChargePlanRepositoryInterface {
-  ChargePlanRepository({
+class ChargeRepository implements ChargeRepositoryInterface {
+  ChargeRepository({
     required this.api,
     required this.requestHelper,
   });
@@ -60,8 +60,8 @@ class ChargePlanRepository implements ChargePlanRepositoryInterface {
   }
 }
 
-final chargePlanRepositoryProvider = Provider<ChargePlanRepository>((ref) {
-  final chargePlanRepository = ChargePlanRepository(
+final chargeRepositoryProvider = Provider<ChargeRepository>((ref) {
+  final chargePlanRepository = ChargeRepository(
     api: SmartGridApi(),
     requestHelper: HttpRequestHelper(),
   );
