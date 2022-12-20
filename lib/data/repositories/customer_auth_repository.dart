@@ -88,7 +88,6 @@ class CustomerAuthRepository implements AuthRepository {
         //throw const APIError.unknown();
       }
     } on SocketException catch (e) {
-      print(e);
       throw Exception("noInternetConnection");
       //throw const APIError.noInternetConnection();
     }
@@ -120,7 +119,6 @@ class CustomerAuthRepository implements AuthRepository {
         //throw const APIError.unknown();
       }
     } on SocketException catch (e) {
-      print(e);
       throw Exception("noInternetConnection");
       //throw const APIError.noInternetConnection();
     }
