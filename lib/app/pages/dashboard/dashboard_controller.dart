@@ -3,14 +3,16 @@ import 'package:smartgrid/app/services/dashboard_service.dart';
 
 class DashboardController extends StateNotifier<AsyncValue<void>> {
   DashboardController({required this.dashboardService})
-      : super(const AsyncData<void>(null));
+      : super(const AsyncData<void>(null)) {
+    getDashboardInfo();
+  }
 
   final DashboardService dashboardService;
 
-  Future<void> getDashboardInfo(int id) async {
+  Future<void> getDashboardInfo() async {
     state = const AsyncLoading<void>();
     state = await AsyncValue.guard<void>(
-      () => dashboardService.getDashboardInfo(id),
+      () => dashboardService.getDashboardInfo(),
     );
   }
 }

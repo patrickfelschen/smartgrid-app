@@ -4,9 +4,11 @@ import 'package:smartgrid/domain/repositories/dashboard_repository_interface.dar
 
 class DashboardRepository implements DashboardRepositoryInterface {
   @override
-  Future<DashboardInfoEntity> getDashboardInfo(int id) {
-    // TODO: implement getDashboardInfo
-    throw UnimplementedError();
+  Future<DashboardInfoEntity> getDashboardInfo(int? id) {
+    Future.delayed(const Duration(seconds: 1));
+    return Future.value(
+      DashboardInfoEntity(totalCo2ValueNotSmart: 280, totalCo2ValueSmart: 170),
+    );
   }
 }
 

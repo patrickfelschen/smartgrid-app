@@ -56,7 +56,7 @@ class CustomerCreationScreen extends ConsumerWidget {
       if (!state.isRefreshing && state.hasValue) {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (_) => const DashboardScreen(),
+            builder: (_) => DashboardScreen(),
           ),
         );
       }

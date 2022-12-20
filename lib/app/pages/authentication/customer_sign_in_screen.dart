@@ -35,7 +35,7 @@ class CustomerSignInScreen extends ConsumerWidget {
       if (!state.isRefreshing && state.hasValue) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (_) => const DashboardScreen(),
+            builder: (_) => DashboardScreen(),
           ),
         );
       }
