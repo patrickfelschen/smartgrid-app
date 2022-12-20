@@ -32,9 +32,14 @@ class SmartGridApi {
       );
 
   // GET Ladeplan erhalten
-  // PATCH Ladeplan abbrechen
   Uri chargePlans(int customerId) => _buildUri(
         endpoint: "customers/$customerId/charge-plans/",
+      );
+
+  // GET Ladeplan erhalten
+  // PATCH Ladeplan abbrechen
+  Uri chargePlan(int customerId, int chargePlanId) => _buildUri(
+        endpoint: "customers/$customerId/charge-plans/$chargePlanId",
       );
 
   // GET Dasboardinfo erhalten

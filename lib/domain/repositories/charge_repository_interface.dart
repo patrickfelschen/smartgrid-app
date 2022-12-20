@@ -1,6 +1,5 @@
 import 'package:smartgrid/domain/entities/charge_plan_entity.dart';
 import 'package:smartgrid/domain/entities/charge_request_entity.dart';
-import 'package:smartgrid/domain/entities/device_entity.dart';
 
 abstract class ChargeRepositoryInterface {
   Future<ChargeRequestEntity> createChargeRequest(
@@ -11,7 +10,7 @@ abstract class ChargeRepositoryInterface {
     DateTime deadline,
   );
 
-  Future<List<ChargePlanEntity>> getAllChargePlans();
+  Future<List<ChargePlanEntity>> getAllChargePlans(int customerId);
 
-  Future<ChargePlanEntity> getChargePlan(int id);
+  Future<ChargePlanEntity> getChargePlan(int customerId, int chargePlanId);
 }
