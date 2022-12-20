@@ -30,6 +30,10 @@ class CustomerService {
     CustomerEntity entity = await ref.read(_authRepository).signIn(id);
     return entity;
   }
+
+  Future<void> signOut() async {
+    await ref.read(_authRepository).signOut();
+  }
 }
 
 final customerServiceProvider = Provider<CustomerService>((ref) {
