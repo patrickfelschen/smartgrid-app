@@ -4,15 +4,15 @@ import 'package:smartgrid/domain/entities/device_entity.dart';
 class ChargeRequestDTO {
   final int id;
   final DeviceEntity deviceEntity;
-  final double requiredPower;
-  final double capacity;
+  final double maxRequiredPower;
+  final double requiredCapacity;
   final DateTime deadline;
 
   ChargeRequestDTO({
     required this.id,
     required this.deviceEntity,
-    required this.requiredPower,
-    required this.capacity,
+    required this.maxRequiredPower,
+    required this.requiredCapacity,
     required this.deadline,
   });
 
@@ -20,9 +20,9 @@ class ChargeRequestDTO {
     return ChargeRequestDTO(
       id: map["id"],
       deviceEntity: map["deviceEntity"],
-      requiredPower: map["street"],
-      capacity: map["number"],
-      deadline: map["postalcode"],
+      maxRequiredPower: map["maxRequiredPower"],
+      requiredCapacity: map["requiredCapacity"],
+      deadline: map["deadline"],
     );
   }
 
@@ -30,8 +30,8 @@ class ChargeRequestDTO {
     return {
       "id": id,
       "deviceEntity": deviceEntity,
-      "requiredPower": requiredPower,
-      "capacity": capacity,
+      "maxRequiredPower": maxRequiredPower,
+      "requiredCapacity": requiredCapacity,
       "deadline": deadline,
     };
   }
@@ -40,8 +40,8 @@ class ChargeRequestDTO {
     return ChargeRequestEntity(
       id: dto.id,
       deviceEntity: dto.deviceEntity,
-      requiredPower: dto.requiredPower,
-      capacity: dto.capacity,
+      maxRequiredPower: dto.maxRequiredPower,
+      requiredCapacity: dto.requiredCapacity,
       deadline: dto.deadline,
     );
   }

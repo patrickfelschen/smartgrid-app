@@ -18,7 +18,7 @@ class OptionScreen extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (_) => const CustomerCreationScreen(),
+                  builder: (_) => CustomerCreationScreen(),
                 ),
               );
             },

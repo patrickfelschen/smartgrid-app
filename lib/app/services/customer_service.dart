@@ -12,6 +12,7 @@ class CustomerService {
     CustomerEntity entity =
         await ref.read(customerAuthRepositoryProvider).signUp(
               creationDTO.id,
+              creationDTO.hubId,
               creationDTO.street,
               creationDTO.number,
               creationDTO.postalcode,

@@ -3,20 +3,20 @@ import 'package:smartgrid/domain/entities/device_entity.dart';
 class ChargeRequestEntity {
   final int id;
   final DeviceEntity deviceEntity;
-  final double requiredPower;
-  final double capacity;
+  final double maxRequiredPower;
+  final double requiredCapacity;
   final DateTime deadline;
 
   ChargeRequestEntity({
     required this.id,
     required this.deviceEntity,
-    required this.requiredPower,
-    required this.capacity,
+    required this.maxRequiredPower,
+    required this.requiredCapacity,
     required this.deadline,
   });
 
   @override
   String toString() {
-    return "$id $deviceEntity $requiredPower $capacity $deadline";
+    return "$id $deviceEntity $maxRequiredPower $requiredCapacity $deadline";
   }
 }

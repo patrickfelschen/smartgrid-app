@@ -2,6 +2,7 @@ import 'package:smartgrid/domain/entities/customer_entity.dart';
 
 class CustomerDTO {
   final int id;
+  final int hubId;
   final String street;
   final String number;
   final String postalcode;
@@ -9,6 +10,7 @@ class CustomerDTO {
 
   CustomerDTO({
     required this.id,
+    required this.hubId,
     required this.street,
     required this.number,
     required this.postalcode,
@@ -18,6 +20,7 @@ class CustomerDTO {
   factory CustomerDTO.fromMap(Map<String, dynamic> map) {
     return CustomerDTO(
       id: map["id"],
+      hubId: map["hubId"],
       street: map["street"],
       number: map["number"],
       postalcode: map["postalcode"],
@@ -38,6 +41,7 @@ class CustomerDTO {
   static CustomerEntity fromDTO(CustomerDTO dto) {
     return CustomerEntity(
       id: dto.id,
+      hubId: dto.hubId,
       street: dto.street,
       number: dto.number,
       postalcode: dto.postalcode,

@@ -11,7 +11,7 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: const CustomerSignInScreen(),
+      home: CustomerSignInScreen(),
     );
   }
 }

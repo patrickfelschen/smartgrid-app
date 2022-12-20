@@ -9,8 +9,8 @@ class ChargePlanEntity {
   final ChargeRequestEntity request;
   final double co2ValueSmart;
   final double co2ValueNotSmart;
-  final List<ChargePlanTimeEntity> times;
   final String status;
+  final List<ChargePlanTimeEntity> times;
 
   ChargePlanEntity({
     required this.id,
@@ -18,7 +18,7 @@ class ChargePlanEntity {
     required this.request,
     required this.co2ValueSmart,
     required this.co2ValueNotSmart,
-    required this.times,
     required this.status,
+    required this.times,
   });
 }

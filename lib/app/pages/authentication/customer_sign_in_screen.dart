@@ -6,28 +6,34 @@ import 'package:smartgrid/app/pages/authentication/customer_sign_in_controller.d
 import '../dashboard/dashboard_screen.dart';
 
 class CustomerSignInScreen extends ConsumerWidget {
-  const CustomerSignInScreen({super.key});
+  final TextEditingController customerIdController = TextEditingController();
+
+  CustomerSignInScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<void> state = ref.watch(customerSignInControllerProvider);
 
     void signIn() async {
-      int id = 1;
-      await ref.read(customerSignInControllerProvider.notifier).signIn(id);
+      String customerIdText = customerIdController.text.trim();
+      if (customerIdText.isEmpty) return;
+      int customerId = int.parse(customerIdText);
+      await ref
+          .read(customerSignInControllerProvider.notifier)
+          .signIn(customerId);
     }
 
     void signUp() {
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (_) => const CustomerCreationScreen(),
+          builder: (_) => CustomerCreationScreen(),
         ),
       );
     }
 
     ref.listen<AsyncValue>(customerSignInControllerProvider, (_, state) {
       if (!state.isRefreshing && state.hasValue) {
-        Navigator.of(context).push(
+        Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (_) => const DashboardScreen(),
           ),
@@ -36,10 +42,48 @@ class CustomerSignInScreen extends ConsumerWidget {
 
       if (!state.isRefreshing && state.hasError) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(state.error.toString())),
+          SnackBar(
+            content: Text(state.error.toString()),
+          ),
         );
       }
     });
+
+    Widget body = ListView(
+      padding: const EdgeInsets.symmetric(
+        vertical: 12.0,
+        horizontal: 12.0,
+      ),
+      children: [
+        const Icon(
+          Icons.person,
+          size: 200.0,
+          color: Colors.green,
+        ),
+        TextField(
+          controller: customerIdController,
+          keyboardType: TextInputType.number,
+          decoration: const InputDecoration(
+            suffixIcon: Icon(Icons.key),
+            border: OutlineInputBorder(),
+            label: Text(
+              "Kundennummer",
+            ),
+            //errorText: state.hasError ? state.error.toString() : null,
+          ),
+        ),
+        ElevatedButton(
+          onPressed: state.isLoading ? null : () => signIn(),
+          child: state.isLoading
+              ? const CircularProgressIndicator()
+              : const Text("Anmelden"),
+        ),
+        OutlinedButton(
+          onPressed: state.isLoading ? null : () => signUp(),
+          child: const Text("Neues Konto erstellen"),
+        )
+      ],
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -47,38 +91,7 @@ class CustomerSignInScreen extends ConsumerWidget {
           "Anmelden",
         ),
       ),
-      body: ListView(
-        padding: const EdgeInsets.symmetric(
-          vertical: 12.0,
-          horizontal: 12.0,
-        ),
-        children: [
-          const Icon(
-            Icons.person,
-            size: 200.0,
-            color: Colors.green,
-          ),
-          const TextField(
-            decoration: InputDecoration(
-              suffixIcon: Icon(Icons.key),
-              border: OutlineInputBorder(),
-              label: Text(
-                "Kundennummer",
-              ),
-            ),
-          ),
-          ElevatedButton(
-            onPressed: state.isLoading ? null : () => signIn(),
-            child: state.isLoading
-                ? const CircularProgressIndicator()
-                : const Text("Anmelden"),
-          ),
-          ElevatedButton(
-            onPressed: state.isLoading ? null : () => signUp(),
-            child: const Text("Neues Konto erstellen"),
-          )
-        ],
-      ),
+      body: body,
     );
   }
 }

@@ -2,6 +2,7 @@ typedef CustomerID = int;
 
 class CustomerEntity {
   final int id;
+  final int hubId;
   final String street;
   final String number;
   final String postalcode;
@@ -9,6 +10,7 @@ class CustomerEntity {
 
   CustomerEntity({
     required this.id,
+    required this.hubId,
     required this.street,
     required this.number,
     required this.postalcode,
@@ -17,6 +19,6 @@ class CustomerEntity {
 
   @override
   String toString() {
-    return "$id $street $number $postalcode $city";
+    return "$id $hubId $street $number $postalcode $city";
   }
 }

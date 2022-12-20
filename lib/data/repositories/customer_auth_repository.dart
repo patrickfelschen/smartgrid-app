@@ -26,6 +26,7 @@ class CustomerAuthRepository implements AuthRepository {
   @override
   Future<CustomerEntity> signUp(
     int id,
+    int hubId,
     String street,
     String number,
     String postalcode,
@@ -33,6 +34,7 @@ class CustomerAuthRepository implements AuthRepository {
   ) async {
     CustomerCreationDTO customerCreationDTO = CustomerCreationDTO(
       id: id,
+      hubId: hubId,
       street: street,
       number: number,
       postalcode: postalcode,
@@ -85,7 +87,8 @@ class CustomerAuthRepository implements AuthRepository {
           throw Exception("unknown");
         //throw const APIError.unknown();
       }
-    } on SocketException catch (_) {
+    } on SocketException catch (e) {
+      print(e);
       throw Exception("noInternetConnection");
       //throw const APIError.noInternetConnection();
     }
@@ -116,7 +119,8 @@ class CustomerAuthRepository implements AuthRepository {
           throw Exception("unknown");
         //throw const APIError.unknown();
       }
-    } on SocketException catch (_) {
+    } on SocketException catch (e) {
+      print(e);
       throw Exception("noInternetConnection");
       //throw const APIError.noInternetConnection();
     }
