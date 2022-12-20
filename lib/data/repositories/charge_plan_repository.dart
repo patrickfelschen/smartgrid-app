@@ -45,7 +45,7 @@ class ChargePlanRepository implements ChargePlanRepositoryInterface {
   }
 
   @override
-  Future<ChargePlanEntity> getChargePlan() {
+  Future<ChargePlanEntity> getChargePlan(int id) {
     // TODO: implement getChargePlan
     throw UnimplementedError();
   }

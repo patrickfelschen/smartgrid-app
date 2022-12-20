@@ -27,6 +27,12 @@ class ChargePlanService {
 
     return chargePlans;
   }
+
+  Future<ChargePlanEntity> getChargePlan(int id) async {
+    ChargePlanEntity chargePlanEntity =
+        await ref.read(chargePlanRepositoryProvider).getChargePlan(id);
+    return chargePlanEntity;
+  }
 }
 
 final chargePlanServiceProvider = Provider<ChargePlanService>((ref) {
