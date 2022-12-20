@@ -9,7 +9,7 @@
   "id": 1000,
   "hubid": 2000,
   "street": "Musterstraße",
-  "number": 42,
+  "number": "42",
   "postalcode": "01234",
   "city": "Musterstadt"
 }
@@ -20,7 +20,7 @@
   "id": 1000,
   "hubid": 2000,
   "street": "Musterstraße",
-  "number": 42,
+  "number": "42",
   "postalcode": "01234",
   "city": "Musterstadt"
 }
@@ -41,7 +41,7 @@
   "id": 1000,
   "hubid": 2000,
   "street": "Musterstraße",
-  "number": 42,
+  "number": "42",
   "postalcode": "01234",
   "city": "Musterstadt"
 }
@@ -66,7 +66,7 @@
   "id": 1000,
   "hubid": 2000,
   "street": "Musterweg",
-  "number": 122,
+  "number": "122",
   "postalcode": "01234",
   "city": "Musterstadt"
 }
