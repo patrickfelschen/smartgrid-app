@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:smartgrid/app/pages/dashboard/dashboard_controller.dart';
 import '../charge_plan/charge_plan_list_screen.dart';
 import '../charge_request/charge_request_creation_screen.dart';
 import '../option/option_screen.dart';
 
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends ConsumerWidget {
   const DashboardScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final AsyncValue<void> state = ref.watch(dashboardControllerProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Smart Grid"),
