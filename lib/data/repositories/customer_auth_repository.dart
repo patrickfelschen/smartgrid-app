@@ -127,7 +127,7 @@ class CustomerAuthRepository implements AuthRepository {
   }
 }
 
-final customerAuthRepositoryProvider = Provider<CustomerAuthRepository>((ref) {
+final customerAuthRepositoryProvider = Provider<AuthRepository>((ref) {
   final customerAuthRepository = CustomerAuthRepository(
     api: SmartGridApi(),
     client: http.Client(),
