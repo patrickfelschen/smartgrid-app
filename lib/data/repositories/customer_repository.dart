@@ -80,7 +80,7 @@ class CustomerAuthRepository implements AuthRepository {
   }
 }
 
-final customerAuthRepositoryProvider = Provider<AuthRepository>((ref) {
+final customerRepositoryProvider = Provider<AuthRepository>((ref) {
   final customerAuthRepository = CustomerAuthRepository(
     api: SmartGridApi(),
     requestHelper: HttpRequestHelper(),

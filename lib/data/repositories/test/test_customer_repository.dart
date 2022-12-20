@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smartgrid/domain/entities/customer_entity.dart';
 
-import '../../domain/repositories/auth_repository.dart';
+import '../../../domain/repositories/auth_repository.dart';
 
-class TestAuthRepository implements AuthRepository {
+class TestCustomerRepository implements AuthRepository {
   CustomerEntity? _currentUser;
 
   @override
@@ -56,7 +56,7 @@ class TestAuthRepository implements AuthRepository {
   }
 }
 
-final testAuthRepositoryProvider = Provider<AuthRepository>((ref) {
-  final customerAuthRepository = TestAuthRepository();
+final testCustomerRepositoryProvider = Provider<AuthRepository>((ref) {
+  final customerAuthRepository = TestCustomerRepository();
   return customerAuthRepository;
 });
