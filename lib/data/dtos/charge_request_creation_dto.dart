@@ -34,4 +34,9 @@ class ChargeRequestCreationDTO {
       "deadline": deadline,
     };
   }
+
+  @override
+  String toString() {
+    return "$id $deviceEntity $requiredPower $capacity $deadline";
+  }
 }

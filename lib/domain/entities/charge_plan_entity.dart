@@ -21,4 +21,9 @@ class ChargePlanEntity {
     required this.status,
     required this.times,
   });
+
+  @override
+  String toString() {
+    return "$id $device $request $co2ValueSmart $co2ValueNotSmart $times $status";
+  }
 }

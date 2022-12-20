@@ -8,4 +8,9 @@ class DeviceEntity {
     required this.description,
     required this.maxPower,
   });
+
+  @override
+  String toString() {
+    return "$id $description $maxPower";
+  }
 }
