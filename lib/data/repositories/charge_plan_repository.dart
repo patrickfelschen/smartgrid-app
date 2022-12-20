@@ -37,6 +37,18 @@ class ChargePlanRepository implements ChargePlanRepositoryInterface {
       status: "Active",
     );
   }
+
+  @override
+  Future<List<ChargePlanEntity>> getAllChargePlans() {
+    // TODO: implement getAllChargePlans
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<ChargePlanEntity> getChargePlan(int id) {
+    // TODO: implement getChargePlan
+    throw UnimplementedError();
+  }
 }
 
 final chargePlanRepositoryProvider = Provider<ChargePlanRepository>((ref) {

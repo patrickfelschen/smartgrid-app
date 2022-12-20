@@ -20,6 +20,19 @@ class ChargePlanService {
             );
     return chargePlanEntity;
   }
+
+  Future<List<ChargePlanEntity>> getAllChargePlans() async {
+    List<ChargePlanEntity> chargePlans =
+        await ref.read(chargePlanRepositoryProvider).getAllChargePlans();
+
+    return chargePlans;
+  }
+
+  Future<ChargePlanEntity> getChargePlan(int id) async {
+    ChargePlanEntity chargePlanEntity =
+        await ref.read(chargePlanRepositoryProvider).getChargePlan(id);
+    return chargePlanEntity;
+  }
 }
 
 final chargePlanServiceProvider = Provider<ChargePlanService>((ref) {

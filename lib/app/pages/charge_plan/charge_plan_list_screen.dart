@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:smartgrid/app/pages/charge_plan/charge_plan_list_controller.dart';
 
 import 'charge_plan_screen.dart';
 
-class ChargePlanListScreen extends StatelessWidget {
+class ChargePlanListScreen extends ConsumerWidget {
   const ChargePlanListScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final AsyncValue<void> state = ref.watch(chargePlanListControllerProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Ladepläne"),
