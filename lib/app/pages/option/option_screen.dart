@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:smartgrid/app/pages/option/option_controller.dart';
 
 import '../authentication/customer_creation_screen.dart';
 import '../device/device_creation_screen.dart';
 
-class OptionScreen extends StatelessWidget {
+class OptionScreen extends ConsumerWidget {
   const OptionScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    void signOut() async {
+      await ref.read(optionControllerProvider.notifier).signOut();
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Optionen"),
@@ -44,7 +50,7 @@ class OptionScreen extends StatelessWidget {
           ),
           const Divider(),
           ListTile(
-            onTap: () {},
+            onTap: signOut,
             leading: const CircleAvatar(
               child: Icon(Icons.logout),
             ),
