@@ -4,10 +4,12 @@ import 'package:smartgrid/domain/entities/customer_entity.dart';
 import '../../domain/repositories/auth_repository.dart';
 
 class TestAuthRepository implements AuthRepository {
+  CustomerEntity? _currentUser;
+
   @override
-  Stream<CustomerEntity?> authStateChanges() {
-    // TODO: implement authStateChanges
-    throw UnimplementedError();
+  Future<CustomerEntity?> getCurrentUser() async {
+    await Future.delayed(const Duration(seconds: 1));
+    return _currentUser;
   }
 
   @override
@@ -26,9 +28,9 @@ class TestAuthRepository implements AuthRepository {
   }
 
   @override
-  Future<void> signOut() {
-    // TODO: implement signOut
-    throw UnimplementedError();
+  Future<void> signOut() async {
+    await Future.delayed(const Duration(seconds: 1));
+    _currentUser = null;
   }
 
   @override
