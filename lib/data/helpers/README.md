@@ -125,7 +125,7 @@
 ```
 #
 
-### /customers/{customerId}/devices/{deviceId}/charge-request
+### /customers/{customerId}/devices/{deviceId}/charge-requests
 #### POST Ladeantrag erstellen
 ###### Request
 ```json
