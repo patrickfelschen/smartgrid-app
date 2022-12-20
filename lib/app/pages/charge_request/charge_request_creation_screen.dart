@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smartgrid/app/pages/charge_request/charge_request_creation_controller.dart';
+import 'package:smartgrid/app/widgets/device_bottom_sheet.dart';
 import 'package:smartgrid/data/dtos/charge_request_creation_dto.dart';
 import 'package:smartgrid/domain/entities/device_entity.dart';
 
 class ChargeRequestCreationScreen extends ConsumerWidget {
   const ChargeRequestCreationScreen({super.key});
+
+  void openDeviceSelection(BuildContext context) {
+    showBottomSheet(
+      context: context,
+      builder: ((_) {
+        return const DeviceBottomSheet();
+      }),
+    );
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -53,8 +63,10 @@ class ChargeRequestCreationScreen extends ConsumerWidget {
           const SizedBox(
             height: 12.0,
           ),
-          const TextField(
-            decoration: InputDecoration(
+          TextField(
+            readOnly: true,
+            onTap: () => openDeviceSelection(context),
+            decoration: const InputDecoration(
               suffixIcon: Icon(Icons.electrical_services),
               border: OutlineInputBorder(),
               label: Text(
