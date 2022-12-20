@@ -12,21 +12,15 @@ class ChargeRequestCreationScreen extends ConsumerWidget {
     final AsyncValue<void> state =
         ref.watch(chargeRequestCreationControllerProvider);
 
-    void createChargePlan() async {
-      ChargeRequestCreationDTO chargeRequestCreationDTO =
-          ChargeRequestCreationDTO(
-              id: 1,
-              deviceEntity: const DeviceEntity(
-                id: 1,
-                description: "Test Device",
-                maxPower: 270,
-              ),
-              requiredPower: 250,
-              capacity: 80,
-              deadline: DateTime(2022));
+    void createChargeRequest() async {
+      ChargeRequestCreationDTO creationDto = ChargeRequestCreationDTO(
+        maxRequiredPower: 250,
+        requiredCapacity: 80,
+        deadline: DateTime(2022),
+      );
       await ref
           .read(chargeRequestCreationControllerProvider.notifier)
-          .createChargePlan(chargeRequestCreationDTO);
+          .createChargeRequest(creationDto);
     }
 
     ref.listen<AsyncValue>(chargeRequestCreationControllerProvider, (_, state) {
@@ -112,7 +106,7 @@ class ChargeRequestCreationScreen extends ConsumerWidget {
           ElevatedButton(
             onPressed: () {
               //Navigator.of(context).pop();
-              createChargePlan();
+              createChargeRequest();
             },
             child: const Text(
               "Fertig",

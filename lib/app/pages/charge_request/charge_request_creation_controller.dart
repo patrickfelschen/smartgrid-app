@@ -1,7 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smartgrid/app/services/charge_plan_service.dart';
 import 'package:smartgrid/data/dtos/charge_request_creation_dto.dart';
-import 'package:smartgrid/domain/entities/charge_plan_entity.dart';
+import 'package:smartgrid/domain/entities/charge_request_entity.dart';
+import 'package:smartgrid/domain/entities/device_entity.dart';
 
 class ChargeRequestCreationController extends StateNotifier<AsyncValue<void>> {
   ChargeRequestCreationController({required this.chargePlanService})
@@ -9,12 +10,22 @@ class ChargeRequestCreationController extends StateNotifier<AsyncValue<void>> {
 
   final ChargePlanService chargePlanService;
 
-  Future<void> createChargePlan(
-      ChargeRequestCreationDTO chargeRequestCreationDTO) async {
+  DeviceEntity? _selectedDevice;
+
+  Future<void> createChargeRequest(
+    ChargeRequestCreationDTO chargeRequestCreationDTO,
+  ) async {
     state = const AsyncLoading();
-    state = await AsyncValue.guard<ChargePlanEntity>(
-      () => chargePlanService.createChargePlan(chargeRequestCreationDTO),
+    state = await AsyncValue.guard<ChargeRequestEntity>(
+      () => chargePlanService.createChargeRequest(
+        _selectedDevice!.id,
+        chargeRequestCreationDTO,
+      ),
     );
+  }
+
+  void selectDevice(DeviceEntity deviceEntity) {
+    _selectedDevice = deviceEntity;
   }
 }
 

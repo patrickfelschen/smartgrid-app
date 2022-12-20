@@ -4,14 +4,14 @@ import 'package:smartgrid/data/repositories/customer_auth_repository.dart';
 import 'package:smartgrid/domain/entities/customer_entity.dart';
 import 'package:smartgrid/domain/repositories/auth_repository.dart';
 
-import '../../data/repositories/test_auth_repository.dart';
+import '../../data/repositories/test/test_auth_repository.dart';
 
 class CustomerService {
   CustomerService(this.ref);
 
   final Ref ref;
   final Provider<AuthRepository> _authRepository = testAuthRepositoryProvider;
-  // final Provider<AuthRepository> _authRepository = customerAuthRepositoryProvider;
+  //final Provider<AuthRepository> _authRepository = customerAuthRepositoryProvider;
 
   Future<CustomerEntity> signUp(CustomerCreationDTO creationDTO) async {
     CustomerEntity entity = await ref.read(_authRepository).signUp(

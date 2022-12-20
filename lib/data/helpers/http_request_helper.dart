@@ -17,7 +17,6 @@ class HttpRequestHelper {
     Object? body,
     required T Function(HttpStatusCode status, dynamic data) builder,
   }) async {
-    //print("GET $uri");
     try {
       Response response;
       switch (method) {
@@ -46,15 +45,23 @@ class HttpRequestHelper {
       switch (response.statusCode) {
         case 200:
           final data = json.decode(response.body);
-          return builder(HttpStatusCode.ok, data);
+          const status = HttpStatusCode.ok;
+          print("\n$method\n$uri\n$status\n$body\n$data\n");
+          return builder(status, data);
         case 400:
           final data = json.decode(response.body);
-          return builder(HttpStatusCode.error, data);
+          const status = HttpStatusCode.error;
+          print("\n$method\n$uri\n$status\n$body\n$data\n");
+          return builder(status, data);
         default:
-          return builder(HttpStatusCode.unknown, null);
+          const status = HttpStatusCode.unknown;
+          print("\n$method\n$uri\n$status\n$body\n");
+          return builder(status, null);
       }
     } on SocketException catch (_) {
-      return builder(HttpStatusCode.noInternet, null);
+      const status = HttpStatusCode.noInternet;
+      print("\n$method\n$uri\n$status\n$body\n");
+      return builder(status, null);
     }
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smartgrid/domain/entities/customer_entity.dart';
 
-import '../../domain/repositories/auth_repository.dart';
+import '../../../domain/repositories/auth_repository.dart';
 
 class TestAuthRepository implements AuthRepository {
   CustomerEntity? _currentUser;

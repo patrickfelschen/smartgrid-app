@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smartgrid/data/repositories/dashboard_repository.dart';
-import 'package:smartgrid/data/repositories/test_auth_repository.dart';
+import 'package:smartgrid/data/repositories/test/test_auth_repository.dart';
 import 'package:smartgrid/domain/entities/dashboard_info_entity.dart';
 import 'package:smartgrid/domain/repositories/auth_repository.dart';
 

@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smartgrid/data/dtos/charge_request_creation_dto.dart';
 import 'package:smartgrid/data/dtos/charge_request_dto.dart';
+import 'package:smartgrid/data/helpers/http_request_helper.dart';
+import 'package:smartgrid/data/helpers/smart_grid_api.dart';
 import 'package:smartgrid/domain/entities/charge_plan_time_entity.dart';
 import 'package:smartgrid/domain/entities/charge_request_entity.dart';
 import 'package:smartgrid/domain/entities/device_entity.dart';
@@ -8,34 +10,41 @@ import 'package:smartgrid/domain/entities/charge_plan_entity.dart';
 import 'package:smartgrid/domain/repositories/charge_plan_repository_interface.dart';
 
 class ChargePlanRepository implements ChargePlanRepositoryInterface {
+  ChargePlanRepository({
+    required this.api,
+    required this.requestHelper,
+  });
+
+  final SmartGridApi api;
+  final HttpRequestHelper requestHelper;
+
   @override
-  Future<ChargePlanEntity> createChargePlan(int id, DeviceEntity device,
-      double requiredPower, double capacity, DateTime deadline) async {
-    ChargeRequestCreationDTO chargeRequestCreationDTO =
-        ChargeRequestCreationDTO(
-      id: id,
-      deviceEntity: device,
-      requiredPower: requiredPower,
-      capacity: capacity,
+  Future<ChargeRequestEntity> createChargeRequest(
+    int customerId,
+    int deviceId,
+    double maxRequiredPower,
+    double requiredCapacity,
+    DateTime deadline,
+  ) async {
+    ChargeRequestCreationDTO creationDto = ChargeRequestCreationDTO(
+      maxRequiredPower: maxRequiredPower,
+      requiredCapacity: requiredCapacity,
       deadline: deadline,
     );
 
-    Future.delayed(const Duration(seconds: 1));
-
-    ChargeRequestDTO chargeRequestDTO =
-        ChargeRequestDTO.fromMap(chargeRequestCreationDTO.toMap());
-    ChargeRequestEntity chargeRequestEntity =
-        ChargeRequestDTO.fromDTO(chargeRequestDTO);
-
-    return ChargePlanEntity(
-      id: id,
-      device: device,
-      request: chargeRequestEntity,
-      co2ValueSmart: 200,
-      co2ValueNotSmart: 250,
-      times: List<ChargePlanTimeEntity>.empty(),
-      status: "Active",
+    ChargeRequestDTO dto = await requestHelper.sendRequest(
+      uri: api.chargeRequests(customerId, deviceId),
+      method: HttpMethod.post,
+      body: creationDto.toMap(),
+      builder: (status, data) {
+        if (status == HttpStatusCode.ok) {
+          return ChargeRequestDTO.fromMap(data);
+        }
+        throw Exception(data);
+      },
     );
+
+    return ChargeRequestDTO.fromDTO(dto);
   }
 
   @override
@@ -52,6 +61,9 @@ class ChargePlanRepository implements ChargePlanRepositoryInterface {
 }
 
 final chargePlanRepositoryProvider = Provider<ChargePlanRepository>((ref) {
-  final chargePlanRepository = ChargePlanRepository();
+  final chargePlanRepository = ChargePlanRepository(
+    api: SmartGridApi(),
+    requestHelper: HttpRequestHelper(),
+  );
   return chargePlanRepository;
 });
