@@ -20,9 +20,9 @@ class ChargeRequestDTO {
     return ChargeRequestDTO(
       id: map["id"],
       deviceEntity: map["deviceEntity"],
-      requiredPower: map["street"],
-      capacity: map["number"],
-      deadline: map["postalcode"],
+      requiredPower: map["requiredPower"],
+      capacity: map["capacity"],
+      deadline: map["deadline"],
     );
   }
 
