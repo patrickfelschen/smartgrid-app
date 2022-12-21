@@ -33,95 +33,101 @@ class DashboardScreen extends ConsumerWidget {
       }
     });
 
+    Future refresh() async {
+      await ref.watch(dashboardControllerProvider.notifier).getDashboardInfo();
+    }
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Smart Grid"),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => const OptionScreen(),
-                  fullscreenDialog: true,
-                ),
-              );
-            },
-            icon: const Icon(
-              Icons.more_vert,
+        appBar: AppBar(
+          title: const Text("Smart Grid"),
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => const OptionScreen(),
+                    fullscreenDialog: true,
+                  ),
+                );
+              },
+              icon: const Icon(
+                Icons.more_vert,
+              ),
             ),
-          ),
-        ],
-      ),
-      body: ListView(
-        padding: const EdgeInsets.symmetric(
-          vertical: 12.0,
-          horizontal: 12.0,
+          ],
         ),
-        children: [
-          const Icon(
-            Icons.electric_bolt,
-            size: 200.0,
-            color: Colors.green,
-          ),
-          const SizedBox(
-            height: 12.0,
-          ),
-          TextField(
-            controller: smartValueController,
-            readOnly: true,
-            decoration: const InputDecoration(
-              suffixText: "g/kWh",
-              border: OutlineInputBorder(),
-              label: Text(
-                "Gesamteinsparung",
+        body: RefreshIndicator(
+          onRefresh: refresh,
+          child: ListView(
+            padding: const EdgeInsets.symmetric(
+              vertical: 12.0,
+              horizontal: 12.0,
+            ),
+            children: [
+              const Icon(
+                Icons.electric_bolt,
+                size: 200.0,
+                color: Colors.green,
               ),
-            ),
-          ),
-          const SizedBox(
-            height: 12.0,
-          ),
-          TextField(
-            controller: notSmartValueController,
-            readOnly: true,
-            decoration: const InputDecoration(
-              suffixText: "kWh",
-              border: OutlineInputBorder(),
-              label: Text(
-                "Gesamt Energie",
+              const SizedBox(
+                height: 12.0,
               ),
-            ),
-          ),
-          const SizedBox(
-            height: 12.0,
-          ),
-          ElevatedButton.icon(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => const ChargeRequestCreationScreen(),
+              TextField(
+                controller: smartValueController,
+                readOnly: true,
+                decoration: const InputDecoration(
+                  suffixText: "g/kWh",
+                  border: OutlineInputBorder(),
+                  label: Text(
+                    "Gesamteinsparung",
+                  ),
                 ),
-              );
-            },
-            icon: const Icon(Icons.battery_charging_full),
-            label: const Text(
-              "Ladeantrag erstellen",
-            ),
-          ),
-          OutlinedButton.icon(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => const ChargePlanListScreen(),
+              ),
+              const SizedBox(
+                height: 12.0,
+              ),
+              TextField(
+                controller: notSmartValueController,
+                readOnly: true,
+                decoration: const InputDecoration(
+                  suffixText: "kWh",
+                  border: OutlineInputBorder(),
+                  label: Text(
+                    "Gesamt Energie",
+                  ),
                 ),
-              );
-            },
-            icon: const Icon(Icons.history),
-            label: const Text(
-              "Ladeplan Liste",
-            ),
+              ),
+              const SizedBox(
+                height: 12.0,
+              ),
+              ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const ChargeRequestCreationScreen(),
+                    ),
+                  );
+                },
+                icon: const Icon(Icons.battery_charging_full),
+                label: const Text(
+                  "Ladeantrag erstellen",
+                ),
+              ),
+              OutlinedButton.icon(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const ChargePlanListScreen(),
+                    ),
+                  );
+                },
+                icon: const Icon(Icons.history),
+                label: const Text(
+                  "Ladeplan Liste",
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-    );
+        ));
   }
 }
