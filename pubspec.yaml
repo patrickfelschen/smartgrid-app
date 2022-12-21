@@ -73,6 +73,7 @@ flutter:
     - assets/json/test/customers_post_res.json
     - assets/json/test/dashboard_get_res.json
     - assets/json/test/devices_get_res.json
+    - assets/json/test/devices_patch_res.json
 
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg

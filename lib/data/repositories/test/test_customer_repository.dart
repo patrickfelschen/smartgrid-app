@@ -1,23 +1,18 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smartgrid/data/dtos/customer_dto.dart';
+import 'package:smartgrid/device/utils/json_loader_helper.dart';
 import 'package:smartgrid/domain/entities/customer_entity.dart';
 
 import '../../../domain/repositories/auth_repository.dart';
 
-import 'dart:convert';
-
-import 'package:flutter/services.dart' show rootBundle;
-
 class TestCustomerRepository implements AuthRepository {
-  CustomerEntity? _currentUser;
+  final JsonLoaderHelper jsonLoaderHelper;
 
-  Future<Map<String, dynamic>> _loadJson(String jsonFile) async {
-    String data = await rootBundle.loadString(
-      'assets/json/test/$jsonFile',
-    );
-    Map<String, dynamic> jsonData = json.decode(data);
-    return jsonData;
-  }
+  TestCustomerRepository({
+    required this.jsonLoaderHelper,
+  });
+
+  CustomerEntity? _currentUser;
 
   @override
   Future<CustomerEntity?> getCurrentUser() async {
@@ -27,7 +22,7 @@ class TestCustomerRepository implements AuthRepository {
 
   @override
   Future<CustomerEntity> signIn(int id) async {
-    Map<String, dynamic> jsonData = await _loadJson(
+    Map<String, dynamic> jsonData = await jsonLoaderHelper.loadJson(
       "customers_get_id_res.json",
     );
     CustomerDTO dto = CustomerDTO.fromMap(jsonData);
@@ -45,7 +40,7 @@ class TestCustomerRepository implements AuthRepository {
     String postalcode,
     String city,
   ) async {
-    Map<String, dynamic> jsonData = await _loadJson(
+    Map<String, dynamic> jsonData = await jsonLoaderHelper.loadJson(
       "customers_post_res.json",
     );
     CustomerDTO dto = CustomerDTO.fromMap(jsonData);
@@ -62,6 +57,8 @@ class TestCustomerRepository implements AuthRepository {
 }
 
 final testCustomerRepositoryProvider = Provider<AuthRepository>((ref) {
-  final customerAuthRepository = TestCustomerRepository();
+  final customerAuthRepository = TestCustomerRepository(
+    jsonLoaderHelper: JsonLoaderHelper(),
+  );
   return customerAuthRepository;
 });

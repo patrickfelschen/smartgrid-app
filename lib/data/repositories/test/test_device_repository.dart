@@ -1,34 +1,46 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:smartgrid/data/dtos/device_dto.dart';
+import 'package:smartgrid/device/utils/json_loader_helper.dart';
 import 'package:smartgrid/domain/entities/device_entity.dart';
 import 'package:smartgrid/domain/repositories/device_repository_interface.dart';
 
 class TestDeviceRepository implements DeviceRepositoryInterface {
-  final Map<int, DeviceEntity> devices;
+  final JsonLoaderHelper jsonLoaderHelper;
 
   TestDeviceRepository({
-    required this.devices,
+    required this.jsonLoaderHelper,
   });
 
   @override
   Future<List<DeviceEntity>> getAllDevices(int? customerId) async {
-    await Future.delayed(const Duration(seconds: 1));
-    return devices.values.toList();
+    dynamic jsonData = await jsonLoaderHelper.loadJson(
+      "devices_get_res.json",
+    );
+    List<DeviceDTO> dtos =
+        (jsonData as List).map((e) => DeviceDTO.fromMap(e)).toList();
+
+    List<DeviceEntity> entities =
+        dtos.map((e) => DeviceDTO.fromDTO(e)).toList();
+    return entities;
   }
 
   @override
   Future<DeviceEntity> updateDevice(
-      int deviceId, String description, double maxPower) {
-    // TODO: implement updateDevice
-    throw UnimplementedError();
+    int deviceId,
+    String description,
+    double maxPower,
+  ) async {
+    dynamic jsonData = await jsonLoaderHelper.loadJson(
+      "devices_update_res.json",
+    );
+    DeviceDTO dto = DeviceDTO.fromMap(jsonData);
+    return DeviceDTO.fromDTO(dto);
   }
 }
 
 final testDeviceRepositoryProvider = Provider<DeviceRepositoryInterface>((ref) {
-  final deviceRepository = TestDeviceRepository(devices: {
-    1000: const DeviceEntity(
-        id: 1000, description: "Test Device 1", maxPower: 500),
-    1001: const DeviceEntity(
-        id: 1001, description: "Test Device 2", maxPower: 420),
-  });
+  final deviceRepository = TestDeviceRepository(
+    jsonLoaderHelper: JsonLoaderHelper(),
+  );
   return deviceRepository;
 });
