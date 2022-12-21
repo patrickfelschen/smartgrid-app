@@ -20,24 +20,27 @@ class DeviceBottomSheet extends StatelessWidget {
       color: Colors.grey[200],
       height: 300,
       child: ListView(
-          padding: const EdgeInsets.all(5),
-          children: devices
-              .map((e) => Card(
-                    child: ListTile(
-                      leading: const Icon(
-                        Icons.electrical_services,
-                        size: 32,
-                        color: Colors.green,
-                      ),
-                      title: Text(e.description),
-                      subtitle: Text(e.maxPower.toString()),
-                      onTap: () {
-                        onDeviceSelected(e);
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ))
-              .toList()),
+        padding: const EdgeInsets.all(5),
+        children: devices
+            .map(
+              (e) => Card(
+                child: ListTile(
+                  leading: const Icon(
+                    Icons.electrical_services,
+                    size: 32,
+                    color: Colors.green,
+                  ),
+                  title: Text(e.description),
+                  subtitle: Text(e.maxPower.toString()),
+                  onTap: () {
+                    onDeviceSelected(e);
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
+            )
+            .toList(),
+      ),
     );
   }
 }

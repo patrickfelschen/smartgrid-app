@@ -72,58 +72,78 @@ class DashboardScreen extends ConsumerWidget {
               const SizedBox(
                 height: 12.0,
               ),
-              TextField(
-                controller: smartValueController,
-                readOnly: true,
-                decoration: const InputDecoration(
-                  suffixText: "g/kWh",
-                  border: OutlineInputBorder(),
-                  label: Text(
-                    "Gesamteinsparung",
+              const Text("Übersicht"),
+              Card(
+                child: ListTile(
+                  leading: const Icon(
+                    Icons.gas_meter,
+                    size: 32,
+                    color: Colors.green,
                   ),
+                  title: Text(smartValueController.text),
+                  subtitle: const Text("Emmisionen mit SmartGrid"),
+                  trailing: const Text("g/kWh"),
                 ),
               ),
               const SizedBox(
                 height: 12.0,
               ),
-              TextField(
-                controller: notSmartValueController,
-                readOnly: true,
-                decoration: const InputDecoration(
-                  suffixText: "kWh",
-                  border: OutlineInputBorder(),
-                  label: Text(
-                    "Gesamt Energie",
+              Card(
+                child: ListTile(
+                  leading: const Icon(
+                    Icons.gas_meter_outlined,
+                    size: 32,
+                    color: Colors.red,
                   ),
+                  title: Text(notSmartValueController.text),
+                  subtitle: const Text("Emmisionen ohne SmartGrid"),
+                  trailing: const Text("g/kWh"),
                 ),
               ),
               const SizedBox(
                 height: 12.0,
               ),
-              ElevatedButton.icon(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => ChargeRequestCreationScreen(),
-                    ),
-                  );
-                },
-                icon: const Icon(Icons.battery_charging_full),
-                label: const Text(
-                  "Ladeantrag erstellen",
+              const Divider(),
+              const SizedBox(
+                height: 12.0,
+              ),
+              const Text("Aktionen"),
+              Card(
+                child: ListTile(
+                  leading: const Icon(
+                    Icons.add_chart,
+                    size: 32,
+                    color: Colors.green,
+                  ),
+                  title: const Text("Ladeantrag erstellen"),
+                  subtitle: const Text("Erstelle einen neuen Antrag"),
+                  trailing: const Icon(Icons.arrow_forward_ios),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => ChargeRequestCreationScreen(),
+                      ),
+                    );
+                  },
                 ),
               ),
-              OutlinedButton.icon(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => const ChargePlanListScreen(),
-                    ),
-                  );
-                },
-                icon: const Icon(Icons.history),
-                label: const Text(
-                  "Ladeplan Liste",
+              Card(
+                child: ListTile(
+                  leading: const Icon(
+                    Icons.history,
+                    size: 32,
+                    color: Colors.green,
+                  ),
+                  title: const Text("Ladeplan Liste"),
+                  subtitle: const Text("Erhalte eine Übersicht der Ladungen"),
+                  trailing: const Icon(Icons.arrow_forward_ios),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => const ChargePlanListScreen(),
+                      ),
+                    );
+                  },
                 ),
               ),
             ],
