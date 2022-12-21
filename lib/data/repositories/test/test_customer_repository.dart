@@ -1,10 +1,23 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:smartgrid/data/dtos/customer_dto.dart';
 import 'package:smartgrid/domain/entities/customer_entity.dart';
 
 import '../../../domain/repositories/auth_repository.dart';
 
+import 'dart:convert';
+
+import 'package:flutter/services.dart' show rootBundle;
+
 class TestCustomerRepository implements AuthRepository {
   CustomerEntity? _currentUser;
+
+  Future<Map<String, dynamic>> _loadJson(String jsonFile) async {
+    String data = await rootBundle.loadString(
+      'assets/json/test/$jsonFile',
+    );
+    Map<String, dynamic> jsonData = json.decode(data);
+    return jsonData;
+  }
 
   @override
   Future<CustomerEntity?> getCurrentUser() async {
@@ -14,23 +27,13 @@ class TestCustomerRepository implements AuthRepository {
 
   @override
   Future<CustomerEntity> signIn(int id) async {
-    await Future.delayed(const Duration(seconds: 1));
-    return Future.value(
-      CustomerEntity(
-        id: 1000,
-        hubId: 2000,
-        street: "Musterstraße",
-        number: "42",
-        postalcode: "01234",
-        city: "Musterstadt",
-      ),
+    Map<String, dynamic> jsonData = await _loadJson(
+      "customers_get_id_res.json",
     );
-  }
-
-  @override
-  Future<void> signOut() async {
-    await Future.delayed(const Duration(seconds: 1));
-    _currentUser = null;
+    CustomerDTO dto = CustomerDTO.fromMap(jsonData);
+    CustomerEntity customer = CustomerDTO.fromDTO(dto);
+    _currentUser = customer;
+    return customer;
   }
 
   @override
@@ -42,17 +45,19 @@ class TestCustomerRepository implements AuthRepository {
     String postalcode,
     String city,
   ) async {
-    await Future.delayed(const Duration(seconds: 1));
-    return Future.value(
-      CustomerEntity(
-        id: id,
-        hubId: hubId,
-        street: street,
-        number: number,
-        postalcode: postalcode,
-        city: city,
-      ),
+    Map<String, dynamic> jsonData = await _loadJson(
+      "customers_post_res.json",
     );
+    CustomerDTO dto = CustomerDTO.fromMap(jsonData);
+    CustomerEntity customer = CustomerDTO.fromDTO(dto);
+    _currentUser = customer;
+    return customer;
+  }
+
+  @override
+  Future<void> signOut() async {
+    await Future.delayed(const Duration(seconds: 1));
+    _currentUser = null;
   }
 }
 

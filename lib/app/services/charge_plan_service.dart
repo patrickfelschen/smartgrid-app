@@ -1,7 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smartgrid/data/dtos/charge_request_creation_dto.dart';
-import 'package:smartgrid/data/repositories/charge_repository.dart';
-import 'package:smartgrid/data/repositories/customer_repository.dart';
 import 'package:smartgrid/data/repositories/test/test_charge_repository.dart';
 import 'package:smartgrid/data/repositories/test/test_customer_repository.dart';
 import 'package:smartgrid/domain/entities/charge_plan_entity.dart';

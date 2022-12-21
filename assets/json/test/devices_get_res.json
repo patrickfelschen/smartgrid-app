@@ -1,0 +1,17 @@
+[
+    {
+        "id": 3000,
+        "description": "E-Auto Ladegerät",
+        "maxPower": 22.5
+    },
+    {
+        "id": 3001,
+        "description": "E-Bike Ladegerät",
+        "maxPower": 12.5
+    },
+    {
+        "id": 3002,
+        "description": "E-Heizung",
+        "maxPower": 45.0
+    }
+]
