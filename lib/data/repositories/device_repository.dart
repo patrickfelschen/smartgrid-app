@@ -11,7 +11,7 @@ class DeviceRepository implements DeviceRepositoryInterface {
   }
 
   @override
-  Future<List<DeviceEntity>> getAllDevices() {
+  Future<List<DeviceEntity>> getAllDevices(int? customerId) {
     // TODO: implement getAllDevices
     throw UnimplementedError();
   }

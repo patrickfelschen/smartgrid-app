@@ -1,6 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smartgrid/data/dtos/device_update_dto.dart';
 import 'package:smartgrid/data/repositories/device_repository.dart';
+import 'package:smartgrid/data/repositories/test/test_customer_repository.dart';
+import 'package:smartgrid/data/repositories/test/test_device_repository.dart';
+import 'package:smartgrid/domain/entities/customer_entity.dart';
 import 'package:smartgrid/domain/entities/device_entity.dart';
 
 class DeviceService {
@@ -9,8 +12,11 @@ class DeviceService {
   final Ref ref;
 
   Future<List<DeviceEntity>> getAllDevices() async {
-    List<DeviceEntity> devices =
-        await ref.read(deviceRepositoryProvider).getAllDevices();
+    final CustomerEntity? customer =
+        await ref.read(testCustomerRepositoryProvider).getCurrentUser();
+    List<DeviceEntity> devices = await ref
+        .read(testDeviceRepositoryProvider)
+        .getAllDevices(customer?.id);
     return devices;
   }
 

@@ -1,12 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:smartgrid/app/pages/device/device_controller.dart';
 
 import '../dashboard/dashboard_screen.dart';
 
-class DeviceCreationScreen extends StatelessWidget {
+class DeviceCreationScreen extends ConsumerWidget {
   const DeviceCreationScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final AsyncValue<void> state = ref.watch(deviceControllerProvider);
+
+    ref.listen<AsyncValue>(deviceControllerProvider, (_, state) {
+      if (!state.isRefreshing && state.hasValue) {
+        print(state.value);
+      }
+
+      if (!state.isRefreshing && state.hasError) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(state.error.toString()),
+          ),
+        );
+      }
+    });
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Geräte Profil erstellen"),

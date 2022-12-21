@@ -4,7 +4,9 @@ import 'package:smartgrid/data/dtos/device_update_dto.dart';
 
 class DeviceController extends StateNotifier<AsyncValue<void>> {
   DeviceController({required this.deviceService})
-      : super(const AsyncData<void>(null));
+      : super(const AsyncData<void>(null)) {
+    getAllDevices();
+  }
 
   final DeviceService deviceService;
 
