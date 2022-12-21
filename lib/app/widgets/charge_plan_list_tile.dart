@@ -20,9 +20,8 @@ class ChargePlanListTile extends StatelessWidget {
       ),
       title: const Text("Ladeplan"),
       subtitle: Text(chargePlanEntity.device.description),
-      trailing: chargePlanEntity.status.contains("active")
-          ? const Text("Aktiv")
-          : null,
+      trailing:
+          chargePlanEntity.status == "active" ? const Text("Aktiv") : null,
     );
   }
 }

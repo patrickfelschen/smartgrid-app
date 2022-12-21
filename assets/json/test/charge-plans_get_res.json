@@ -21,7 +21,7 @@
         "id": 5001,
         "device": {
           "id": 3001,
-          "description": "E-Auto Ladegerät",
+          "description": "E-Bike Ladegerät",
           "maxPower": 30.5
         },
         "request": {
