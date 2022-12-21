@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:smartgrid/domain/entities/device_entity.dart';
 
-class DeviceBottomSheet extends ConsumerWidget {
-  const DeviceBottomSheet({super.key});
+class DeviceBottomSheet extends StatelessWidget {
+  List<DeviceEntity> devices;
+
+  DeviceBottomSheet({super.key, required this.devices}) {
+    print(devices);
+  }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      body: Container(),
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.grey[200],
+      height: 300,
     );
   }
 }

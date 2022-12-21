@@ -6,13 +6,15 @@ import 'package:smartgrid/data/dtos/charge_request_creation_dto.dart';
 import 'package:smartgrid/domain/entities/device_entity.dart';
 
 class ChargeRequestCreationScreen extends ConsumerWidget {
-  const ChargeRequestCreationScreen({super.key});
+  List<DeviceEntity> _devices = List.empty();
+
+  ChargeRequestCreationScreen({super.key});
 
   void openDeviceSelection(BuildContext context) {
     showBottomSheet(
       context: context,
       builder: ((_) {
-        return const DeviceBottomSheet();
+        return DeviceBottomSheet(devices: _devices);
       }),
     );
   }
@@ -35,7 +37,7 @@ class ChargeRequestCreationScreen extends ConsumerWidget {
 
     ref.listen<AsyncValue>(chargeRequestCreationControllerProvider, (_, state) {
       if (!state.isRefreshing && state.hasValue) {
-        print(state.value);
+        _devices = state.value;
       }
 
       if (!state.isRefreshing && state.hasError) {
@@ -46,86 +48,87 @@ class ChargeRequestCreationScreen extends ConsumerWidget {
     });
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Ladeantrag erstellen"),
-      ),
-      body: ListView(
-        padding: const EdgeInsets.symmetric(
-          vertical: 12.0,
-          horizontal: 12.0,
+        appBar: AppBar(
+          title: const Text("Ladeantrag erstellen"),
         ),
-        children: [
-          const Icon(
-            Icons.battery_charging_full,
-            size: 200.0,
-            color: Colors.green,
-          ),
-          const SizedBox(
-            height: 12.0,
-          ),
-          TextField(
-            readOnly: true,
-            onTap: () => openDeviceSelection(context),
-            decoration: const InputDecoration(
-              suffixIcon: Icon(Icons.electrical_services),
-              border: OutlineInputBorder(),
-              label: Text(
-                "Geräteprofil",
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 12.0,
-          ),
-          const TextField(
-            decoration: InputDecoration(
-              suffixIcon: Icon(Icons.access_time),
-              border: OutlineInputBorder(),
-              label: Text(
-                "Abfahrtszeit",
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 12.0,
-          ),
-          const TextField(
-            decoration: InputDecoration(
-              suffixText: "kW",
-              suffixIcon: Icon(Icons.electric_car),
-              border: OutlineInputBorder(),
-              label: Text(
-                "Maximale Leistung des Verbrauchers",
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 12.0,
-          ),
-          const TextField(
-            decoration: InputDecoration(
-              suffixText: "kW/h",
-              suffixIcon: Icon(Icons.electric_bolt),
-              border: OutlineInputBorder(),
-              label: Text(
-                "Benötigte Kapazität",
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 12.0,
-          ),
-          ElevatedButton(
-            onPressed: () {
-              //Navigator.of(context).pop();
-              createChargeRequest();
-            },
-            child: const Text(
-              "Fertig",
-            ),
-          ),
-        ],
-      ),
-    );
+        body: Builder(
+          builder: ((context) => ListView(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 12.0,
+                  horizontal: 12.0,
+                ),
+                children: [
+                  const Icon(
+                    Icons.battery_charging_full,
+                    size: 200.0,
+                    color: Colors.green,
+                  ),
+                  const SizedBox(
+                    height: 12.0,
+                  ),
+                  TextField(
+                    readOnly: true,
+                    onTap: () => openDeviceSelection(context),
+                    decoration: const InputDecoration(
+                      suffixIcon: Icon(Icons.electrical_services),
+                      border: OutlineInputBorder(),
+                      label: Text(
+                        "Geräteprofil",
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 12.0,
+                  ),
+                  const TextField(
+                    decoration: InputDecoration(
+                      suffixIcon: Icon(Icons.access_time),
+                      border: OutlineInputBorder(),
+                      label: Text(
+                        "Abfahrtszeit",
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 12.0,
+                  ),
+                  const TextField(
+                    decoration: InputDecoration(
+                      suffixText: "kW",
+                      suffixIcon: Icon(Icons.electric_car),
+                      border: OutlineInputBorder(),
+                      label: Text(
+                        "Maximale Leistung des Verbrauchers",
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 12.0,
+                  ),
+                  const TextField(
+                    decoration: InputDecoration(
+                      suffixText: "kW/h",
+                      suffixIcon: Icon(Icons.electric_bolt),
+                      border: OutlineInputBorder(),
+                      label: Text(
+                        "Benötigte Kapazität",
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 12.0,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      //Navigator.of(context).pop();
+                      createChargeRequest();
+                    },
+                    child: const Text(
+                      "Fertig",
+                    ),
+                  ),
+                ],
+              )),
+        ));
   }
 }
