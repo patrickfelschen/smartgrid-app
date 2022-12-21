@@ -104,7 +104,7 @@ class DashboardScreen extends ConsumerWidget {
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (_) => const ChargeRequestCreationScreen(),
+                      builder: (_) => ChargeRequestCreationScreen(),
                     ),
                   );
                 },
