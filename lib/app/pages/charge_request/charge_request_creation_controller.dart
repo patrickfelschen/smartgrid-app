@@ -24,7 +24,7 @@ class ChargeRequestCreationController extends StateNotifier<AsyncValue<void>> {
     state = const AsyncLoading();
     state = await AsyncValue.guard<ChargeRequestEntity>(
       () => chargePlanService.createChargeRequest(
-        _selectedDevice!.id,
+        1000, //TODO: _selectedDevice!.id,
         chargeRequestCreationDTO,
       ),
     );

@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smartgrid/app/pages/charge_request/charge_request_creation_controller.dart';
 import 'package:smartgrid/app/widgets/device_bottom_sheet.dart';
 import 'package:smartgrid/data/dtos/charge_request_creation_dto.dart';
-import 'package:smartgrid/domain/entities/device_entity.dart';
 
 class ChargeRequestCreationScreen extends ConsumerWidget {
   List<DeviceEntity> _devices = List.empty();

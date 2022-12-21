@@ -1,16 +1,16 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:smartgrid/data/dtos/charge_plan_dto.dart';
+import 'package:smartgrid/data/dtos/charge_request_dto.dart';
+import 'package:smartgrid/device/utils/json_loader_helper.dart';
 import 'package:smartgrid/domain/entities/charge_request_entity.dart';
 import 'package:smartgrid/domain/entities/charge_plan_entity.dart';
-import 'package:smartgrid/domain/entities/device_entity.dart';
 import 'package:smartgrid/domain/repositories/charge_repository_interface.dart';
 
 class TestChargeRepository implements ChargeRepositoryInterface {
-  final Map<int, ChargeRequestEntity> requests;
-  final Map<int, ChargePlanEntity> plans;
+  final JsonLoaderHelper jsonLoaderHelper;
 
   TestChargeRepository({
-    required this.requests,
-    required this.plans,
+    required this.jsonLoaderHelper,
   });
 
   @override
@@ -21,21 +21,24 @@ class TestChargeRepository implements ChargeRepositoryInterface {
     double requiredCapacity,
     DateTime deadline,
   ) async {
-    ChargeRequestEntity entity = ChargeRequestEntity(
-      id: 4000,
-      maxRequiredPower: maxRequiredPower,
-      requiredCapacity: requiredCapacity,
-      deadline: deadline,
+    Map<String, dynamic> jsonData = await jsonLoaderHelper.loadJson(
+      "charge-requests_post_res.json",
     );
-    requests.addAll({4000: entity});
-    await Future.delayed(const Duration(seconds: 1));
-    return entity;
+    ChargeRequestDTO dto = ChargeRequestDTO.fromMap(jsonData);
+    return ChargeRequestDTO.fromDTO(dto);
   }
 
   @override
   Future<List<ChargePlanEntity>> getAllChargePlans(int customerId) async {
-    await Future.delayed(const Duration(seconds: 1));
-    return plans.values.toList();
+    Map<String, dynamic> jsonData = await jsonLoaderHelper.loadJson(
+      "charge-plans_get_res.json",
+    );
+    List<ChargePlanDTO> dtos =
+        (jsonData as List).map((e) => ChargePlanDTO.fromMap(e)).toList();
+
+    List<ChargePlanEntity> entities =
+        dtos.map((e) => ChargePlanDTO.fromDTO(e)).toList();
+    return entities;
   }
 
   @override
@@ -43,34 +46,17 @@ class TestChargeRepository implements ChargeRepositoryInterface {
     int customerId,
     int chargePlanId,
   ) async {
-    await Future.delayed(const Duration(seconds: 1));
-    return plans[chargePlanId]!;
+    Map<String, dynamic> jsonData = await jsonLoaderHelper.loadJson(
+      "charge-plans_get_id_res.json",
+    );
+    ChargePlanDTO dto = ChargePlanDTO.fromMap(jsonData);
+    return ChargePlanDTO.fromDTO(dto);
   }
 }
 
 final testChargeRepositoryProvider = Provider<ChargeRepositoryInterface>((ref) {
   final chargePlanRepository = TestChargeRepository(
-    requests: {},
-    plans: {
-      5000: ChargePlanEntity(
-        id: 5000,
-        device: const DeviceEntity(
-          id: 3000,
-          description: "E-Auto Ladegerät",
-          maxPower: 30.5,
-        ),
-        request: ChargeRequestEntity(
-          id: 4000,
-          maxRequiredPower: 25.0,
-          requiredCapacity: 11.0,
-          deadline: DateTime(2023),
-        ),
-        co2ValueSmart: 100.22,
-        co2ValueNotSmart: 300.43,
-        status: "active",
-        times: [],
-      )
-    },
+    jsonLoaderHelper: JsonLoaderHelper(),
   );
   return chargePlanRepository;
 });

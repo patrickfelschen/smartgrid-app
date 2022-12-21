@@ -20,7 +20,7 @@ class CustomerDTO {
   factory CustomerDTO.fromMap(Map<String, dynamic> map) {
     return CustomerDTO(
       id: map["id"],
-      hubId: map["hubId"],
+      hubId: map["hubid"],
       street: map["street"],
       number: map["number"],
       postalcode: map["postalcode"],
@@ -31,6 +31,7 @@ class CustomerDTO {
   Map<String, dynamic> toMap() {
     return {
       "id": id,
+      "hubid": hubId,
       "street": street,
       "number": number,
       "postalcode": postalcode,

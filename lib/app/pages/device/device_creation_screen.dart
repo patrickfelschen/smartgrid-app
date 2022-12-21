@@ -27,7 +27,7 @@ class DeviceCreationScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Geräte Profil erstellen"),
+        title: const Text("Geräte Profil bearbeiten"),
       ),
       body: ListView(
         padding: const EdgeInsets.symmetric(

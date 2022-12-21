@@ -16,15 +16,20 @@ class DeviceService {
         await ref.read(testCustomerRepositoryProvider).getCurrentUser();
     List<DeviceEntity> devices = await ref
         .read(testDeviceRepositoryProvider)
-        .getAllDevices(customer?.id);
+        .getAllDevices(customer!.id);
     return devices;
   }
 
   Future<DeviceEntity> updateDevice(
-      int deviceId, DeviceUpdateDTO updateDTO) async {
-    DeviceEntity deviceEntity = await ref
-        .read(deviceRepositoryProvider)
-        .updateDevice(deviceId, updateDTO.description, updateDTO.maxPower);
+    int deviceId,
+    DeviceUpdateDTO updateDTO,
+  ) async {
+    DeviceEntity deviceEntity =
+        await ref.read(deviceRepositoryProvider).updateDevice(
+              deviceId,
+              updateDTO.description,
+              updateDTO.maxPower,
+            );
     return deviceEntity;
   }
 }

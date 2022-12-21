@@ -13,7 +13,7 @@ class ChargeRequestCreationDTO {
     return ChargeRequestCreationDTO(
       maxRequiredPower: map["maxRequiredPower"],
       requiredCapacity: map["requiredCapacity"],
-      deadline: map["postalcode"],
+      deadline: DateTime.parse(map["deadline"]),
     );
   }
 
@@ -21,7 +21,7 @@ class ChargeRequestCreationDTO {
     return {
       "maxRequiredPower": maxRequiredPower,
       "requiredCapacity": requiredCapacity,
-      "deadline": deadline,
+      "deadline": deadline.toIso8601String(),
     };
   }
 

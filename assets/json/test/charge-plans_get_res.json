@@ -1,0 +1,38 @@
+[
+    {
+      "id": 5000,
+      "device": {
+        "id": 3000,
+        "description": "E-Auto Ladegerät",
+        "maxPower": 30.5
+      },
+      "request": {
+        "id": 4000,
+        "maxRequiredPower": 25.0,
+        "requiredCapacity": 11.0,
+        "deadline": "2012-04-23T18:25:43.511Z"
+      },
+      "co2ValueSmart": 100.22,
+      "co2ValueNotSmart": 300.43,
+      "status": "active",
+      "times": []
+    },
+    {
+        "id": 5001,
+        "device": {
+          "id": 3001,
+          "description": "E-Auto Ladegerät",
+          "maxPower": 30.5
+        },
+        "request": {
+          "id": 4001,
+          "maxRequiredPower": 25.0,
+          "requiredCapacity": 11.0,
+          "deadline": "2012-03-23T18:25:43.511Z"
+        },
+        "co2ValueSmart": 100.22,
+        "co2ValueNotSmart": 300.43,
+        "status": "inactive",
+        "times": []
+      }
+  ]

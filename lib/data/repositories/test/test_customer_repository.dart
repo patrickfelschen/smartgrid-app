@@ -1,9 +1,17 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:smartgrid/data/dtos/customer_dto.dart';
+import 'package:smartgrid/device/utils/json_loader_helper.dart';
 import 'package:smartgrid/domain/entities/customer_entity.dart';
 
 import '../../../domain/repositories/auth_repository.dart';
 
 class TestCustomerRepository implements AuthRepository {
+  final JsonLoaderHelper jsonLoaderHelper;
+
+  TestCustomerRepository({
+    required this.jsonLoaderHelper,
+  });
+
   CustomerEntity? _currentUser;
 
   @override
@@ -14,23 +22,13 @@ class TestCustomerRepository implements AuthRepository {
 
   @override
   Future<CustomerEntity> signIn(int id) async {
-    await Future.delayed(const Duration(seconds: 1));
-    return Future.value(
-      CustomerEntity(
-        id: 1000,
-        hubId: 2000,
-        street: "Musterstraße",
-        number: "42",
-        postalcode: "01234",
-        city: "Musterstadt",
-      ),
+    Map<String, dynamic> jsonData = await jsonLoaderHelper.loadJson(
+      "customers_get_id_res.json",
     );
-  }
-
-  @override
-  Future<void> signOut() async {
-    await Future.delayed(const Duration(seconds: 1));
-    _currentUser = null;
+    CustomerDTO dto = CustomerDTO.fromMap(jsonData);
+    CustomerEntity customer = CustomerDTO.fromDTO(dto);
+    _currentUser = customer;
+    return customer;
   }
 
   @override
@@ -42,21 +40,25 @@ class TestCustomerRepository implements AuthRepository {
     String postalcode,
     String city,
   ) async {
-    await Future.delayed(const Duration(seconds: 1));
-    return Future.value(
-      CustomerEntity(
-        id: id,
-        hubId: hubId,
-        street: street,
-        number: number,
-        postalcode: postalcode,
-        city: city,
-      ),
+    Map<String, dynamic> jsonData = await jsonLoaderHelper.loadJson(
+      "customers_post_res.json",
     );
+    CustomerDTO dto = CustomerDTO.fromMap(jsonData);
+    CustomerEntity customer = CustomerDTO.fromDTO(dto);
+    _currentUser = customer;
+    return customer;
+  }
+
+  @override
+  Future<void> signOut() async {
+    await Future.delayed(const Duration(seconds: 1));
+    _currentUser = null;
   }
 }
 
 final testCustomerRepositoryProvider = Provider<AuthRepository>((ref) {
-  final customerAuthRepository = TestCustomerRepository();
+  final customerAuthRepository = TestCustomerRepository(
+    jsonLoaderHelper: JsonLoaderHelper(),
+  );
   return customerAuthRepository;
 });
