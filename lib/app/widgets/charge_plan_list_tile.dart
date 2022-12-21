@@ -16,7 +16,7 @@ class ChargePlanListTile extends StatelessWidget {
     return ListTile(
       onTap: () => onTap(chargePlanEntity),
       leading: const CircleAvatar(
-        child: Icon(Icons.timeline),
+        child: Icon(Icons.analytics),
       ),
       title: const Text("Ladeplan"),
       subtitle: Text(chargePlanEntity.device.description),

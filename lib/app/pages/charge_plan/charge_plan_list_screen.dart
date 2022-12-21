@@ -8,47 +8,48 @@ import 'package:smartgrid/domain/entities/charge_plan_entity.dart';
 class ChargePlanListScreen extends ConsumerWidget {
   const ChargePlanListScreen({super.key});
 
+  void onPlanSelected(BuildContext context, ChargePlanEntity selected) {
+    print(selected);
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => const ChargePlanScreen(),
+      ),
+    );
+  }
+
+  Widget onData(List<ChargePlanEntity> plans) {
+    return ListView.builder(
+      itemCount: plans.length,
+      itemBuilder: ((context, index) {
+        print("item builder");
+        return ChargePlanListTile(
+          onTap: (selected) => onPlanSelected(context, selected),
+          chargePlanEntity: plans[index],
+        );
+      }),
+    );
+  }
+
+  Widget onLoading() {
+    print("loading");
+    return const Center(
+      child: CircularProgressIndicator(),
+    );
+  }
+
+  Widget onError(Object error, StackTrace stackTrace) {
+    print(stackTrace);
+    return const Center(
+      child: Icon(
+        Icons.warning,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    print("build");
     final AsyncValue state = ref.watch(chargePlanListControllerProvider);
-
-    void onPlanSelected(ChargePlanEntity selected) {
-      print(selected);
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (_) => const ChargePlanScreen(),
-        ),
-      );
-    }
-
-    Widget onData(List<ChargePlanEntity> plans) {
-      return ListView.builder(
-        itemCount: plans.length,
-        itemBuilder: ((context, index) {
-          print("item builder");
-          return ChargePlanListTile(
-            onTap: (selected) => onPlanSelected(selected),
-            chargePlanEntity: plans[index],
-          );
-        }),
-      );
-    }
-
-    Widget onLoading() {
-      print("loading");
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
-    }
-
-    Widget onError(Object error, StackTrace stackTrace) {
-      print(stackTrace);
-      return const Center(
-        child: Icon(
-          Icons.warning,
-        ),
-      );
-    }
 
     return Scaffold(
       appBar: AppBar(
