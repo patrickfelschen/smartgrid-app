@@ -21,7 +21,7 @@ class TestChargeRepository implements ChargeRepositoryInterface {
     double requiredCapacity,
     DateTime deadline,
   ) async {
-    Map<String, dynamic> jsonData = await jsonLoaderHelper.loadJson(
+    dynamic jsonData = await jsonLoaderHelper.loadJson(
       "charge-requests_post_res.json",
     );
     ChargeRequestDTO dto = ChargeRequestDTO.fromMap(jsonData);
@@ -30,7 +30,7 @@ class TestChargeRepository implements ChargeRepositoryInterface {
 
   @override
   Future<List<ChargePlanEntity>> getAllChargePlans(int customerId) async {
-    Map<String, dynamic> jsonData = await jsonLoaderHelper.loadJson(
+    dynamic jsonData = await jsonLoaderHelper.loadJson(
       "charge-plans_get_res.json",
     );
     List<ChargePlanDTO> dtos =
@@ -46,7 +46,7 @@ class TestChargeRepository implements ChargeRepositoryInterface {
     int customerId,
     int chargePlanId,
   ) async {
-    Map<String, dynamic> jsonData = await jsonLoaderHelper.loadJson(
+    dynamic jsonData = await jsonLoaderHelper.loadJson(
       "charge-plans_get_id_res.json",
     );
     ChargePlanDTO dto = ChargePlanDTO.fromMap(jsonData);

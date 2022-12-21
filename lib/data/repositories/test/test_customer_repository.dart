@@ -22,7 +22,7 @@ class TestCustomerRepository implements AuthRepository {
 
   @override
   Future<CustomerEntity> signIn(int id) async {
-    Map<String, dynamic> jsonData = await jsonLoaderHelper.loadJson(
+    dynamic jsonData = await jsonLoaderHelper.loadJson(
       "customers_get_id_res.json",
     );
     CustomerDTO dto = CustomerDTO.fromMap(jsonData);
@@ -40,7 +40,7 @@ class TestCustomerRepository implements AuthRepository {
     String postalcode,
     String city,
   ) async {
-    Map<String, dynamic> jsonData = await jsonLoaderHelper.loadJson(
+    dynamic jsonData = await jsonLoaderHelper.loadJson(
       "customers_post_res.json",
     );
     CustomerDTO dto = CustomerDTO.fromMap(jsonData);
