@@ -1,9 +1,11 @@
 class ChargeRequestCreationDTO {
+  int? deviceId;
   final double maxRequiredPower;
   final double requiredCapacity;
   final DateTime deadline;
 
   ChargeRequestCreationDTO({
+    this.deviceId,
     required this.maxRequiredPower,
     required this.requiredCapacity,
     required this.deadline,

@@ -16,8 +16,6 @@ class ChargeRequestCreationController extends StateNotifier<AsyncValue<void>> {
   final ChargePlanService chargePlanService;
   final DeviceService deviceService;
 
-  DeviceEntity? _selectedDevice;
-
   Future<void> createChargeRequest(
     ChargeRequestCreationDTO chargeRequestCreationDTO,
   ) async {
@@ -28,10 +26,6 @@ class ChargeRequestCreationController extends StateNotifier<AsyncValue<void>> {
         chargeRequestCreationDTO,
       ),
     );
-  }
-
-  void selectDevice(DeviceEntity deviceEntity) {
-    _selectedDevice = deviceEntity;
   }
 
   Future<void> getAllDevices() async {
@@ -48,4 +42,12 @@ final chargeRequestCreationControllerProvider = StateNotifierProvider
     chargePlanService: ref.watch(chargePlanServiceProvider),
     deviceService: ref.watch(deviceServiceProvider),
   );
+});
+
+final selectedDeviceProvider = StateProvider<DeviceEntity?>((ref) {
+  return null;
+});
+
+final deadlineProvider = StateProvider<DateTime?>((ref) {
+  return DateTime.now();
 });

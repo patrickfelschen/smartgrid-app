@@ -13,5 +13,15 @@
         "id": 3002,
         "description": "E-Heizung",
         "maxPower": 45.0
+    },
+    {
+        "id": 3003,
+        "description": "E-Wasserkocher",
+        "maxPower": 15.0
+    },
+    {
+        "id": 3004,
+        "description": "E-Kaffeemaschine",
+        "maxPower": 25.0
     }
 ]
