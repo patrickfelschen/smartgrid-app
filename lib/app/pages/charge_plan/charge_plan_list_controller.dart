@@ -3,7 +3,9 @@ import 'package:smartgrid/app/services/charge_plan_service.dart';
 
 class ChargePlanListController extends StateNotifier<AsyncValue<void>> {
   ChargePlanListController({required this.chargePlanService})
-      : super(const AsyncData<void>(null));
+      : super(const AsyncData<void>(null)) {
+    getAllChargePlans();
+  }
 
   final ChargePlanService chargePlanService;
 

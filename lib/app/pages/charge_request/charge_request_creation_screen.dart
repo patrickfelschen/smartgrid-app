@@ -11,7 +11,7 @@ class ChargeRequestCreationScreen extends ConsumerWidget {
   ChargeRequestCreationScreen({super.key});
 
   void openDeviceSelection(BuildContext context) {
-    showBottomSheet(
+    showModalBottomSheet(
       context: context,
       builder: ((_) {
         return DeviceBottomSheet(devices: _devices);

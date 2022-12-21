@@ -34,7 +34,7 @@ class DashboardScreen extends ConsumerWidget {
     });
 
     Future refresh() async {
-      await ref.watch(dashboardControllerProvider.notifier).getDashboardInfo();
+      await ref.read(dashboardControllerProvider.notifier).getDashboardInfo();
     }
 
     return Scaffold(
