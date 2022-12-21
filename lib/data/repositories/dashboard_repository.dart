@@ -4,7 +4,7 @@ import 'package:smartgrid/domain/repositories/dashboard_repository_interface.dar
 
 class DashboardRepository implements DashboardRepositoryInterface {
   @override
-  Future<DashboardInfoEntity> getDashboardInfo(int? id) {
+  Future<DashboardInfoEntity> getDashboardInfo(int customerId) {
     // TODO: implement getDashboardInfo
     throw UnimplementedError();
   }

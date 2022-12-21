@@ -14,7 +14,7 @@ class DashboardService {
         await ref.read(testCustomerRepositoryProvider).getCurrentUser();
     DashboardInfoEntity dashboardInfoEntity = await ref
         .read(testDashboardRepositoryProvider)
-        .getDashboardInfo(customer?.id);
+        .getDashboardInfo(customer!.id);
     return dashboardInfoEntity;
   }
 }
