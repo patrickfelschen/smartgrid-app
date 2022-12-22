@@ -16,7 +16,7 @@ class ChargePlanTimeDTO {
 
   factory ChargePlanTimeDTO.fromMap(Map<String, dynamic> map) {
     return ChargePlanTimeDTO(
-      time: map["time"],
+      time: DateTime.parse(map["time"]),
       power: map["power"],
       gCO2eqPerkWh: map["gCO2eqPerkWh"],
       powerGridCapacity: map["powerGridCapacity"],
@@ -25,7 +25,7 @@ class ChargePlanTimeDTO {
 
   Map<String, dynamic> toMap() {
     return {
-      "time": time,
+      "time": time.toIso8601String(),
       "power": power,
       "gCO2eqPerkWh": gCO2eqPerkWh,
       "powerGridCapacity": powerGridCapacity,
