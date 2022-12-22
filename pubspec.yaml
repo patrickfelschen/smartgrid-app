@@ -42,6 +42,9 @@ dependencies:
   json_serializable: ^6.5.4
   http: ^0.13.5
   intl: ^0.17.0
+  freezed: ^2.3.2
+  hive_flutter: ^1.1.0
+  validators:
 
 dev_dependencies:
   flutter_test:

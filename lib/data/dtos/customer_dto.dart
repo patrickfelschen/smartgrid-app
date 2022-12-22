@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:smartgrid/domain/entities/customer_entity.dart';
 
 class CustomerDTO {
@@ -28,6 +30,9 @@ class CustomerDTO {
     );
   }
 
+  factory CustomerDTO.fromJson(String source) =>
+      CustomerDTO.fromMap(json.decode(source) as Map<String, dynamic>);
+
   Map<String, dynamic> toMap() {
     return {
       "id": id,
@@ -49,4 +54,17 @@ class CustomerDTO {
       city: dto.city,
     );
   }
+
+  static CustomerDTO toDTO(CustomerEntity entity) {
+    return CustomerDTO(
+      id: entity.id,
+      hubId: entity.hubId,
+      street: entity.street,
+      number: entity.number,
+      postalcode: entity.postalcode,
+      city: entity.city,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
 }

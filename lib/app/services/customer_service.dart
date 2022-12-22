@@ -25,8 +25,8 @@ class CustomerService {
     return entity;
   }
 
-  Future<CustomerEntity> signIn(int id) async {
-    CustomerEntity entity = await ref.read(_authRepository).signIn(id);
+  Future<CustomerEntity> signIn(int customerId) async {
+    CustomerEntity entity = await ref.read(_authRepository).signIn(customerId);
     return entity;
   }
 

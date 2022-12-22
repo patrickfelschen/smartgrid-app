@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:smartgrid/app/pages/option/option_controller.dart';
+import 'package:smartgrid/app/pages/authentication/auth_provider.dart';
 
 import '../authentication/customer_creation_screen.dart';
 import '../device/device_creation_screen.dart';
@@ -11,7 +11,8 @@ class OptionScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     void signOut() async {
-      await ref.read(optionControllerProvider.notifier).signOut();
+      Navigator.of(context).pop();
+      ref.read(authNotifierProvider.notifier).signOut();
     }
 
     return Scaffold(
@@ -57,7 +58,7 @@ class OptionScreen extends ConsumerWidget {
           const Divider(),
           Card(
             child: ListTile(
-              onTap: signOut,
+              onTap: () => signOut(),
               leading: const CircleAvatar(
                 child: Icon(Icons.logout),
               ),

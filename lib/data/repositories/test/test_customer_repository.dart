@@ -12,12 +12,13 @@ class TestCustomerRepository implements AuthRepository {
     required this.jsonLoaderHelper,
   });
 
-  CustomerEntity? _currentUser;
+  @override
+  CustomerEntity? currentUser;
 
   @override
   Future<CustomerEntity?> getCurrentUser() async {
     await Future.delayed(const Duration(seconds: 1));
-    return _currentUser;
+    return currentUser;
   }
 
   @override
@@ -28,7 +29,7 @@ class TestCustomerRepository implements AuthRepository {
     await Future.delayed(const Duration(seconds: 2));
     CustomerDTO dto = CustomerDTO.fromMap(jsonData);
     CustomerEntity customer = CustomerDTO.fromDTO(dto);
-    _currentUser = customer;
+    currentUser = customer;
     return customer;
   }
 
@@ -46,14 +47,14 @@ class TestCustomerRepository implements AuthRepository {
     );
     CustomerDTO dto = CustomerDTO.fromMap(jsonData);
     CustomerEntity customer = CustomerDTO.fromDTO(dto);
-    _currentUser = customer;
+    currentUser = customer;
     return customer;
   }
 
   @override
   Future<void> signOut() async {
     await Future.delayed(const Duration(seconds: 1));
-    _currentUser = null;
+    currentUser = null;
   }
 }
 

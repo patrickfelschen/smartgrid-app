@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:smartgrid/app/pages/authentication/auth_provider.dart';
 import 'package:smartgrid/app/pages/authentication/customer_creation_screen.dart';
-import 'package:smartgrid/app/pages/authentication/customer_sign_in_controller.dart';
-
-import '../dashboard/dashboard_screen.dart';
+import 'package:validators/validators.dart';
 
 class CustomerSignInScreen extends ConsumerWidget {
   final TextEditingController customerIdController = TextEditingController();
@@ -12,13 +11,15 @@ class CustomerSignInScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<void> state = ref.watch(customerSignInControllerProvider);
+    final auth = ref.watch(authNotifierProvider);
+    final formKey = GlobalKey<FormState>();
 
     void signIn() {
-      String customerIdText = customerIdController.text.trim();
-      if (customerIdText.isEmpty) return;
-      int customerId = int.parse(customerIdText);
-      ref.read(customerSignInControllerProvider.notifier).signIn(customerId);
+      if (formKey.currentState!.validate()) {
+        final customerIdText = customerIdController.text;
+        int customerId = int.parse(customerIdText);
+        ref.read(authNotifierProvider.notifier).signIn(customerId);
+      }
     }
 
     void signUp() {
@@ -29,62 +30,61 @@ class CustomerSignInScreen extends ConsumerWidget {
       );
     }
 
-    ref.listen<AsyncValue>(customerSignInControllerProvider, (_, state) {
-      if (!state.isRefreshing && state.hasValue) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (_) => DashboardScreen(),
-          ),
-        );
-      }
-
-      if (!state.isRefreshing && state.hasError) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(state.error.toString()),
-          ),
-        );
-      }
-    });
-
-    Widget body = ListView(
-      padding: const EdgeInsets.symmetric(
-        vertical: 12.0,
-        horizontal: 12.0,
-      ),
-      children: [
-        const Icon(
-          Icons.person,
-          size: 200.0,
-          color: Colors.green,
+    Widget newBody() {
+      return ListView(
+        padding: const EdgeInsets.symmetric(
+          vertical: 12,
+          horizontal: 12,
         ),
-        TextField(
-          controller: customerIdController,
-          keyboardType: TextInputType.number,
-          decoration: const InputDecoration(
-            suffixIcon: Icon(Icons.key),
-            border: OutlineInputBorder(),
-            label: Text(
-              "Kundennummer",
+        children: [
+          const Icon(
+            Icons.person,
+            size: 200.0,
+            color: Colors.green,
+          ),
+          Form(
+            key: formKey,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            child: Column(
+              children: [
+                TextFormField(
+                  controller: customerIdController,
+                  keyboardType: TextInputType.number,
+                  autofocus: true,
+                  validator: (value) {
+                    return isNumeric(value.toString())
+                        ? null
+                        : 'Gib eine Nummer ein';
+                  },
+                  decoration: const InputDecoration(
+                    suffixIcon: Icon(Icons.key),
+                    border: OutlineInputBorder(),
+                    label: Text(
+                      "Kundennummer",
+                    ),
+                    hintText: "93483854738",
+                  ),
+                ),
+              ],
             ),
           ),
-        ),
-        ElevatedButton(
-          onPressed: state.isLoading ? null : () => signIn(),
-          child: state.isLoading
-              ? const SizedBox(
-                  height: 20,
-                  width: 20,
-                  child: CircularProgressIndicator(),
-                )
-              : const Text("Anmelden"),
-        ),
-        OutlinedButton(
-          onPressed: state.isLoading ? null : () => signUp(),
-          child: const Text("Neues Konto erstellen"),
-        )
-      ],
-    );
+          ElevatedButton(
+            onPressed: auth.loading ? null : () => signIn(),
+            child: auth.loading
+                ? const SizedBox(
+                    height: 20,
+                    width: 20,
+                    child: CircularProgressIndicator(),
+                  )
+                : const Text("Anmelden"),
+          ),
+          OutlinedButton(
+            onPressed: auth.loading ? null : () => signUp(),
+            child: const Text("Neues Konto erstellen"),
+          )
+        ],
+      );
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -92,7 +92,7 @@ class CustomerSignInScreen extends ConsumerWidget {
           "Anmelden",
         ),
       ),
-      body: body,
+      body: newBody(),
     );
   }
 }
