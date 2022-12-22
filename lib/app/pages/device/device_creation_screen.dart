@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:smartgrid/app/pages/device/device_controller.dart';
+import 'package:smartgrid/app/pages/device/device_creation_controller.dart';
 
 import '../dashboard/dashboard_screen.dart';
 

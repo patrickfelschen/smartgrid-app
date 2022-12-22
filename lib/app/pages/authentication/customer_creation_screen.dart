@@ -20,7 +20,7 @@ class CustomerCreationScreen extends ConsumerWidget {
     final AsyncValue<void> state =
         ref.watch(customerCreationControllerProvider);
 
-    void signUp() async {
+    void signUp() {
       String customerIdText = customerIdController.text.trim();
       String hubIdText = hubIdController.text.trim();
       String streetText = streetController.text.trim();
@@ -46,7 +46,7 @@ class CustomerCreationScreen extends ConsumerWidget {
           city: cityText,
         );
 
-        await ref
+        ref
             .read(customerCreationControllerProvider.notifier)
             .signUp(creationDTO);
       }
@@ -164,7 +164,11 @@ class CustomerCreationScreen extends ConsumerWidget {
         ElevatedButton(
           onPressed: state.isLoading ? null : () => signUp(),
           child: state.isLoading
-              ? const CircularProgressIndicator()
+              ? const SizedBox(
+                  height: 20,
+                  width: 20,
+                  child: CircularProgressIndicator(),
+                )
               : const Text("Fertig"),
         ),
       ],
