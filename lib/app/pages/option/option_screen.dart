@@ -20,42 +20,50 @@ class OptionScreen extends ConsumerWidget {
       ),
       body: ListView(
         children: [
-          ListTile(
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => CustomerCreationScreen(),
-                ),
-              );
-            },
-            leading: const CircleAvatar(
-              child: Icon(Icons.person),
+          Card(
+            child: ListTile(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => CustomerCreationScreen(),
+                  ),
+                );
+              },
+              leading: const CircleAvatar(
+                child: Icon(Icons.person),
+              ),
+              title: const Text("Konto"),
+              subtitle: const Text("Verwalte deine Kontoeinstellungen."),
+              trailing: const Icon(Icons.arrow_forward_ios),
             ),
-            title: const Text("Konto"),
-            subtitle: const Text("Verwalte deine Kontoeinstellungen."),
           ),
-          ListTile(
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => const DeviceCreationScreen(),
-                ),
-              );
-            },
-            leading: const CircleAvatar(
-              child: Icon(Icons.electrical_services),
+          Card(
+            child: ListTile(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => const DeviceCreationScreen(),
+                  ),
+                );
+              },
+              leading: const CircleAvatar(
+                child: Icon(Icons.electrical_services),
+              ),
+              title: const Text("Geräte Profil"),
+              subtitle: const Text("Verwalte deine Geräteprofile."),
+              trailing: const Icon(Icons.arrow_forward_ios),
             ),
-            title: const Text("Geräte Profil"),
-            subtitle: const Text("Verwalte deine Geräteprofile."),
           ),
           const Divider(),
-          ListTile(
-            onTap: signOut,
-            leading: const CircleAvatar(
-              child: Icon(Icons.logout),
+          Card(
+            child: ListTile(
+              onTap: signOut,
+              leading: const CircleAvatar(
+                child: Icon(Icons.logout),
+              ),
+              title: const Text("Abmelden"),
+              subtitle: const Text("Melde dich von deinem Konto ab."),
             ),
-            title: const Text("Abmelden"),
-            subtitle: const Text("Melde dich von deinem Konto ab."),
           ),
         ],
       ),
