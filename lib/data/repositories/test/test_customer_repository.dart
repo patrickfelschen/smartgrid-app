@@ -25,6 +25,7 @@ class TestCustomerRepository implements AuthRepository {
     dynamic jsonData = await jsonLoaderHelper.loadJson(
       "customers_get_id_res.json",
     );
+    await Future.delayed(const Duration(seconds: 2));
     CustomerDTO dto = CustomerDTO.fromMap(jsonData);
     CustomerEntity customer = CustomerDTO.fromDTO(dto);
     _currentUser = customer;

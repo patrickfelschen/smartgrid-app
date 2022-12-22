@@ -97,7 +97,7 @@ class ChargeRequestCreationScreen extends ConsumerWidget {
                 ),
                 children: [
                   const Icon(
-                    Icons.battery_charging_full,
+                    Icons.add_chart,
                     size: 200.0,
                     color: Colors.green,
                   ),

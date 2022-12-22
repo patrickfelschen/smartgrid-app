@@ -14,13 +14,11 @@ class CustomerSignInScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<void> state = ref.watch(customerSignInControllerProvider);
 
-    void signIn() async {
+    void signIn() {
       String customerIdText = customerIdController.text.trim();
       if (customerIdText.isEmpty) return;
       int customerId = int.parse(customerIdText);
-      await ref
-          .read(customerSignInControllerProvider.notifier)
-          .signIn(customerId);
+      ref.read(customerSignInControllerProvider.notifier).signIn(customerId);
     }
 
     void signUp() {
@@ -69,13 +67,16 @@ class CustomerSignInScreen extends ConsumerWidget {
             label: Text(
               "Kundennummer",
             ),
-            //errorText: state.hasError ? state.error.toString() : null,
           ),
         ),
         ElevatedButton(
           onPressed: state.isLoading ? null : () => signIn(),
           child: state.isLoading
-              ? const CircularProgressIndicator()
+              ? const SizedBox(
+                  height: 20,
+                  width: 20,
+                  child: CircularProgressIndicator(),
+                )
               : const Text("Anmelden"),
         ),
         OutlinedButton(
