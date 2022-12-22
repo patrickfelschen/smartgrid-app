@@ -1,8 +1,8 @@
-import '../constants.dart';
+import 'package:smartgrid/utils/constants.dart';
 
 /// Uri builder class for the Smart Grid API
 class SmartGridApi {
-  static const String _apiBaseUrl = kSmartGridApiBaseUrl;
+  static const String _apiBaseUrl = Constants.smartGridApiBaseUrl;
   static const String _apiPath = "/api/v1/";
 
   // POST Kunde erstellen

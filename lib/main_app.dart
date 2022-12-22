@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smartgrid/app/pages/authentication/customer_sign_in_screen.dart';
+import 'package:smartgrid/app/pages/authentication/auth_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 class MainApp extends StatelessWidget {
@@ -21,7 +21,7 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: CustomerSignInScreen(),
+      home: const AuthScreen(),
     );
   }
 }
