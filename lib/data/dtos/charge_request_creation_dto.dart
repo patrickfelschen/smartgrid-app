@@ -29,6 +29,6 @@ class ChargeRequestCreationDTO {
 
   @override
   String toString() {
-    return "$maxRequiredPower $requiredCapacity $deadline";
+    return "$deviceId $maxRequiredPower $requiredCapacity $deadline";
   }
 }

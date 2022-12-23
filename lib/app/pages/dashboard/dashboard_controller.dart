@@ -15,7 +15,9 @@ class DashboardController extends StateNotifier<DashboardState> {
   final DashboardService dashboardService;
 
   Future<void> getDashboardInfo() async {
+    print("DashboardController::getDashboardInfo");
     state = state.copyWith(status: StateStatus.loading);
+    print("DashboardState::Loading");
     DashboardInfoEntity dashboardInfo =
         await dashboardService.getDashboardInfo();
     if (dashboardInfo != null) {
@@ -23,9 +25,11 @@ class DashboardController extends StateNotifier<DashboardState> {
         status: StateStatus.success,
         dashboardInfo: dashboardInfo,
       );
+      print("DashboardState::Success");
     } else {
       state = state.copyWith(
           status: StateStatus.failure, error: "Error receiving Dashboard Info");
+      print("DashboardState::Error");
     }
   }
 }
