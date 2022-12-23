@@ -15,16 +15,28 @@ class ChargeRequestCreationController
     required this.chargePlanService,
     required this.deviceService,
   }) : super(ChargeRequestCreationState()) {
-    getAllDevices();
+    initialize();
   }
 
   final ChargePlanService chargePlanService;
   final DeviceService deviceService;
 
+  Future<void> initialize() async {
+    state = state.copyWith(status: StateStatus.loading);
+    List<DeviceEntity> devices = await deviceService.getAllDevices();
+    state = state.copyWith(
+      status: StateStatus.initial,
+      devices: devices,
+      selectedDevice: devices.first,
+      deadline: DateTime.now(),
+    );
+  }
+
   Future<void> createChargeRequest(
     ChargeRequestCreationDTO chargeRequestCreationDTO,
   ) async {
     print("ChargeRequestCreationController::createChargeRequest");
+    print("ChargeRequestDTO: $chargeRequestCreationDTO");
     state = state.copyWith(status: StateStatus.loading);
     print("ChargeRequestCreationState::Loading");
     ChargeRequestEntity chargeRequest =
@@ -36,31 +48,13 @@ class ChargeRequestCreationController
       state = state.copyWith(
         status: StateStatus.success,
       );
-      state = ChargeRequestCreationState();
+
       print("ChargeRequestCreationState::Success");
     } else {
       state = state.copyWith(
         status: StateStatus.failure,
         error: "Could not create charge request",
       );
-      print("ChargeRequestCreationState::Error");
-    }
-  }
-
-  Future<void> getAllDevices() async {
-    print("ChargeRequestCreationController::getAllDevices");
-    state = state.copyWith(status: StateStatus.loading);
-    print("ChargeRequestCreationState::Loading");
-    List<DeviceEntity> devices = await deviceService.getAllDevices();
-    if (devices.isNotEmpty) {
-      state = state.copyWith(
-        status: StateStatus.success,
-        devices: devices,
-      );
-      print("ChargeRequestCreationState::Success");
-    } else {
-      state = state.copyWith(
-          status: StateStatus.failure, error: "No devices found");
       print("ChargeRequestCreationState::Error");
     }
   }

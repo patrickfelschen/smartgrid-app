@@ -6,50 +6,30 @@ import 'package:smartgrid/app/pages/charge_request/charge_request_creation_contr
 import 'package:smartgrid/app/pages/dashboard/dashboard_screen.dart';
 import 'package:smartgrid/app/widgets/device_bottom_sheet.dart';
 import 'package:smartgrid/data/models/charge_request_creation_dto.dart';
+import 'package:validators/validators.dart';
 
 class ChargeRequestCreationScreen extends ConsumerWidget {
-  const ChargeRequestCreationScreen({super.key});
-
+  ChargeRequestCreationScreen({super.key});
+  final TextEditingController deviceTextEditingController =
+      TextEditingController();
+  final TextEditingController deadlineTextEditingController =
+      TextEditingController();
+  final TextEditingController maxRequiredPowerTextEditingController =
+      TextEditingController();
+  final TextEditingController requiredCapacityTextEditingController =
+      TextEditingController();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final ChargeRequestCreationState state =
         ref.watch(chargeRequestCreationControllerProvider);
 
-    TextEditingController deviceTextEditingController = TextEditingController();
     if (state.selectedDevice != null) {
-      deviceTextEditingController =
-          TextEditingController(text: state.selectedDevice!.description);
+      deviceTextEditingController.text = state.selectedDevice!.description;
     }
 
-    TextEditingController deadlineTextEditingController =
-        TextEditingController();
     if (state.deadline != null) {
-      deadlineTextEditingController = TextEditingController(
-          text: DateFormat("dd.MM.yyyy HH:mm").format(state.deadline!));
-    }
-
-    TextEditingController maxRequiredPowerTextEditingController =
-        TextEditingController(text: state.maxRequiredPower.toString());
-
-    TextEditingController requiredCapacityTextEditingController =
-        TextEditingController(text: state.requiredCapacity.toString());
-
-    void createChargeRequest() async {
-      ChargeRequestCreationDTO creationDto = ChargeRequestCreationDTO(
-        maxRequiredPower: state.maxRequiredPower,
-        requiredCapacity: state.requiredCapacity,
-        deadline: state.deadline!,
-      );
-      await ref
-          .read(chargeRequestCreationControllerProvider.notifier)
-          .createChargeRequest(creationDto);
-      if (state.status == StateStatus.success) {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (_) => DashboardScreen(),
-          ),
-        );
-      }
+      deadlineTextEditingController.text =
+          DateFormat("dd.MM.yyyy HH:mm").format(state.deadline!);
     }
 
     void openDeviceSelection(BuildContext context) {
@@ -86,18 +66,24 @@ class ChargeRequestCreationScreen extends ConsumerWidget {
       }
     }
 
-    void setMaxRequiredPower() {
-      ref
+    void createChargeRequest() async {
+      ChargeRequestCreationDTO creationDto = ChargeRequestCreationDTO(
+        maxRequiredPower:
+            double.parse(maxRequiredPowerTextEditingController.text),
+        requiredCapacity:
+            double.parse(requiredCapacityTextEditingController.text),
+        deadline: state.deadline!,
+      );
+      await ref
           .read(chargeRequestCreationControllerProvider.notifier)
-          .setMaxRequiredPower(
-              double.parse(maxRequiredPowerTextEditingController.text));
-    }
-
-    void setRequiredCapacity() {
-      ref
-          .read(chargeRequestCreationControllerProvider.notifier)
-          .setRequiredCapacity(
-              double.parse(requiredCapacityTextEditingController.text));
+          .createChargeRequest(creationDto);
+      if (state.status == StateStatus.success) {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (_) => DashboardScreen(),
+          ),
+        );
+      }
     }
 
     Widget bodyContent = Builder(
@@ -139,10 +125,13 @@ class ChargeRequestCreationScreen extends ConsumerWidget {
               const SizedBox(
                 height: 12.0,
               ),
-              Focus(
-                onFocusChange: (value) => {if (!value) setMaxRequiredPower()},
-                child: TextField(
+              Form(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                child: TextFormField(
                   controller: maxRequiredPowerTextEditingController,
+                  validator: (value) => isNumeric(value.toString())
+                      ? null
+                      : "Gib eine Nummer ein",
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     suffixText: "kW",
@@ -155,10 +144,13 @@ class ChargeRequestCreationScreen extends ConsumerWidget {
               const SizedBox(
                 height: 12.0,
               ),
-              Focus(
-                onFocusChange: ((value) => {if (!value) setRequiredCapacity()}),
-                child: TextField(
+              Form(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                child: TextFormField(
                   controller: requiredCapacityTextEditingController,
+                  validator: (value) => isNumeric(value.toString())
+                      ? null
+                      : "Gib eine Nummer ein",
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     suffixText: "kW/h",
@@ -189,9 +181,10 @@ class ChargeRequestCreationScreen extends ConsumerWidget {
     );
 
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("Ladeantrag erstellen"),
-        ),
-        body: state.status == StateStatus.loading ? bodyLoading : bodyContent);
+      appBar: AppBar(
+        title: const Text("Ladeantrag erstellen"),
+      ),
+      body: state.status == StateStatus.loading ? bodyLoading : bodyContent,
+    );
   }
 }
