@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:smartgrid/app/enums/state_status.dart';
 import 'package:smartgrid/app/pages/dashboard/dashboard_controller.dart';
-import 'package:smartgrid/domain/entities/dashboard_info_entity.dart';
 import '../charge_plan/charge_plan_list_screen.dart';
 import '../charge_request/charge_request_creation_screen.dart';
 import '../option/option_screen.dart';
@@ -14,24 +14,14 @@ class DashboardScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<void> state = ref.watch(dashboardControllerProvider);
+    final DashboardState state = ref.watch(dashboardControllerProvider);
 
-    ref.listen<AsyncValue>(dashboardControllerProvider, (_, state) {
-      if (!state.isRefreshing && state.hasValue) {
-        DashboardInfoEntity dashboardInfo = state.value;
-        smartValueController.text = dashboardInfo.totalCo2ValueSmart.toString();
-        notSmartValueController.text =
-            dashboardInfo.totalCo2ValueNotSmart.toString();
-      }
-
-      if (!state.isRefreshing && state.hasError) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(state.error.toString()),
-          ),
-        );
-      }
-    });
+    if (state.status == StateStatus.success) {
+      smartValueController.text =
+          state.dashboardInfo!.totalCo2ValueSmart.toString();
+      notSmartValueController.text =
+          state.dashboardInfo!.totalCo2ValueNotSmart.toString();
+    }
 
     Future refresh() async {
       await ref.read(dashboardControllerProvider.notifier).getDashboardInfo();
