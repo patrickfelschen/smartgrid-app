@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smartgrid/app/enums/auth_status.dart';
-import 'package:smartgrid/app/pages/authentication/auth_provider.dart';
-import 'package:smartgrid/app/pages/authentication/customer_sign_in_screen.dart';
+import 'package:smartgrid/app/pages/authentication/sign_in_screen.dart';
 import 'package:smartgrid/app/pages/dashboard/dashboard_screen.dart';
+import 'package:smartgrid/app/providers/auth_provider.dart';
 
-class AuthScreen extends ConsumerWidget {
-  const AuthScreen({super.key});
+class AuthWrapperScreen extends ConsumerWidget {
+  const AuthWrapperScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -16,7 +16,7 @@ class AuthScreen extends ConsumerWidget {
 
     return Container(
       child: authStatus == AuthStatus.unauthenticated
-          ? CustomerSignInScreen()
+          ? SignInScreen()
           : authStatus == AuthStatus.authenticated
               ? DashboardScreen()
               : const Center(

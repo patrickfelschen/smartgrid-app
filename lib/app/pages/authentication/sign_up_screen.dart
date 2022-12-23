@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:smartgrid/app/pages/authentication/auth_provider.dart';
+import 'package:smartgrid/app/providers/auth_provider.dart';
 import 'package:smartgrid/data/dtos/customer_creation_dto.dart';
 import 'package:validators/validators.dart';
 
-class CustomerCreationScreen extends ConsumerWidget {
+class SignUpScreen extends ConsumerWidget {
   final TextEditingController customerIdController = TextEditingController();
   final TextEditingController hubIdController = TextEditingController();
   final TextEditingController streetController = TextEditingController();
@@ -12,7 +12,7 @@ class CustomerCreationScreen extends ConsumerWidget {
   final TextEditingController postalcodeController = TextEditingController();
   final TextEditingController cityController = TextEditingController();
 
-  CustomerCreationScreen({super.key});
+  SignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
