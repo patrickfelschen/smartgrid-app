@@ -60,12 +60,14 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
       state = state.copyWith(
         status: AuthStatus.authenticated,
         user: CustomerDTO.fromDTO(customerDTO),
+        loading: false,
       );
       return;
     }
 
     state = state.copyWith(
       status: AuthStatus.unauthenticated,
+      loading: false,
     );
   }
 
