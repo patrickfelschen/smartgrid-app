@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smartgrid/app/pages/authentication/auth_provider.dart';
-import 'package:smartgrid/app/pages/authentication/customer_creation_controller.dart';
 import 'package:smartgrid/data/dtos/customer_creation_dto.dart';
 import 'package:validators/validators.dart';
-
-import '../dashboard/dashboard_screen.dart';
 
 class CustomerCreationScreen extends ConsumerWidget {
   final TextEditingController customerIdController = TextEditingController();
@@ -47,7 +44,7 @@ class CustomerCreationScreen extends ConsumerWidget {
         Navigator.pop(context);
       }
     }
-
+    /*
     ref.listen<AsyncValue>(customerCreationControllerProvider, (_, state) {
       if (!state.isRefreshing && state.hasValue) {
         Navigator.of(context).push(
@@ -62,7 +59,7 @@ class CustomerCreationScreen extends ConsumerWidget {
           SnackBar(content: Text(state.error.toString())),
         );
       }
-    });
+    });*/
 
     Widget newBody() {
       return ListView(
@@ -96,6 +93,7 @@ class CustomerCreationScreen extends ConsumerWidget {
                     label: Text(
                       "Kundennummer",
                     ),
+                    hintText: "93483854738",
                   ),
                 ),
                 const SizedBox(
@@ -115,6 +113,7 @@ class CustomerCreationScreen extends ConsumerWidget {
                     label: Text(
                       "HUB-Nummer",
                     ),
+                    hintText: "3427",
                   ),
                 ),
                 const SizedBox(
@@ -137,6 +136,7 @@ class CustomerCreationScreen extends ConsumerWidget {
                     label: Text(
                       "Straße",
                     ),
+                    hintText: "Musterstraße",
                   ),
                 ),
                 const SizedBox(
@@ -155,6 +155,7 @@ class CustomerCreationScreen extends ConsumerWidget {
                     label: Text(
                       "Hausnummer",
                     ),
+                    hintText: "1a",
                   ),
                 ),
                 const SizedBox(
@@ -173,6 +174,7 @@ class CustomerCreationScreen extends ConsumerWidget {
                     label: Text(
                       "Postleitzahl",
                     ),
+                    hintText: "98765",
                   ),
                 ),
                 const SizedBox(
@@ -191,6 +193,7 @@ class CustomerCreationScreen extends ConsumerWidget {
                     label: Text(
                       "Ort",
                     ),
+                    hintText: "Musterstadt",
                   ),
                 ),
               ],
