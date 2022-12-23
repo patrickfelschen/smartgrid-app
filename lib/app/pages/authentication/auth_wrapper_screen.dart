@@ -14,14 +14,17 @@ class AuthWrapperScreen extends ConsumerWidget {
       authNotifierProvider.select((value) => value.status),
     );
 
-    return Container(
-      child: authStatus == AuthStatus.unauthenticated
-          ? SignInScreen()
-          : authStatus == AuthStatus.authenticated
-              ? DashboardScreen()
-              : const Center(
-                  child: CircularProgressIndicator(),
-                ),
-    );
+    switch (authStatus) {
+      case AuthStatus.initial:
+        return const Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
+      case AuthStatus.unauthenticated:
+        return SignInScreen();
+      case AuthStatus.authenticated:
+        return DashboardScreen();
+    }
   }
 }

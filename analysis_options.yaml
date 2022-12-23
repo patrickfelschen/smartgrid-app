@@ -37,9 +37,9 @@ linter:
 
 # To do that, you can add the following to the analysis_options.yaml file at the root of your project:
 
-#analyzer:
-#  errors:
-#    invalid_annotation_target: ignore
+analyzer:
+  errors:
+    invalid_annotation_target: ignore
 
 
 #analyzer:

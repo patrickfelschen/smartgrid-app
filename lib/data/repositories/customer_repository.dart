@@ -1,11 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:smartgrid/data/dtos/customer_creation_dto.dart';
+import 'package:smartgrid/data/helpers/http_request_helper.dart';
+import 'package:smartgrid/data/models/customer_creation_dto.dart';
 import 'package:smartgrid/data/helpers/smart_grid_api.dart';
+import 'package:smartgrid/data/models/customer_dto.dart';
 import 'package:smartgrid/domain/entities/customer_entity.dart';
 import 'package:smartgrid/domain/repositories/auth_repository.dart';
-
-import '../dtos/customer_dto.dart';
-import '../helpers/http_request_helper.dart';
 
 class CustomerAuthRepository implements AuthRepository {
   CustomerAuthRepository({
@@ -27,7 +26,7 @@ class CustomerAuthRepository implements AuthRepository {
   @override
   Future<CustomerEntity> signUp(
     int id,
-    int hubId,
+    int hubid,
     String street,
     String number,
     String postalcode,
@@ -35,7 +34,7 @@ class CustomerAuthRepository implements AuthRepository {
   ) async {
     CustomerCreationDTO customerCreationDTO = CustomerCreationDTO(
       id: id,
-      hubId: hubId,
+      hubid: hubid,
       street: street,
       number: number,
       postalcode: postalcode,
@@ -45,10 +44,10 @@ class CustomerAuthRepository implements AuthRepository {
     CustomerDTO customerDTO = await requestHelper.sendRequest(
       uri: api.customers(),
       method: HttpMethod.post,
-      body: customerCreationDTO.toMap(),
+      body: customerCreationDTO.toJson(),
       builder: (status, data) {
         if (status == HttpStatusCode.ok) {
-          return CustomerDTO.fromMap(data);
+          return CustomerDTO.fromJson(data);
         }
         throw Exception(data);
       },
@@ -64,7 +63,7 @@ class CustomerAuthRepository implements AuthRepository {
       method: HttpMethod.get,
       builder: (status, data) {
         if (status == HttpStatusCode.ok) {
-          return CustomerDTO.fromMap(data);
+          return CustomerDTO.fromJson(data);
         }
         throw Exception(data);
       },

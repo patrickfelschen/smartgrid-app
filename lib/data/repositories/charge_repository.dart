@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:smartgrid/data/dtos/charge_plan_dto.dart';
-import 'package:smartgrid/data/dtos/charge_request_creation_dto.dart';
-import 'package:smartgrid/data/dtos/charge_request_dto.dart';
+import 'package:smartgrid/data/models/charge_plan_dto.dart';
+import 'package:smartgrid/data/models/charge_request_creation_dto.dart';
+import 'package:smartgrid/data/models/charge_request_dto.dart';
 import 'package:smartgrid/data/helpers/http_request_helper.dart';
 import 'package:smartgrid/data/helpers/smart_grid_api.dart';
 import 'package:smartgrid/domain/entities/charge_request_entity.dart';
@@ -34,10 +34,10 @@ class ChargeRepository implements ChargeRepositoryInterface {
     ChargeRequestDTO dto = await requestHelper.sendRequest(
       uri: api.chargeRequests(customerId, deviceId),
       method: HttpMethod.post,
-      body: creationDto.toMap(),
+      body: creationDto.toJson(),
       builder: (status, data) {
         if (status == HttpStatusCode.ok) {
-          return ChargeRequestDTO.fromMap(data);
+          return ChargeRequestDTO.fromJson(data);
         }
         throw Exception(data);
       },
@@ -54,7 +54,7 @@ class ChargeRepository implements ChargeRepositoryInterface {
       builder: (status, data) {
         if (status == HttpStatusCode.ok) {
           List<ChargePlanDTO> dtos =
-              (data as List).map((e) => ChargePlanDTO.fromMap(e)).toList();
+              (data as List).map((e) => ChargePlanDTO.fromJson(e)).toList();
           return dtos;
         }
         throw Exception(data);
@@ -75,7 +75,7 @@ class ChargeRepository implements ChargeRepositoryInterface {
       method: HttpMethod.get,
       builder: (status, data) {
         if (status == HttpStatusCode.ok) {
-          return ChargePlanDTO.fromMap(data);
+          return ChargePlanDTO.fromJson(data);
         }
         throw Exception(data);
       },

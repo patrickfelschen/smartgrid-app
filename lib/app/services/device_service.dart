@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:smartgrid/data/dtos/device_update_dto.dart';
+import 'package:smartgrid/data/models/device_update_dto.dart';
 import 'package:smartgrid/data/repositories/device_repository.dart';
 import 'package:smartgrid/data/repositories/test/test_customer_repository.dart';
 import 'package:smartgrid/data/repositories/test/test_device_repository.dart';

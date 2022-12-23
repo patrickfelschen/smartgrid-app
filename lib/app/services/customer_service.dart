@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:smartgrid/data/dtos/customer_creation_dto.dart';
+import 'package:smartgrid/data/models/customer_creation_dto.dart';
 import 'package:smartgrid/domain/entities/customer_entity.dart';
 import 'package:smartgrid/domain/repositories/auth_repository.dart';
 
@@ -16,7 +16,7 @@ class CustomerService {
   Future<CustomerEntity> signUp(CustomerCreationDTO creationDTO) async {
     CustomerEntity entity = await ref.read(_authRepository).signUp(
           creationDTO.id,
-          creationDTO.hubId,
+          creationDTO.hubid,
           creationDTO.street,
           creationDTO.number,
           creationDTO.postalcode,

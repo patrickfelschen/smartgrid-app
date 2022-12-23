@@ -19,8 +19,10 @@ mixin _$ChargeRequestCreationState {
   StateStatus get status => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
   List<DeviceEntity> get devices => throw _privateConstructorUsedError;
-  ChargeRequestCreationDTO? get chargeRequestCreationDTO =>
-      throw _privateConstructorUsedError;
+  DeviceEntity? get selectedDevice => throw _privateConstructorUsedError;
+  double get maxRequiredPower => throw _privateConstructorUsedError;
+  double get requiredCapacity => throw _privateConstructorUsedError;
+  DateTime? get deadline => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ChargeRequestCreationStateCopyWith<ChargeRequestCreationState>
@@ -38,7 +40,10 @@ abstract class $ChargeRequestCreationStateCopyWith<$Res> {
       {StateStatus status,
       String? error,
       List<DeviceEntity> devices,
-      ChargeRequestCreationDTO? chargeRequestCreationDTO});
+      DeviceEntity? selectedDevice,
+      double maxRequiredPower,
+      double requiredCapacity,
+      DateTime? deadline});
 }
 
 /// @nodoc
@@ -58,7 +63,10 @@ class _$ChargeRequestCreationStateCopyWithImpl<$Res,
     Object? status = null,
     Object? error = freezed,
     Object? devices = null,
-    Object? chargeRequestCreationDTO = freezed,
+    Object? selectedDevice = freezed,
+    Object? maxRequiredPower = null,
+    Object? requiredCapacity = null,
+    Object? deadline = freezed,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -73,10 +81,22 @@ class _$ChargeRequestCreationStateCopyWithImpl<$Res,
           ? _value.devices
           : devices // ignore: cast_nullable_to_non_nullable
               as List<DeviceEntity>,
-      chargeRequestCreationDTO: freezed == chargeRequestCreationDTO
-          ? _value.chargeRequestCreationDTO
-          : chargeRequestCreationDTO // ignore: cast_nullable_to_non_nullable
-              as ChargeRequestCreationDTO?,
+      selectedDevice: freezed == selectedDevice
+          ? _value.selectedDevice
+          : selectedDevice // ignore: cast_nullable_to_non_nullable
+              as DeviceEntity?,
+      maxRequiredPower: null == maxRequiredPower
+          ? _value.maxRequiredPower
+          : maxRequiredPower // ignore: cast_nullable_to_non_nullable
+              as double,
+      requiredCapacity: null == requiredCapacity
+          ? _value.requiredCapacity
+          : requiredCapacity // ignore: cast_nullable_to_non_nullable
+              as double,
+      deadline: freezed == deadline
+          ? _value.deadline
+          : deadline // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -94,7 +114,10 @@ abstract class _$$_ChargeRequestCreationStateCopyWith<$Res>
       {StateStatus status,
       String? error,
       List<DeviceEntity> devices,
-      ChargeRequestCreationDTO? chargeRequestCreationDTO});
+      DeviceEntity? selectedDevice,
+      double maxRequiredPower,
+      double requiredCapacity,
+      DateTime? deadline});
 }
 
 /// @nodoc
@@ -113,7 +136,10 @@ class __$$_ChargeRequestCreationStateCopyWithImpl<$Res>
     Object? status = null,
     Object? error = freezed,
     Object? devices = null,
-    Object? chargeRequestCreationDTO = freezed,
+    Object? selectedDevice = freezed,
+    Object? maxRequiredPower = null,
+    Object? requiredCapacity = null,
+    Object? deadline = freezed,
   }) {
     return _then(_$_ChargeRequestCreationState(
       status: null == status
@@ -128,10 +154,22 @@ class __$$_ChargeRequestCreationStateCopyWithImpl<$Res>
           ? _value._devices
           : devices // ignore: cast_nullable_to_non_nullable
               as List<DeviceEntity>,
-      chargeRequestCreationDTO: freezed == chargeRequestCreationDTO
-          ? _value.chargeRequestCreationDTO
-          : chargeRequestCreationDTO // ignore: cast_nullable_to_non_nullable
-              as ChargeRequestCreationDTO?,
+      selectedDevice: freezed == selectedDevice
+          ? _value.selectedDevice
+          : selectedDevice // ignore: cast_nullable_to_non_nullable
+              as DeviceEntity?,
+      maxRequiredPower: null == maxRequiredPower
+          ? _value.maxRequiredPower
+          : maxRequiredPower // ignore: cast_nullable_to_non_nullable
+              as double,
+      requiredCapacity: null == requiredCapacity
+          ? _value.requiredCapacity
+          : requiredCapacity // ignore: cast_nullable_to_non_nullable
+              as double,
+      deadline: freezed == deadline
+          ? _value.deadline
+          : deadline // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -143,7 +181,10 @@ class _$_ChargeRequestCreationState extends _ChargeRequestCreationState {
       {this.status = StateStatus.initial,
       this.error = "",
       final List<DeviceEntity> devices = const [],
-      this.chargeRequestCreationDTO = null})
+      this.selectedDevice = null,
+      this.maxRequiredPower = 0,
+      this.requiredCapacity = 0,
+      this.deadline = null})
       : _devices = devices,
         super._();
 
@@ -164,11 +205,20 @@ class _$_ChargeRequestCreationState extends _ChargeRequestCreationState {
 
   @override
   @JsonKey()
-  final ChargeRequestCreationDTO? chargeRequestCreationDTO;
+  final DeviceEntity? selectedDevice;
+  @override
+  @JsonKey()
+  final double maxRequiredPower;
+  @override
+  @JsonKey()
+  final double requiredCapacity;
+  @override
+  @JsonKey()
+  final DateTime? deadline;
 
   @override
   String toString() {
-    return 'ChargeRequestCreationState(status: $status, error: $error, devices: $devices, chargeRequestCreationDTO: $chargeRequestCreationDTO)';
+    return 'ChargeRequestCreationState(status: $status, error: $error, devices: $devices, selectedDevice: $selectedDevice, maxRequiredPower: $maxRequiredPower, requiredCapacity: $requiredCapacity, deadline: $deadline)';
   }
 
   @override
@@ -179,14 +229,26 @@ class _$_ChargeRequestCreationState extends _ChargeRequestCreationState {
             (identical(other.status, status) || other.status == status) &&
             (identical(other.error, error) || other.error == error) &&
             const DeepCollectionEquality().equals(other._devices, _devices) &&
-            (identical(
-                    other.chargeRequestCreationDTO, chargeRequestCreationDTO) ||
-                other.chargeRequestCreationDTO == chargeRequestCreationDTO));
+            (identical(other.selectedDevice, selectedDevice) ||
+                other.selectedDevice == selectedDevice) &&
+            (identical(other.maxRequiredPower, maxRequiredPower) ||
+                other.maxRequiredPower == maxRequiredPower) &&
+            (identical(other.requiredCapacity, requiredCapacity) ||
+                other.requiredCapacity == requiredCapacity) &&
+            (identical(other.deadline, deadline) ||
+                other.deadline == deadline));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, error,
-      const DeepCollectionEquality().hash(_devices), chargeRequestCreationDTO);
+  int get hashCode => Object.hash(
+      runtimeType,
+      status,
+      error,
+      const DeepCollectionEquality().hash(_devices),
+      selectedDevice,
+      maxRequiredPower,
+      requiredCapacity,
+      deadline);
 
   @JsonKey(ignore: true)
   @override
@@ -198,11 +260,13 @@ class _$_ChargeRequestCreationState extends _ChargeRequestCreationState {
 
 abstract class _ChargeRequestCreationState extends ChargeRequestCreationState {
   factory _ChargeRequestCreationState(
-          {final StateStatus status,
-          final String? error,
-          final List<DeviceEntity> devices,
-          final ChargeRequestCreationDTO? chargeRequestCreationDTO}) =
-      _$_ChargeRequestCreationState;
+      {final StateStatus status,
+      final String? error,
+      final List<DeviceEntity> devices,
+      final DeviceEntity? selectedDevice,
+      final double maxRequiredPower,
+      final double requiredCapacity,
+      final DateTime? deadline}) = _$_ChargeRequestCreationState;
   _ChargeRequestCreationState._() : super._();
 
   @override
@@ -212,7 +276,13 @@ abstract class _ChargeRequestCreationState extends ChargeRequestCreationState {
   @override
   List<DeviceEntity> get devices;
   @override
-  ChargeRequestCreationDTO? get chargeRequestCreationDTO;
+  DeviceEntity? get selectedDevice;
+  @override
+  double get maxRequiredPower;
+  @override
+  double get requiredCapacity;
+  @override
+  DateTime? get deadline;
   @override
   @JsonKey(ignore: true)
   _$$_ChargeRequestCreationStateCopyWith<_$_ChargeRequestCreationState>

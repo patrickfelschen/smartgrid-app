@@ -1,21 +1,23 @@
+import 'dart:convert';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:smartgrid/app/enums/auth_status.dart';
 import 'package:smartgrid/app/services/customer_service.dart';
-import 'package:smartgrid/data/dtos/customer_creation_dto.dart';
-import 'package:smartgrid/data/dtos/customer_dto.dart';
+import 'package:smartgrid/data/models/customer_creation_dto.dart';
+import 'package:smartgrid/data/models/customer_dto.dart';
 import 'package:smartgrid/domain/entities/customer_entity.dart';
 import 'package:smartgrid/utils/constants.dart';
 
 part 'auth_provider.freezed.dart';
 
 @freezed
-abstract class AuthState with _$AuthState {
+class AuthState with _$AuthState {
   const factory AuthState({
     @Default(null) String? accessToken,
     @Default(null) CustomerEntity? user,
-    @Default(AuthStatus.unauthenticated) AuthStatus status,
+    @Default(AuthStatus.initial) AuthStatus status,
     @Default(null) String? errorMessage,
     @Default(false) bool loading,
   }) = _AuthState;
@@ -40,25 +42,32 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
   final CustomerService _service;
 
   Future<void> checkAuthStatus() async {
+    state = state.copyWith(
+      loading: true,
+    );
+    await Hive.openBox(Constants.authStorageKey);
     // check storage for existing token/user
     final box = Hive.box(Constants.authStorageKey);
     //final token = box.get('token');
-    final user = box.get('user');
+    dynamic userData = box.get('user');
 
     // if authenticated, update state accordingly
-    if (user != null && user.toString().isNotEmpty) {
+    if (userData != null && userData.toString().isNotEmpty) {
+      Map<String, dynamic> userJson = json.decode(userData);
+      CustomerDTO customerDTO = CustomerDTO.fromJson(userJson);
+      await _service.signIn(customerDTO.id);
+
       state = state.copyWith(
         status: AuthStatus.authenticated,
-        user: CustomerDTO.fromDTO(
-          CustomerDTO.fromJson(
-            user.toString(),
-          ),
-        ),
+        user: CustomerDTO.fromDTO(customerDTO),
+        loading: false,
       );
       return;
     }
+
     state = state.copyWith(
       status: AuthStatus.unauthenticated,
+      loading: false,
     );
   }
 
@@ -69,10 +78,11 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
         errorMessage: '',
       );
 
-      final customer = await _service.signIn(customerId);
+      CustomerEntity customer = await _service.signIn(customerId);
+      CustomerDTO customerDTO = CustomerDTO.toDTO(customer);
 
       final box = Hive.box(Constants.authStorageKey);
-      await box.put('user', CustomerDTO.toDTO(customer).toJson());
+      await box.put('user', json.encode(customerDTO.toJson()));
 
       state = state.copyWith(
         accessToken: "",
@@ -101,7 +111,7 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
       final customer = await _service.signUp(creationDTO);
 
       final box = Hive.box(Constants.authStorageKey);
-      await box.put('user', CustomerDTO.toDTO(customer).toJson());
+      await box.put('user', json.encode(creationDTO.toJson()));
 
       state = state.copyWith(
         accessToken: "",

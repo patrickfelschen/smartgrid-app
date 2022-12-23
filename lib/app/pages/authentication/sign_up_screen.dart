@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smartgrid/app/providers/auth_provider.dart';
-import 'package:smartgrid/data/dtos/customer_creation_dto.dart';
+import 'package:smartgrid/data/models/customer_creation_dto.dart';
 import 'package:validators/validators.dart';
 
 class SignUpScreen extends ConsumerWidget {
@@ -29,11 +29,11 @@ class SignUpScreen extends ConsumerWidget {
         String cityText = cityController.text.trim();
 
         int customerId = int.parse(customerIdText);
-        int hubId = int.parse(hubIdText);
+        int hubid = int.parse(hubIdText);
 
         CustomerCreationDTO creationDTO = CustomerCreationDTO(
           id: customerId,
-          hubId: hubId,
+          hubid: hubid,
           street: streetText,
           number: numberText,
           postalcode: postalcodeText,
