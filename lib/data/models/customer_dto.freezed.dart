@@ -21,11 +21,17 @@ CustomerDTO _$CustomerDTOFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$CustomerDTO {
   int get id => throw _privateConstructorUsedError;
+  set id(int value) => throw _privateConstructorUsedError;
   int get hubid => throw _privateConstructorUsedError;
+  set hubid(int value) => throw _privateConstructorUsedError;
   String get street => throw _privateConstructorUsedError;
+  set street(String value) => throw _privateConstructorUsedError;
   String get number => throw _privateConstructorUsedError;
+  set number(String value) => throw _privateConstructorUsedError;
   String get postalcode => throw _privateConstructorUsedError;
+  set postalcode(String value) => throw _privateConstructorUsedError;
   String get city => throw _privateConstructorUsedError;
+  set city(String value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -176,41 +182,22 @@ class _$_CustomerDTO implements _CustomerDTO {
       _$$_CustomerDTOFromJson(json);
 
   @override
-  final int id;
+  int id;
   @override
-  final int hubid;
+  int hubid;
   @override
-  final String street;
+  String street;
   @override
-  final String number;
+  String number;
   @override
-  final String postalcode;
+  String postalcode;
   @override
-  final String city;
+  String city;
 
   @override
   String toString() {
     return 'CustomerDTO(id: $id, hubid: $hubid, street: $street, number: $number, postalcode: $postalcode, city: $city)';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_CustomerDTO &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.hubid, hubid) || other.hubid == hubid) &&
-            (identical(other.street, street) || other.street == street) &&
-            (identical(other.number, number) || other.number == number) &&
-            (identical(other.postalcode, postalcode) ||
-                other.postalcode == postalcode) &&
-            (identical(other.city, city) || other.city == city));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, hubid, street, number, postalcode, city);
 
   @JsonKey(ignore: true)
   @override
@@ -228,28 +215,34 @@ class _$_CustomerDTO implements _CustomerDTO {
 
 abstract class _CustomerDTO implements CustomerDTO {
   factory _CustomerDTO(
-      {required final int id,
-      required final int hubid,
-      required final String street,
-      required final String number,
-      required final String postalcode,
-      required final String city}) = _$_CustomerDTO;
+      {required int id,
+      required int hubid,
+      required String street,
+      required String number,
+      required String postalcode,
+      required String city}) = _$_CustomerDTO;
 
   factory _CustomerDTO.fromJson(Map<String, dynamic> json) =
       _$_CustomerDTO.fromJson;
 
   @override
   int get id;
+  set id(int value);
   @override
   int get hubid;
+  set hubid(int value);
   @override
   String get street;
+  set street(String value);
   @override
   String get number;
+  set number(String value);
   @override
   String get postalcode;
+  set postalcode(String value);
   @override
   String get city;
+  set city(String value);
   @override
   @JsonKey(ignore: true)
   _$$_CustomerDTOCopyWith<_$_CustomerDTO> get copyWith =>

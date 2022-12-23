@@ -15,6 +15,12 @@ class AuthWrapperScreen extends ConsumerWidget {
     );
 
     switch (authStatus) {
+      case AuthStatus.initial:
+        return const Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
       case AuthStatus.unauthenticated:
         return SignInScreen();
       case AuthStatus.authenticated:

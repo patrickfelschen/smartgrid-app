@@ -147,7 +147,7 @@ class _$_AuthState extends _AuthState {
   const _$_AuthState(
       {this.accessToken = null,
       this.user = null,
-      this.status = AuthStatus.unauthenticated,
+      this.status = AuthStatus.initial,
       this.errorMessage = null,
       this.loading = false})
       : super._();

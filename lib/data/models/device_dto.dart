@@ -4,7 +4,7 @@ import 'package:smartgrid/domain/entities/device_entity.dart';
 part 'device_dto.freezed.dart';
 part 'device_dto.g.dart';
 
-@freezed
+@unfreezed
 class DeviceDTO with _$DeviceDTO {
   factory DeviceDTO({
     required int id,

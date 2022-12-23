@@ -17,7 +17,7 @@ class AuthState with _$AuthState {
   const factory AuthState({
     @Default(null) String? accessToken,
     @Default(null) CustomerEntity? user,
-    @Default(AuthStatus.unauthenticated) AuthStatus status,
+    @Default(AuthStatus.initial) AuthStatus status,
     @Default(null) String? errorMessage,
     @Default(false) bool loading,
   }) = _AuthState;

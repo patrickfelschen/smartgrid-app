@@ -4,7 +4,7 @@ import 'package:smartgrid/domain/entities/customer_entity.dart';
 part 'customer_dto.freezed.dart';
 part 'customer_dto.g.dart';
 
-@freezed
+@unfreezed
 class CustomerDTO with _$CustomerDTO {
   factory CustomerDTO({
     required int id,

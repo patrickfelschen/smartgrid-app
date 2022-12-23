@@ -22,8 +22,11 @@ ChargeRequestCreationDTO _$ChargeRequestCreationDTOFromJson(
 /// @nodoc
 mixin _$ChargeRequestCreationDTO {
   double get maxRequiredPower => throw _privateConstructorUsedError;
+  set maxRequiredPower(double value) => throw _privateConstructorUsedError;
   double get requiredCapacity => throw _privateConstructorUsedError;
+  set requiredCapacity(double value) => throw _privateConstructorUsedError;
   DateTime get deadline => throw _privateConstructorUsedError;
+  set deadline(DateTime value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -134,34 +137,16 @@ class _$_ChargeRequestCreationDTO implements _ChargeRequestCreationDTO {
       _$$_ChargeRequestCreationDTOFromJson(json);
 
   @override
-  final double maxRequiredPower;
+  double maxRequiredPower;
   @override
-  final double requiredCapacity;
+  double requiredCapacity;
   @override
-  final DateTime deadline;
+  DateTime deadline;
 
   @override
   String toString() {
     return 'ChargeRequestCreationDTO(maxRequiredPower: $maxRequiredPower, requiredCapacity: $requiredCapacity, deadline: $deadline)';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_ChargeRequestCreationDTO &&
-            (identical(other.maxRequiredPower, maxRequiredPower) ||
-                other.maxRequiredPower == maxRequiredPower) &&
-            (identical(other.requiredCapacity, requiredCapacity) ||
-                other.requiredCapacity == requiredCapacity) &&
-            (identical(other.deadline, deadline) ||
-                other.deadline == deadline));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, maxRequiredPower, requiredCapacity, deadline);
 
   @JsonKey(ignore: true)
   @override
@@ -180,19 +165,22 @@ class _$_ChargeRequestCreationDTO implements _ChargeRequestCreationDTO {
 
 abstract class _ChargeRequestCreationDTO implements ChargeRequestCreationDTO {
   factory _ChargeRequestCreationDTO(
-      {required final double maxRequiredPower,
-      required final double requiredCapacity,
-      required final DateTime deadline}) = _$_ChargeRequestCreationDTO;
+      {required double maxRequiredPower,
+      required double requiredCapacity,
+      required DateTime deadline}) = _$_ChargeRequestCreationDTO;
 
   factory _ChargeRequestCreationDTO.fromJson(Map<String, dynamic> json) =
       _$_ChargeRequestCreationDTO.fromJson;
 
   @override
   double get maxRequiredPower;
+  set maxRequiredPower(double value);
   @override
   double get requiredCapacity;
+  set requiredCapacity(double value);
   @override
   DateTime get deadline;
+  set deadline(DateTime value);
   @override
   @JsonKey(ignore: true)
   _$$_ChargeRequestCreationDTOCopyWith<_$_ChargeRequestCreationDTO>

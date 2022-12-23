@@ -4,7 +4,7 @@ import 'package:smartgrid/domain/entities/charge_request_entity.dart';
 part 'charge_request_dto.freezed.dart';
 part 'charge_request_dto.g.dart';
 
-@freezed
+@unfreezed
 class ChargeRequestDTO with _$ChargeRequestDTO {
   factory ChargeRequestDTO({
     required int id,

@@ -21,7 +21,9 @@ DashboardInfoDTO _$DashboardInfoDTOFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$DashboardInfoDTO {
   double get totalCo2ValueSmart => throw _privateConstructorUsedError;
+  set totalCo2ValueSmart(double value) => throw _privateConstructorUsedError;
   double get totalCo2ValueNotSmart => throw _privateConstructorUsedError;
+  set totalCo2ValueNotSmart(double value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -115,30 +117,14 @@ class _$_DashboardInfoDTO implements _DashboardInfoDTO {
       _$$_DashboardInfoDTOFromJson(json);
 
   @override
-  final double totalCo2ValueSmart;
+  double totalCo2ValueSmart;
   @override
-  final double totalCo2ValueNotSmart;
+  double totalCo2ValueNotSmart;
 
   @override
   String toString() {
     return 'DashboardInfoDTO(totalCo2ValueSmart: $totalCo2ValueSmart, totalCo2ValueNotSmart: $totalCo2ValueNotSmart)';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_DashboardInfoDTO &&
-            (identical(other.totalCo2ValueSmart, totalCo2ValueSmart) ||
-                other.totalCo2ValueSmart == totalCo2ValueSmart) &&
-            (identical(other.totalCo2ValueNotSmart, totalCo2ValueNotSmart) ||
-                other.totalCo2ValueNotSmart == totalCo2ValueNotSmart));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, totalCo2ValueSmart, totalCo2ValueNotSmart);
 
   @JsonKey(ignore: true)
   @override
@@ -156,16 +142,18 @@ class _$_DashboardInfoDTO implements _DashboardInfoDTO {
 
 abstract class _DashboardInfoDTO implements DashboardInfoDTO {
   factory _DashboardInfoDTO(
-      {required final double totalCo2ValueSmart,
-      required final double totalCo2ValueNotSmart}) = _$_DashboardInfoDTO;
+      {required double totalCo2ValueSmart,
+      required double totalCo2ValueNotSmart}) = _$_DashboardInfoDTO;
 
   factory _DashboardInfoDTO.fromJson(Map<String, dynamic> json) =
       _$_DashboardInfoDTO.fromJson;
 
   @override
   double get totalCo2ValueSmart;
+  set totalCo2ValueSmart(double value);
   @override
   double get totalCo2ValueNotSmart;
+  set totalCo2ValueNotSmart(double value);
   @override
   @JsonKey(ignore: true)
   _$$_DashboardInfoDTOCopyWith<_$_DashboardInfoDTO> get copyWith =>

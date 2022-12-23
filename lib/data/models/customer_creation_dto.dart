@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'customer_creation_dto.freezed.dart';
 part 'customer_creation_dto.g.dart';
 
-@freezed
+@unfreezed
 class CustomerCreationDTO with _$CustomerCreationDTO {
   factory CustomerCreationDTO({
     required int id,

@@ -21,12 +21,20 @@ ChargePlanDTO _$ChargePlanDTOFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ChargePlanDTO {
   int get id => throw _privateConstructorUsedError;
+  set id(int value) => throw _privateConstructorUsedError;
   DeviceDTO get device => throw _privateConstructorUsedError;
+  set device(DeviceDTO value) => throw _privateConstructorUsedError;
   ChargeRequestDTO get request => throw _privateConstructorUsedError;
+  set request(ChargeRequestDTO value) => throw _privateConstructorUsedError;
   double get co2ValueSmart => throw _privateConstructorUsedError;
+  set co2ValueSmart(double value) => throw _privateConstructorUsedError;
   double get co2ValueNotSmart => throw _privateConstructorUsedError;
+  set co2ValueNotSmart(double value) => throw _privateConstructorUsedError;
   List<ChargePlanTimeDTO> get times => throw _privateConstructorUsedError;
+  set times(List<ChargePlanTimeDTO> value) =>
+      throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
+  set status(String value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -187,7 +195,7 @@ class __$$_ChargePlanDTOCopyWithImpl<$Res>
           : co2ValueNotSmart // ignore: cast_nullable_to_non_nullable
               as double,
       times: null == times
-          ? _value._times
+          ? _value.times
           : times // ignore: cast_nullable_to_non_nullable
               as List<ChargePlanTimeDTO>,
       status: null == status
@@ -207,66 +215,31 @@ class _$_ChargePlanDTO implements _ChargePlanDTO {
       required this.request,
       required this.co2ValueSmart,
       required this.co2ValueNotSmart,
-      required final List<ChargePlanTimeDTO> times,
-      required this.status})
-      : _times = times;
+      required this.times,
+      required this.status});
 
   factory _$_ChargePlanDTO.fromJson(Map<String, dynamic> json) =>
       _$$_ChargePlanDTOFromJson(json);
 
   @override
-  final int id;
+  int id;
   @override
-  final DeviceDTO device;
+  DeviceDTO device;
   @override
-  final ChargeRequestDTO request;
+  ChargeRequestDTO request;
   @override
-  final double co2ValueSmart;
+  double co2ValueSmart;
   @override
-  final double co2ValueNotSmart;
-  final List<ChargePlanTimeDTO> _times;
+  double co2ValueNotSmart;
   @override
-  List<ChargePlanTimeDTO> get times {
-    if (_times is EqualUnmodifiableListView) return _times;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_times);
-  }
-
+  List<ChargePlanTimeDTO> times;
   @override
-  final String status;
+  String status;
 
   @override
   String toString() {
     return 'ChargePlanDTO(id: $id, device: $device, request: $request, co2ValueSmart: $co2ValueSmart, co2ValueNotSmart: $co2ValueNotSmart, times: $times, status: $status)';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_ChargePlanDTO &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.device, device) || other.device == device) &&
-            (identical(other.request, request) || other.request == request) &&
-            (identical(other.co2ValueSmart, co2ValueSmart) ||
-                other.co2ValueSmart == co2ValueSmart) &&
-            (identical(other.co2ValueNotSmart, co2ValueNotSmart) ||
-                other.co2ValueNotSmart == co2ValueNotSmart) &&
-            const DeepCollectionEquality().equals(other._times, _times) &&
-            (identical(other.status, status) || other.status == status));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      device,
-      request,
-      co2ValueSmart,
-      co2ValueNotSmart,
-      const DeepCollectionEquality().hash(_times),
-      status);
 
   @JsonKey(ignore: true)
   @override
@@ -284,31 +257,38 @@ class _$_ChargePlanDTO implements _ChargePlanDTO {
 
 abstract class _ChargePlanDTO implements ChargePlanDTO {
   factory _ChargePlanDTO(
-      {required final int id,
-      required final DeviceDTO device,
-      required final ChargeRequestDTO request,
-      required final double co2ValueSmart,
-      required final double co2ValueNotSmart,
-      required final List<ChargePlanTimeDTO> times,
-      required final String status}) = _$_ChargePlanDTO;
+      {required int id,
+      required DeviceDTO device,
+      required ChargeRequestDTO request,
+      required double co2ValueSmart,
+      required double co2ValueNotSmart,
+      required List<ChargePlanTimeDTO> times,
+      required String status}) = _$_ChargePlanDTO;
 
   factory _ChargePlanDTO.fromJson(Map<String, dynamic> json) =
       _$_ChargePlanDTO.fromJson;
 
   @override
   int get id;
+  set id(int value);
   @override
   DeviceDTO get device;
+  set device(DeviceDTO value);
   @override
   ChargeRequestDTO get request;
+  set request(ChargeRequestDTO value);
   @override
   double get co2ValueSmart;
+  set co2ValueSmart(double value);
   @override
   double get co2ValueNotSmart;
+  set co2ValueNotSmart(double value);
   @override
   List<ChargePlanTimeDTO> get times;
+  set times(List<ChargePlanTimeDTO> value);
   @override
   String get status;
+  set status(String value);
   @override
   @JsonKey(ignore: true)
   _$$_ChargePlanDTOCopyWith<_$_ChargePlanDTO> get copyWith =>

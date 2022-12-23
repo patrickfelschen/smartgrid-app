@@ -5,7 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'dashboard_info_dto.freezed.dart';
 part 'dashboard_info_dto.g.dart';
 
-@freezed
+@unfreezed
 class DashboardInfoDTO with _$DashboardInfoDTO {
   factory DashboardInfoDTO({
     required double totalCo2ValueSmart,

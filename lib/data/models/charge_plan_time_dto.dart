@@ -4,7 +4,7 @@ import 'package:smartgrid/domain/entities/charge_plan_time_entity.dart';
 part 'charge_plan_time_dto.freezed.dart';
 part 'charge_plan_time_dto.g.dart';
 
-@freezed
+@unfreezed
 class ChargePlanTimeDTO with _$ChargePlanTimeDTO {
   factory ChargePlanTimeDTO({
     required DateTime time,
