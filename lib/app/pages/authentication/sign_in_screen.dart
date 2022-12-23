@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:smartgrid/app/pages/authentication/auth_provider.dart';
-import 'package:smartgrid/app/pages/authentication/customer_creation_screen.dart';
+import 'package:smartgrid/app/pages/authentication/sign_up_screen.dart';
+import 'package:smartgrid/app/providers/auth_provider.dart';
 import 'package:validators/validators.dart';
 
-class CustomerSignInScreen extends ConsumerWidget {
+class SignInScreen extends ConsumerWidget {
   final TextEditingController customerIdController = TextEditingController();
 
-  CustomerSignInScreen({super.key});
+  SignInScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,7 +25,7 @@ class CustomerSignInScreen extends ConsumerWidget {
     void signUp() {
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (_) => CustomerCreationScreen(),
+          builder: (_) => SignUpScreen(),
         ),
       );
     }

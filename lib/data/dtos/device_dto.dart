@@ -13,9 +13,9 @@ class DeviceDTO {
 
   factory DeviceDTO.fromMap(Map<String, dynamic> map) {
     return DeviceDTO(
-      id: map["id"],
-      description: map["description"],
-      maxPower: map["maxPower"],
+      id: map["id"] as int,
+      description: map["description"] as String,
+      maxPower: map["maxPower"] as double,
     );
   }
 

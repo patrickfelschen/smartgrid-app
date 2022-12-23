@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:smartgrid/app/pages/authentication/auth_provider.dart';
+import 'package:smartgrid/app/providers/auth_provider.dart';
 
-import '../authentication/customer_creation_screen.dart';
+import '../authentication/sign_up_screen.dart';
 import '../device/device_creation_screen.dart';
 
 class OptionScreen extends ConsumerWidget {
@@ -26,7 +26,7 @@ class OptionScreen extends ConsumerWidget {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (_) => CustomerCreationScreen(),
+                    builder: (_) => SignUpScreen(),
                   ),
                 );
               },

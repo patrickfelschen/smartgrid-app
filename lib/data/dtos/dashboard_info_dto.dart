@@ -11,8 +11,8 @@ class DashboardInfoDTO {
 
   factory DashboardInfoDTO.fromMap(Map<String, dynamic> map) {
     return DashboardInfoDTO(
-      totalCo2ValueSmart: map["totalCo2ValueSmart"],
-      totalCo2ValueNotSmart: map["totalCo2ValueNotSmart"],
+      totalCo2ValueSmart: map["totalCo2ValueSmart"] as double,
+      totalCo2ValueNotSmart: map["totalCo2ValueNotSmart"] as double,
     );
   }
 

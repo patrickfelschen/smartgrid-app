@@ -11,7 +11,7 @@ class ChargePlanListScreen extends ConsumerWidget {
   void onPlanSelected(BuildContext context, ChargePlanEntity selected) {
     print(selected);
     Navigator.of(context).push(
-      MaterialPageRoute(
+      MaterialPageRoute<ChargePlanScreen>(
         builder: (_) => const ChargePlanScreen(),
       ),
     );
