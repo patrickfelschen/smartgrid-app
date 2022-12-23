@@ -3,8 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smartgrid/app/enums/state_status.dart';
 import 'package:smartgrid/app/pages/device/device_update_controller.dart';
 import 'package:smartgrid/app/widgets/device_bottom_sheet.dart';
-
-import '../dashboard/dashboard_screen.dart';
+import 'package:validators/validators.dart';
 
 class DeviceUpdateScreen extends ConsumerWidget {
   DeviceUpdateScreen({super.key});
@@ -15,6 +14,7 @@ class DeviceUpdateScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final formKey = GlobalKey<FormState>();
     final DeviceUpdateState state = ref.watch(deviceControllerProvider);
 
     void openDeviceSelection() {
@@ -33,10 +33,16 @@ class DeviceUpdateScreen extends ConsumerWidget {
       );
     }
 
+    void updateSelectedDevice() {
+      if (formKey.currentState!.validate()) {}
+    }
+
     Widget body() {
       switch (state.status) {
         case StateStatus.initial:
           deviceController.text = state.selectedDevice!.description;
+          descriptionController.text = state.selectedDevice!.description;
+          maxPowerController.text = state.selectedDevice!.maxPower.toString();
           return ListView(
             padding: const EdgeInsets.symmetric(
               vertical: 12.0,
@@ -52,10 +58,11 @@ class DeviceUpdateScreen extends ConsumerWidget {
                 height: 12.0,
               ),
               TextFormField(
+                readOnly: true,
                 onTap: () => openDeviceSelection(),
                 controller: deviceController,
                 decoration: const InputDecoration(
-                  suffixIcon: Icon(Icons.electric_meter),
+                  prefixIcon: Icon(Icons.electrical_services),
                   border: OutlineInputBorder(),
                   label: Text(
                     "HUB-Anschluss",
@@ -65,41 +72,65 @@ class DeviceUpdateScreen extends ConsumerWidget {
               const SizedBox(
                 height: 12.0,
               ),
-              TextField(
-                controller: descriptionController,
-                decoration: const InputDecoration(
-                  suffixIcon: Icon(Icons.edit),
-                  border: OutlineInputBorder(),
-                  label: Text(
-                    "Bezeichnung",
-                  ),
-                ),
-              ),
+              const Divider(),
               const SizedBox(
                 height: 12.0,
               ),
-              TextField(
-                controller: maxPowerController,
-                decoration: const InputDecoration(
-                  suffixText: "kW",
-                  suffixIcon: Icon(Icons.electric_bolt),
-                  border: OutlineInputBorder(),
-                  label: Text(
-                    "Maximale Leistung",
-                  ),
+              const Text("Bearbeiten"),
+              const SizedBox(
+                height: 24.0,
+              ),
+              Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    TextFormField(
+                      controller: descriptionController,
+                      validator: (value) {
+                        return isLength(value.toString(), 4)
+                            ? null
+                            : 'min. 4 Zeichen';
+                      },
+                      decoration: const InputDecoration(
+                        prefixIcon: Icon(Icons.text_snippet),
+                        hintText: "E-Auto",
+                        border: OutlineInputBorder(),
+                        label: Text(
+                          "Bezeichnung",
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 12.0,
+                    ),
+                    TextFormField(
+                      controller: maxPowerController,
+                      keyboardType: const TextInputType.numberWithOptions(
+                        decimal: true,
+                      ),
+                      validator: (value) {
+                        return isNumeric(value.toString())
+                            ? null
+                            : 'Gib eine Nummer ein';
+                      },
+                      decoration: const InputDecoration(
+                        suffixText: "kW",
+                        hintText: "12.5",
+                        prefixIcon: Icon(Icons.electric_bolt),
+                        border: OutlineInputBorder(),
+                        label: Text(
+                          "Maximale Leistung",
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               const SizedBox(
                 height: 12.0,
               ),
               ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => DashboardScreen(),
-                    ),
-                  );
-                },
+                onPressed: () => updateSelectedDevice(),
                 child: const Text(
                   "Fertig",
                 ),

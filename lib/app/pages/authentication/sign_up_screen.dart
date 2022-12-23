@@ -44,22 +44,6 @@ class SignUpScreen extends ConsumerWidget {
         Navigator.pop(context);
       }
     }
-    /*
-    ref.listen<AsyncValue>(customerCreationControllerProvider, (_, state) {
-      if (!state.isRefreshing && state.hasValue) {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (_) => DashboardScreen(),
-          ),
-        );
-      }
-
-      if (!state.isRefreshing && state.hasError) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(state.error.toString())),
-        );
-      }
-    });*/
 
     Widget newBody() {
       return ListView(
