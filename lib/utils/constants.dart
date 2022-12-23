@@ -1,4 +1,4 @@
 class Constants {
-  static const authStorageKey = 'auth';
+  static const authStorageKey = 'auth3';
   static const smartGridApiBaseUrl = "api.smartgrid.de";
 }

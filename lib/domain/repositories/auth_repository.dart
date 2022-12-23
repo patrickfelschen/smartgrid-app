@@ -5,7 +5,7 @@ abstract class AuthRepository {
 
   Future<CustomerEntity> signUp(
     int id,
-    int hubId,
+    int hubid,
     String street,
     String number,
     String postalcode,

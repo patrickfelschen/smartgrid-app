@@ -1,0 +1,27 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'customer_dto.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+_$_CustomerDTO _$$_CustomerDTOFromJson(Map<String, dynamic> json) =>
+    _$_CustomerDTO(
+      id: json['id'] as int,
+      hubid: json['hubid'] as int,
+      street: json['street'] as String,
+      number: json['number'] as String,
+      postalcode: json['postalcode'] as String,
+      city: json['city'] as String,
+    );
+
+Map<String, dynamic> _$$_CustomerDTOToJson(_$_CustomerDTO instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'hubid': instance.hubid,
+      'street': instance.street,
+      'number': instance.number,
+      'postalcode': instance.postalcode,
+      'city': instance.city,
+    };

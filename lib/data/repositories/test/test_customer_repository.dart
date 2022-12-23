@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:smartgrid/data/dtos/customer_dto.dart';
+import 'package:smartgrid/data/models/customer_dto.dart';
 import 'package:smartgrid/device/utils/json_loader_helper.dart';
 import 'package:smartgrid/domain/entities/customer_entity.dart';
 
@@ -26,8 +26,9 @@ class TestCustomerRepository implements AuthRepository {
     dynamic jsonData = await jsonLoaderHelper.loadJson(
       "customers_get_id_res.json",
     );
+    print(id);
     await Future.delayed(const Duration(seconds: 2));
-    CustomerDTO dto = CustomerDTO.fromMap(jsonData);
+    CustomerDTO dto = CustomerDTO.fromJson(jsonData);
     CustomerEntity customer = CustomerDTO.fromDTO(dto);
     currentUser = customer;
     return customer;
@@ -45,7 +46,7 @@ class TestCustomerRepository implements AuthRepository {
     dynamic jsonData = await jsonLoaderHelper.loadJson(
       "customers_post_res.json",
     );
-    CustomerDTO dto = CustomerDTO.fromMap(jsonData);
+    CustomerDTO dto = CustomerDTO.fromJson(jsonData);
     CustomerEntity customer = CustomerDTO.fromDTO(dto);
     currentUser = customer;
     return customer;

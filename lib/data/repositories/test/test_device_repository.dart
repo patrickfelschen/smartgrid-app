@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:smartgrid/data/dtos/device_dto.dart';
+import 'package:smartgrid/data/models/device_dto.dart';
 import 'package:smartgrid/device/utils/json_loader_helper.dart';
 import 'package:smartgrid/domain/entities/device_entity.dart';
 import 'package:smartgrid/domain/repositories/device_repository_interface.dart';
@@ -17,7 +17,7 @@ class TestDeviceRepository implements DeviceRepositoryInterface {
       "devices_get_res.json",
     );
     List<DeviceDTO> dtos =
-        (jsonData as List).map((e) => DeviceDTO.fromMap(e)).toList();
+        (jsonData as List).map((e) => DeviceDTO.fromJson(e)).toList();
 
     List<DeviceEntity> entities =
         dtos.map((e) => DeviceDTO.fromDTO(e)).toList();
@@ -33,7 +33,7 @@ class TestDeviceRepository implements DeviceRepositoryInterface {
     dynamic jsonData = await jsonLoaderHelper.loadJson(
       "devices_update_res.json",
     );
-    DeviceDTO dto = DeviceDTO.fromMap(jsonData);
+    DeviceDTO dto = DeviceDTO.fromJson(jsonData);
     return DeviceDTO.fromDTO(dto);
   }
 }

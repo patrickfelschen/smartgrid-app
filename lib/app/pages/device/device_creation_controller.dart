@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smartgrid/app/services/device_service.dart';
-import 'package:smartgrid/data/dtos/device_update_dto.dart';
+import 'package:smartgrid/data/models/device_update_dto.dart';
 
 class DeviceController extends StateNotifier<AsyncValue<void>> {
   DeviceController({required this.deviceService})
