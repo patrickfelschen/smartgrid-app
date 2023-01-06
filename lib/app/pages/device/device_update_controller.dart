@@ -41,6 +41,7 @@ class DeviceUpdateController extends StateNotifier<DeviceUpdateState> {
     //state = await AsyncValue.guard<void>(
     //  () => deviceService.updateDevice(deviceId, updateDTO),
     //);
+    //TODO:
   }
 
   void selectDevice(DeviceEntity selectedDevice) {
