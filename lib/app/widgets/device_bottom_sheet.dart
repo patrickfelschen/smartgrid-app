@@ -30,7 +30,7 @@ class DeviceBottomSheet extends StatelessWidget {
                 color: Colors.green,
               ),
               title: Text(e.description),
-              subtitle: Text(e.maxPower.toString()),
+              subtitle: Text("Maximale Leisung: ${e.maxPower} kW"),
               onTap: () {
                 onDeviceSelected(e);
                 Navigator.pop(context);
