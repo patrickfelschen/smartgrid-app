@@ -45,6 +45,8 @@ dependencies:
   validators:
   freezed_annotation: ^2.2.0
   json_annotation: ^4.7.0
+  fl_chart: ^0.55.2
+  expandable: ^5.0.1
 
 dev_dependencies:
   flutter_test:
