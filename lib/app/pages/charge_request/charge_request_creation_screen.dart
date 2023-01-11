@@ -51,7 +51,7 @@ class ChargeRequestCreationScreen extends ConsumerWidget {
         context: context,
         initialDate: DateTime.now(),
         firstDate: DateTime.now(),
-        lastDate: DateTime(2023),
+        lastDate: DateTime(2030),
       );
 
       TimeOfDay? time =
