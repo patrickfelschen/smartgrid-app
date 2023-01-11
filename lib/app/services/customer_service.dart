@@ -20,6 +20,17 @@ class CustomerService {
       ? testCustomerRepositoryProvider
       : customerRepositoryProvider;
 
+  Future<CustomerEntity> getCurrentCustomer() async {
+    CustomerEntity? currentCustomer =
+        await ref.read(_authRepository).getCurrentUser();
+
+    if (currentCustomer == null) {
+      throw Exception();
+    }
+
+    return currentCustomer;
+  }
+
   Future<CustomerEntity> signUp(CustomerCreationDTO creationDTO) async {
     CustomerEntity entity = await ref.read(_authRepository).signUp(
           creationDTO.id,

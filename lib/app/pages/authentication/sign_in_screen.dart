@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:smartgrid/app/pages/authentication/sign_up_screen.dart';
+import 'package:smartgrid/app/pages/authentication/customer_manage_screen.dart';
 import 'package:smartgrid/app/providers/auth_provider.dart';
 import 'package:validators/validators.dart';
 
@@ -25,7 +25,7 @@ class SignInScreen extends ConsumerWidget {
     void signUp() {
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (_) => SignUpScreen(),
+          builder: (_) => CustomerManageScreen(),
         ),
       );
     }

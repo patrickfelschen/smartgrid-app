@@ -4,7 +4,7 @@ import 'package:smartgrid/app/providers/auth_provider.dart';
 import 'package:smartgrid/data/models/customer_creation_dto.dart';
 import 'package:validators/validators.dart';
 
-class SignUpScreen extends ConsumerWidget {
+class CustomerManageScreen extends ConsumerWidget {
   final TextEditingController customerIdController = TextEditingController();
   final TextEditingController hubIdController = TextEditingController();
   final TextEditingController streetController = TextEditingController();
@@ -12,14 +12,25 @@ class SignUpScreen extends ConsumerWidget {
   final TextEditingController postalcodeController = TextEditingController();
   final TextEditingController cityController = TextEditingController();
 
-  SignUpScreen({super.key});
+  final bool editMode;
+
+  CustomerManageScreen({super.key, this.editMode = false});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final auth = ref.watch(authNotifierProvider);
     final formKey = GlobalKey<FormState>();
 
-    void signUp() {
+    if (editMode) {
+      customerIdController.text = auth.user!.id.toString();
+      hubIdController.text = auth.user!.hubid.toString();
+      streetController.text = auth.user!.street.toString();
+      numberController.text = auth.user!.number.toString();
+      postalcodeController.text = auth.user!.postalcode.toString();
+      cityController.text = auth.user!.city.toString();
+    }
+
+    void done() {
       if (formKey.currentState!.validate()) {
         String customerIdText = customerIdController.text.trim();
         String hubIdText = hubIdController.text.trim();
@@ -40,7 +51,12 @@ class SignUpScreen extends ConsumerWidget {
           city: cityText,
         );
 
-        ref.read(authNotifierProvider.notifier).signUp(creationDTO);
+        if (editMode) {
+          ref.read(authNotifierProvider.notifier).updateCustomer(creationDTO);
+        } else {
+          ref.read(authNotifierProvider.notifier).signUp(creationDTO);
+        }
+
         Navigator.pop(context);
       }
     }
@@ -63,6 +79,7 @@ class SignUpScreen extends ConsumerWidget {
             child: Column(
               children: [
                 TextFormField(
+                  readOnly: editMode,
                   controller: customerIdController,
                   keyboardType: TextInputType.number,
                   autofocus: true,
@@ -84,6 +101,7 @@ class SignUpScreen extends ConsumerWidget {
                   height: 12.0,
                 ),
                 TextFormField(
+                  readOnly: editMode,
                   controller: hubIdController,
                   keyboardType: TextInputType.number,
                   validator: (value) {
@@ -183,15 +201,18 @@ class SignUpScreen extends ConsumerWidget {
               ],
             ),
           ),
+          const SizedBox(
+            height: 12.0,
+          ),
           ElevatedButton(
-            onPressed: auth.loading ? null : () => signUp(),
+            onPressed: auth.loading ? null : () => done(),
             child: auth.loading
                 ? const SizedBox(
                     height: 20,
                     width: 20,
                     child: CircularProgressIndicator(),
                   )
-                : const Text("Anmelden"),
+                : Text(editMode ? "Bearbeiten" : "Erstellen"),
           )
         ],
       );
@@ -199,8 +220,8 @@ class SignUpScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Konto erstellen",
+        title: Text(
+          editMode ? "Konto bearbeiten" : "Konto erstellen",
         ),
       ),
       body: newBody(),
