@@ -1,103 +1,127 @@
-import 'package:expandable/expandable.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:smartgrid/app/enums/state_status.dart';
 import 'package:smartgrid/app/pages/charge_plan/charge_plan_controller.dart';
+import 'package:smartgrid/domain/entities/charge_plan_entity.dart';
 
 class ChargePlanScreen extends ConsumerWidget {
-  const ChargePlanScreen({super.key});
+  const ChargePlanScreen({super.key, required this.chargePlan});
+
+  final ChargePlanEntity chargePlan;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final ChargePlanState state = ref.watch(chargePlanControllerProvider);
 
-    TextEditingController planIdTextEditingController =
-        TextEditingController(text: "Plan ID");
-    TextEditingController requestIdTextEditingController =
-        TextEditingController(text: "Antrag ID");
-
-    if (state.status == StateStatus.success) {
-      planIdTextEditingController.text = state.chargePlan!.id.toString();
-      requestIdTextEditingController.text =
-          state.chargePlan!.request.id.toString();
+    Widget bodyContent() {
+      return ListView(
+        padding: const EdgeInsets.all(12.0),
+        children: [
+          Card(
+            child: ListTile(
+              trailing: const CircleAvatar(
+                child: Icon(
+                  Icons.electrical_services,
+                ),
+              ),
+              title: Text(
+                chargePlan.device.description,
+              ),
+              subtitle: const Text("Gerät"),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              trailing: const CircleAvatar(
+                child: Icon(
+                  Icons.add_chart,
+                ),
+              ),
+              title: Text(
+                "${chargePlan.request.requiredCapacity} kW/h",
+              ),
+              subtitle: Text(
+                DateFormat('dd.MM.yyyy - kk:mm').format(
+                  chargePlan.request.deadline,
+                ),
+              ),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              trailing: CircleAvatar(
+                child: Icon(
+                  chargePlan.status == "active"
+                      ? Icons.hourglass_empty
+                      : Icons.check,
+                ),
+              ),
+              title: const Text("Status"),
+            ),
+          ),
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: lineChart(),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: Text(
+                "${chargePlan.id}",
+              ),
+              subtitle: const Text("Plan-Identifikationsnummer"),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: Text(
+                "${chargePlan.request.id}",
+              ),
+              subtitle: const Text("Antrag-Identifikationsnummer"),
+            ),
+          ),
+          const SizedBox(
+            height: 12.0,
+          ),
+          ElevatedButton(
+            onPressed: () {},
+            child: const Text(
+              "Abbrechen",
+            ),
+          ),
+        ],
+      );
     }
-
-    Widget bodyContent = ListView(
-      padding: const EdgeInsets.symmetric(
-        vertical: 12.0,
-        horizontal: 12.0,
-      ),
-      children: [
-        const Icon(
-          Icons.timeline,
-          size: 200.0,
-          color: Colors.green,
-        ),
-        const SizedBox(
-          height: 12.0,
-        ),
-        TextField(
-          controller: planIdTextEditingController,
-          readOnly: true,
-          decoration: const InputDecoration(
-            suffixIcon: Icon(Icons.numbers),
-            border: OutlineInputBorder(),
-            label: Text("Plan ID"),
-          ),
-        ),
-        const SizedBox(
-          height: 12.0,
-        ),
-        TextField(
-          controller: requestIdTextEditingController,
-          readOnly: true,
-          decoration: const InputDecoration(
-            suffixIcon: Icon(Icons.numbers),
-            border: OutlineInputBorder(),
-            label: Text(
-              "Antrag ID",
-            ),
-          ),
-        ),
-        Card(
-          child: Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: ExpandablePanel(
-              header: const Text(
-                "Ladeverlauf",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              collapsed: const Text("Tippen zum Anzeigen"),
-              expanded: lineChart(),
-              theme: const ExpandableThemeData(
-                iconColor: Colors.green,
-                headerAlignment: ExpandablePanelHeaderAlignment.center,
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: 12.0,
-        ),
-        OutlinedButton(
-          onPressed: () {},
-          child: const Text(
-            "Abbrechen",
-          ),
-        ),
-      ],
-    );
 
     Widget bodyLoading = const Center(
       child: CircularProgressIndicator(),
     );
 
+    Widget bodyError = const Center(
+      child: Text("Error"),
+    );
+
+    Widget body() {
+      switch (state.status) {
+        case StateStatus.initial:
+          return bodyContent();
+        case StateStatus.loading:
+          return bodyLoading;
+        case StateStatus.success:
+          return bodyContent();
+        case StateStatus.failure:
+          return bodyError;
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Ladeplan ansehen"),
       ),
-      body: state.status == StateStatus.loading ? bodyLoading : bodyContent,
+      body: body(),
     );
   }
 
@@ -111,13 +135,13 @@ class ChargePlanScreen extends ConsumerWidget {
               borderRadius: BorderRadius.all(
                 Radius.circular(18),
               ),
-              color: Color.fromARGB(255, 214, 217, 221),
+              //color: Color.fromARGB(255, 214, 217, 221),
             ),
             child: Padding(
               padding: const EdgeInsets.only(
-                right: 18,
+                right: 12,
                 left: 12,
-                top: 24,
+                top: 12,
                 bottom: 12,
               ),
               child: LineChart(chartData()),

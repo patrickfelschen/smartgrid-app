@@ -12,13 +12,14 @@ class ChargePlanListScreen extends ConsumerWidget {
     print(selected);
     Navigator.of(context).push(
       MaterialPageRoute<ChargePlanScreen>(
-        builder: (_) => const ChargePlanScreen(),
+        builder: (_) => ChargePlanScreen(chargePlan: selected),
       ),
     );
   }
 
   Widget onData(List<ChargePlanEntity> plans) {
     return ListView.builder(
+      padding: const EdgeInsets.all(12.0),
       itemCount: plans.length,
       itemBuilder: ((context, index) {
         print("item builder");
