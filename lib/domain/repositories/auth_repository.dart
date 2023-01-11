@@ -1,6 +1,6 @@
 import 'package:smartgrid/domain/entities/customer_entity.dart';
 
-abstract class AuthRepository {
+abstract class AuthRepositoryInterface {
   Future<CustomerEntity?> getCurrentUser();
 
   Future<CustomerEntity> signUp(

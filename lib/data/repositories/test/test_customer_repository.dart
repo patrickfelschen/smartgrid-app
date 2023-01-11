@@ -5,7 +5,7 @@ import 'package:smartgrid/domain/entities/customer_entity.dart';
 
 import '../../../domain/repositories/auth_repository.dart';
 
-class TestCustomerRepository implements AuthRepository {
+class TestCustomerRepository implements AuthRepositoryInterface {
   final JsonLoaderHelper jsonLoaderHelper;
 
   TestCustomerRepository({
@@ -72,7 +72,7 @@ class TestCustomerRepository implements AuthRepository {
   }
 }
 
-final testCustomerRepositoryProvider = Provider<AuthRepository>((ref) {
+final testCustomerRepositoryProvider = Provider<AuthRepositoryInterface>((ref) {
   final customerAuthRepository = TestCustomerRepository(
     jsonLoaderHelper: JsonLoaderHelper(),
   );
