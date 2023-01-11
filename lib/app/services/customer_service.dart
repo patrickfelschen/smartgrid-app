@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smartgrid/data/models/customer_creation_dto.dart';
 import 'package:smartgrid/data/repositories/customer_repository.dart';
 import 'package:smartgrid/domain/entities/customer_entity.dart';
-import 'package:smartgrid/domain/repositories/auth_repository.dart';
+import 'package:smartgrid/domain/repositories/auth_repository_interface.dart';
 import 'package:smartgrid/utils/constants.dart';
 
 import '../../data/repositories/test/test_customer_repository.dart';

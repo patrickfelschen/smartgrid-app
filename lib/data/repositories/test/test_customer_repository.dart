@@ -3,7 +3,7 @@ import 'package:smartgrid/data/models/customer_dto.dart';
 import 'package:smartgrid/device/utils/json_loader_helper.dart';
 import 'package:smartgrid/domain/entities/customer_entity.dart';
 
-import '../../../domain/repositories/auth_repository.dart';
+import '../../../domain/repositories/auth_repository_interface.dart';
 
 class TestCustomerRepository implements AuthRepositoryInterface {
   final JsonLoaderHelper jsonLoaderHelper;
