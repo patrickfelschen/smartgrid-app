@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smartgrid/data/models/charge_request_creation_dto.dart';
+import 'package:smartgrid/data/repositories/charge_repository.dart';
+import 'package:smartgrid/data/repositories/customer_repository.dart';
 import 'package:smartgrid/data/repositories/test/test_charge_repository.dart';
 import 'package:smartgrid/data/repositories/test/test_customer_repository.dart';
 import 'package:smartgrid/domain/entities/charge_plan_entity.dart';
@@ -7,16 +9,20 @@ import 'package:smartgrid/domain/entities/charge_request_entity.dart';
 import 'package:smartgrid/domain/entities/customer_entity.dart';
 import 'package:smartgrid/domain/repositories/auth_repository.dart';
 import 'package:smartgrid/domain/repositories/charge_repository_interface.dart';
+import 'package:smartgrid/utils/constants.dart';
 
 class ChargePlanService {
   ChargePlanService(this.ref);
 
   final Ref ref;
 
-  final Provider<AuthRepository> _authRepository =
-      testCustomerRepositoryProvider;
+  final Provider<AuthRepositoryInterface> _authRepository = Constants.testMode
+      ? testCustomerRepositoryProvider
+      : customerRepositoryProvider;
   final Provider<ChargeRepositoryInterface> _chargeRepository =
-      testChargeRepositoryProvider;
+      Constants.testMode
+          ? testChargeRepositoryProvider
+          : chargeRepositoryProvider;
 
   Future<ChargeRequestEntity> createChargeRequest(
     int deviceId,

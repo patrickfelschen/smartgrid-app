@@ -10,7 +10,6 @@ import '../option/option_screen.dart';
 class DashboardScreen extends ConsumerWidget {
   final TextEditingController totalCo2SavingValueController =
       TextEditingController();
-  final TextEditingController notSmartValueController = TextEditingController();
 
   DashboardScreen({super.key});
 
@@ -58,18 +57,6 @@ class DashboardScreen extends ConsumerWidget {
           ),
           const SizedBox(
             height: 12.0,
-          ),
-          Card(
-            child: ListTile(
-              leading: Icon(
-                Icons.gas_meter_outlined,
-                size: 32,
-                color: Theme.of(context).errorColor,
-              ),
-              title: Text(notSmartValueController.text),
-              subtitle: const Text("Emissionen ohne SmartGrid"),
-              trailing: const Text("g/kWh"),
-            ),
           ),
           const SizedBox(
             height: 12.0,
