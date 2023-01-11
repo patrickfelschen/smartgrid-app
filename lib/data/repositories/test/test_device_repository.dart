@@ -26,6 +26,7 @@ class TestDeviceRepository implements DeviceRepositoryInterface {
 
   @override
   Future<DeviceEntity> updateDevice(
+    int customerId,
     int deviceId,
     String description,
     double maxPower,
@@ -39,6 +40,7 @@ class TestDeviceRepository implements DeviceRepositoryInterface {
 
   @override
   Future<DeviceEntity> createDevice(
+    int customerId,
     int deviceId,
     String description,
     double maxPower,
