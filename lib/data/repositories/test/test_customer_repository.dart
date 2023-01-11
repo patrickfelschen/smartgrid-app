@@ -57,6 +57,19 @@ class TestCustomerRepository implements AuthRepository {
     await Future.delayed(const Duration(seconds: 1));
     currentUser = null;
   }
+
+  @override
+  Future<CustomerEntity> updateCustomer(
+    int id,
+    int hubid,
+    String street,
+    String number,
+    String postalcode,
+    String city,
+  ) {
+    // TODO: implement updateCustomer
+    throw UnimplementedError();
+  }
 }
 
 final testCustomerRepositoryProvider = Provider<AuthRepository>((ref) {

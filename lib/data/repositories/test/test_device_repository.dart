@@ -36,6 +36,16 @@ class TestDeviceRepository implements DeviceRepositoryInterface {
     DeviceDTO dto = DeviceDTO.fromJson(jsonData);
     return DeviceDTO.fromDTO(dto);
   }
+
+  @override
+  Future<DeviceEntity> createDevice(
+    int deviceId,
+    String description,
+    double maxPower,
+  ) {
+    // TODO: implement createDevice
+    throw UnimplementedError();
+  }
 }
 
 final testDeviceRepositoryProvider = Provider<DeviceRepositoryInterface>((ref) {

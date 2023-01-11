@@ -30,8 +30,10 @@ class OptionScreen extends ConsumerWidget {
                   ),
                 );
               },
-              leading: const CircleAvatar(
-                child: Icon(Icons.person),
+              leading: CircleAvatar(
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                child: const Icon(Icons.person),
               ),
               title: const Text("Konto"),
               subtitle: const Text("Verwalte deine Kontoeinstellungen."),
@@ -47,8 +49,10 @@ class OptionScreen extends ConsumerWidget {
                   ),
                 );
               },
-              leading: const CircleAvatar(
-                child: Icon(Icons.electrical_services),
+              leading: CircleAvatar(
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                child: const Icon(Icons.electrical_services),
               ),
               title: const Text("Geräte Profil"),
               subtitle: const Text("Verwalte deine Geräteprofile."),
@@ -59,8 +63,10 @@ class OptionScreen extends ConsumerWidget {
           Card(
             child: ListTile(
               onTap: () => signOut(),
-              leading: const CircleAvatar(
-                child: Icon(Icons.logout),
+              leading: CircleAvatar(
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                child: const Icon(Icons.logout),
               ),
               title: const Text("Abmelden"),
               subtitle: const Text("Melde dich von deinem Konto ab."),

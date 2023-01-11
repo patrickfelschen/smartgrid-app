@@ -1,14 +1,12 @@
 class DashboardInfoEntity {
-  final double totalCo2ValueSmart;
-  final double totalCo2ValueNotSmart;
+  final double totalCo2SavingValue;
 
   DashboardInfoEntity({
-    required this.totalCo2ValueSmart,
-    required this.totalCo2ValueNotSmart,
+    required this.totalCo2SavingValue,
   });
 
   @override
   String toString() {
-    return "$totalCo2ValueSmart $totalCo2ValueNotSmart";
+    return "$totalCo2SavingValue";
   }
 }

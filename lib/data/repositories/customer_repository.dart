@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smartgrid/data/helpers/http_request_helper.dart';
-import 'package:smartgrid/data/models/customer_creation_dto.dart';
 import 'package:smartgrid/data/helpers/smart_grid_api.dart';
+import 'package:smartgrid/data/models/customer_creation_dto.dart';
 import 'package:smartgrid/data/models/customer_dto.dart';
 import 'package:smartgrid/domain/entities/customer_entity.dart';
 import 'package:smartgrid/domain/repositories/auth_repository.dart';
@@ -76,6 +76,19 @@ class CustomerAuthRepository implements AuthRepository {
   Future<void> signOut() async {
     await Future.delayed(const Duration(seconds: 1));
     _currentUser = null;
+  }
+
+  @override
+  Future<CustomerEntity> updateCustomer(
+    int id,
+    int hubid,
+    String street,
+    String number,
+    String postalcode,
+    String city,
+  ) {
+    // TODO: implement updateCustomer
+    throw UnimplementedError();
   }
 }
 

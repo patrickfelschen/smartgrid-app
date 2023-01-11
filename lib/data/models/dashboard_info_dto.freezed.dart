@@ -20,10 +20,8 @@ DashboardInfoDTO _$DashboardInfoDTOFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$DashboardInfoDTO {
-  double get totalCo2ValueSmart => throw _privateConstructorUsedError;
-  set totalCo2ValueSmart(double value) => throw _privateConstructorUsedError;
-  double get totalCo2ValueNotSmart => throw _privateConstructorUsedError;
-  set totalCo2ValueNotSmart(double value) => throw _privateConstructorUsedError;
+  double get totalCo2SavingValue => throw _privateConstructorUsedError;
+  set totalCo2SavingValue(double value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +35,7 @@ abstract class $DashboardInfoDTOCopyWith<$Res> {
           DashboardInfoDTO value, $Res Function(DashboardInfoDTO) then) =
       _$DashboardInfoDTOCopyWithImpl<$Res, DashboardInfoDTO>;
   @useResult
-  $Res call({double totalCo2ValueSmart, double totalCo2ValueNotSmart});
+  $Res call({double totalCo2SavingValue});
 }
 
 /// @nodoc
@@ -53,17 +51,12 @@ class _$DashboardInfoDTOCopyWithImpl<$Res, $Val extends DashboardInfoDTO>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? totalCo2ValueSmart = null,
-    Object? totalCo2ValueNotSmart = null,
+    Object? totalCo2SavingValue = null,
   }) {
     return _then(_value.copyWith(
-      totalCo2ValueSmart: null == totalCo2ValueSmart
-          ? _value.totalCo2ValueSmart
-          : totalCo2ValueSmart // ignore: cast_nullable_to_non_nullable
-              as double,
-      totalCo2ValueNotSmart: null == totalCo2ValueNotSmart
-          ? _value.totalCo2ValueNotSmart
-          : totalCo2ValueNotSmart // ignore: cast_nullable_to_non_nullable
+      totalCo2SavingValue: null == totalCo2SavingValue
+          ? _value.totalCo2SavingValue
+          : totalCo2SavingValue // ignore: cast_nullable_to_non_nullable
               as double,
     ) as $Val);
   }
@@ -77,7 +70,7 @@ abstract class _$$_DashboardInfoDTOCopyWith<$Res>
       __$$_DashboardInfoDTOCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({double totalCo2ValueSmart, double totalCo2ValueNotSmart});
+  $Res call({double totalCo2SavingValue});
 }
 
 /// @nodoc
@@ -91,17 +84,12 @@ class __$$_DashboardInfoDTOCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? totalCo2ValueSmart = null,
-    Object? totalCo2ValueNotSmart = null,
+    Object? totalCo2SavingValue = null,
   }) {
     return _then(_$_DashboardInfoDTO(
-      totalCo2ValueSmart: null == totalCo2ValueSmart
-          ? _value.totalCo2ValueSmart
-          : totalCo2ValueSmart // ignore: cast_nullable_to_non_nullable
-              as double,
-      totalCo2ValueNotSmart: null == totalCo2ValueNotSmart
-          ? _value.totalCo2ValueNotSmart
-          : totalCo2ValueNotSmart // ignore: cast_nullable_to_non_nullable
+      totalCo2SavingValue: null == totalCo2SavingValue
+          ? _value.totalCo2SavingValue
+          : totalCo2SavingValue // ignore: cast_nullable_to_non_nullable
               as double,
     ));
   }
@@ -110,20 +98,17 @@ class __$$_DashboardInfoDTOCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_DashboardInfoDTO implements _DashboardInfoDTO {
-  _$_DashboardInfoDTO(
-      {required this.totalCo2ValueSmart, required this.totalCo2ValueNotSmart});
+  _$_DashboardInfoDTO({required this.totalCo2SavingValue});
 
   factory _$_DashboardInfoDTO.fromJson(Map<String, dynamic> json) =>
       _$$_DashboardInfoDTOFromJson(json);
 
   @override
-  double totalCo2ValueSmart;
-  @override
-  double totalCo2ValueNotSmart;
+  double totalCo2SavingValue;
 
   @override
   String toString() {
-    return 'DashboardInfoDTO(totalCo2ValueSmart: $totalCo2ValueSmart, totalCo2ValueNotSmart: $totalCo2ValueNotSmart)';
+    return 'DashboardInfoDTO(totalCo2SavingValue: $totalCo2SavingValue)';
   }
 
   @JsonKey(ignore: true)
@@ -141,19 +126,15 @@ class _$_DashboardInfoDTO implements _DashboardInfoDTO {
 }
 
 abstract class _DashboardInfoDTO implements DashboardInfoDTO {
-  factory _DashboardInfoDTO(
-      {required double totalCo2ValueSmart,
-      required double totalCo2ValueNotSmart}) = _$_DashboardInfoDTO;
+  factory _DashboardInfoDTO({required double totalCo2SavingValue}) =
+      _$_DashboardInfoDTO;
 
   factory _DashboardInfoDTO.fromJson(Map<String, dynamic> json) =
       _$_DashboardInfoDTO.fromJson;
 
   @override
-  double get totalCo2ValueSmart;
-  set totalCo2ValueSmart(double value);
-  @override
-  double get totalCo2ValueNotSmart;
-  set totalCo2ValueNotSmart(double value);
+  double get totalCo2SavingValue;
+  set totalCo2SavingValue(double value);
   @override
   @JsonKey(ignore: true)
   _$$_DashboardInfoDTOCopyWith<_$_DashboardInfoDTO> get copyWith =>

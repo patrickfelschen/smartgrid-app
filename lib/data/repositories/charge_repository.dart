@@ -1,11 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:smartgrid/data/helpers/http_request_helper.dart';
+import 'package:smartgrid/data/helpers/smart_grid_api.dart';
 import 'package:smartgrid/data/models/charge_plan_dto.dart';
 import 'package:smartgrid/data/models/charge_request_creation_dto.dart';
 import 'package:smartgrid/data/models/charge_request_dto.dart';
-import 'package:smartgrid/data/helpers/http_request_helper.dart';
-import 'package:smartgrid/data/helpers/smart_grid_api.dart';
-import 'package:smartgrid/domain/entities/charge_request_entity.dart';
 import 'package:smartgrid/domain/entities/charge_plan_entity.dart';
+import 'package:smartgrid/domain/entities/charge_request_entity.dart';
 import 'package:smartgrid/domain/repositories/charge_repository_interface.dart';
 
 class ChargeRepository implements ChargeRepositoryInterface {
@@ -81,6 +81,16 @@ class ChargeRepository implements ChargeRepositoryInterface {
       },
     );
     return ChargePlanDTO.fromDTO(dto);
+  }
+
+  @override
+  Future<ChargePlanEntity> updateChargePlan(
+    int customerId,
+    int chargePlanId,
+    String status,
+  ) {
+    // TODO: implement updateChargePlan
+    throw UnimplementedError();
   }
 }
 

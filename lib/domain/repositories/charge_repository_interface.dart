@@ -10,6 +10,12 @@ abstract class ChargeRepositoryInterface {
     DateTime deadline,
   );
 
+  Future<ChargePlanEntity> updateChargePlan(
+    int customerId,
+    int chargePlanId,
+    String status,
+  );
+
   Future<List<ChargePlanEntity>> getAllChargePlans(int customerId);
 
   Future<ChargePlanEntity> getChargePlan(int customerId, int chargePlanId);

@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smartgrid/app/enums/state_status.dart';
 import 'package:smartgrid/app/pages/dashboard/dashboard_controller.dart';
+
 import '../charge_plan/charge_plan_list_screen.dart';
 import '../charge_request/charge_request_creation_screen.dart';
 import '../option/option_screen.dart';
 
 class DashboardScreen extends ConsumerWidget {
-  final TextEditingController smartValueController = TextEditingController();
+  final TextEditingController totalCo2SavingValueController =
+      TextEditingController();
   final TextEditingController notSmartValueController = TextEditingController();
 
   DashboardScreen({super.key});
@@ -17,10 +19,8 @@ class DashboardScreen extends ConsumerWidget {
     final DashboardState state = ref.watch(dashboardControllerProvider);
 
     if (state.status == StateStatus.success) {
-      smartValueController.text =
-          state.dashboardInfo!.totalCo2ValueSmart.toString();
-      notSmartValueController.text =
-          state.dashboardInfo!.totalCo2ValueNotSmart.toString();
+      totalCo2SavingValueController.text =
+          state.dashboardInfo!.totalCo2SavingValue.toString();
     }
 
     Future refresh() async {
@@ -35,10 +35,10 @@ class DashboardScreen extends ConsumerWidget {
           horizontal: 12.0,
         ),
         children: [
-          const Icon(
+          Icon(
             Icons.electric_bolt,
             size: 200.0,
-            color: Colors.green,
+            color: Theme.of(context).primaryColor,
           ),
           const SizedBox(
             height: 12.0,
@@ -46,12 +46,12 @@ class DashboardScreen extends ConsumerWidget {
           const Text("Übersicht"),
           Card(
             child: ListTile(
-              leading: const Icon(
+              leading: Icon(
                 Icons.gas_meter,
                 size: 32,
-                color: Colors.green,
+                color: Theme.of(context).primaryColor,
               ),
-              title: Text(smartValueController.text),
+              title: Text(totalCo2SavingValueController.text),
               subtitle: const Text("Emissionen mit SmartGrid"),
               trailing: const Text("g/kWh"),
             ),
@@ -61,10 +61,10 @@ class DashboardScreen extends ConsumerWidget {
           ),
           Card(
             child: ListTile(
-              leading: const Icon(
+              leading: Icon(
                 Icons.gas_meter_outlined,
                 size: 32,
-                color: Colors.red,
+                color: Theme.of(context).errorColor,
               ),
               title: Text(notSmartValueController.text),
               subtitle: const Text("Emissionen ohne SmartGrid"),
@@ -81,10 +81,10 @@ class DashboardScreen extends ConsumerWidget {
           const Text("Aktionen"),
           Card(
             child: ListTile(
-              leading: const Icon(
+              leading: Icon(
                 Icons.add_chart,
                 size: 32,
-                color: Colors.green,
+                color: Theme.of(context).primaryColor,
               ),
               title: const Text("Ladeantrag erstellen"),
               subtitle: const Text("Erstelle einen neuen Antrag"),
@@ -100,10 +100,10 @@ class DashboardScreen extends ConsumerWidget {
           ),
           Card(
             child: ListTile(
-              leading: const Icon(
+              leading: Icon(
                 Icons.history,
                 size: 32,
-                color: Colors.green,
+                color: Theme.of(context).primaryColor,
               ),
               title: const Text("Ladeplan Liste"),
               subtitle: const Text("Erhalte eine Übersicht der Ladungen"),
