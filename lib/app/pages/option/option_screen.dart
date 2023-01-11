@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smartgrid/app/providers/auth_provider.dart';
 
 import '../authentication/sign_up_screen.dart';
-import '../device/device_update_screen.dart';
+import '../device/device_profile_screen.dart';
 
 class OptionScreen extends ConsumerWidget {
   const OptionScreen({super.key});
@@ -45,7 +45,7 @@ class OptionScreen extends ConsumerWidget {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (_) => DeviceUpdateScreen(),
+                    builder: (_) => DeviceProfileScreen(),
                   ),
                 );
               },

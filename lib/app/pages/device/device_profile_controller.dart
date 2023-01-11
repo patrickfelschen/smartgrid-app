@@ -5,21 +5,29 @@ import 'package:smartgrid/app/services/device_service.dart';
 import 'package:smartgrid/data/models/device_update_dto.dart';
 import 'package:smartgrid/domain/entities/device_entity.dart';
 
-part 'device_update_controller.freezed.dart';
+part 'device_profile_controller.freezed.dart';
+
+final deviceControllerProvider =
+    StateNotifierProvider.autoDispose<DeviceController, DeviceProfileState>(
+        (ref) {
+  return DeviceController(
+    deviceService: ref.watch(deviceServiceProvider),
+  );
+});
 
 @freezed
-class DeviceUpdateState with _$DeviceUpdateState {
-  const factory DeviceUpdateState({
+class DeviceProfileState with _$DeviceProfileState {
+  const factory DeviceProfileState({
     @Default(null) List<DeviceEntity>? devices,
     @Default(null) DeviceEntity? selectedDevice,
     @Default(StateStatus.initial) StateStatus status,
     @Default(null) String? error,
-  }) = _DeviceUpdateState;
+  }) = _DeviceProfileState;
 }
 
-class DeviceUpdateController extends StateNotifier<DeviceUpdateState> {
-  DeviceUpdateController({required this.deviceService})
-      : super(const DeviceUpdateState()) {
+class DeviceController extends StateNotifier<DeviceProfileState> {
+  DeviceController({required this.deviceService})
+      : super(const DeviceProfileState()) {
     initialize();
   }
 
@@ -44,14 +52,7 @@ class DeviceUpdateController extends StateNotifier<DeviceUpdateState> {
     //TODO:
   }
 
-  void selectDevice(DeviceEntity selectedDevice) {
+  void selectDevice(DeviceEntity? selectedDevice) {
     state = state.copyWith(selectedDevice: selectedDevice);
   }
 }
-
-final deviceControllerProvider = StateNotifierProvider.autoDispose<
-    DeviceUpdateController, DeviceUpdateState>((ref) {
-  return DeviceUpdateController(
-    deviceService: ref.watch(deviceServiceProvider),
-  );
-});
