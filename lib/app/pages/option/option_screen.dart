@@ -20,6 +20,7 @@ class OptionScreen extends ConsumerWidget {
         title: const Text("Optionen"),
       ),
       body: ListView(
+        padding: const EdgeInsets.all(12.0),
         children: [
           Card(
             child: ListTile(

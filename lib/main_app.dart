@@ -20,6 +20,12 @@ class MainApp extends StatelessWidget {
       ],
       theme: ThemeData(
         primarySwatch: Colors.green,
+        buttonTheme: const ButtonThemeData(height: 50.0),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+            minimumSize: MaterialStateProperty.all<Size>(const Size(10, 50)),
+          ),
+        ),
         //useMaterial3: true,
         //colorSchemeSeed: Colors.green,
       ),
