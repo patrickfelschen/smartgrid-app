@@ -2,11 +2,20 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smartgrid/data/helpers/http_request_helper.dart';
 import 'package:smartgrid/data/helpers/smart_grid_api.dart';
 import 'package:smartgrid/data/models/charge_plan_dto.dart';
+import 'package:smartgrid/data/models/charge_plan_update_dto.dart';
 import 'package:smartgrid/data/models/charge_request_creation_dto.dart';
 import 'package:smartgrid/data/models/charge_request_dto.dart';
 import 'package:smartgrid/domain/entities/charge_plan_entity.dart';
 import 'package:smartgrid/domain/entities/charge_request_entity.dart';
 import 'package:smartgrid/domain/repositories/charge_repository_interface.dart';
+
+final chargeRepositoryProvider = Provider<ChargeRepositoryInterface>((ref) {
+  final chargePlanRepository = ChargeRepository(
+    api: SmartGridApi(),
+    requestHelper: HttpRequestHelper(),
+  );
+  return chargePlanRepository;
+});
 
 class ChargeRepository implements ChargeRepositoryInterface {
   ChargeRepository({
@@ -47,6 +56,31 @@ class ChargeRepository implements ChargeRepositoryInterface {
   }
 
   @override
+  Future<ChargePlanEntity> updateChargePlan(
+    int customerId,
+    int chargePlanId,
+    String status,
+  ) async {
+    ChargePlanUpdateDTO updateDTO = ChargePlanUpdateDTO(
+      status: status,
+    );
+
+    ChargePlanDTO dto = await requestHelper.sendRequest(
+      uri: api.chargePlan(customerId, chargePlanId),
+      method: HttpMethod.patch,
+      body: updateDTO.toJson(),
+      builder: (status, data) {
+        if (status == HttpStatusCode.ok) {
+          return ChargePlanDTO.fromJson(data);
+        }
+        throw Exception(data);
+      },
+    );
+
+    return ChargePlanDTO.fromDTO(dto);
+  }
+
+  @override
   Future<List<ChargePlanEntity>> getAllChargePlans(int customerId) async {
     List<ChargePlanDTO> dtos = await requestHelper.sendRequest(
       uri: api.chargePlans(customerId),
@@ -82,22 +116,4 @@ class ChargeRepository implements ChargeRepositoryInterface {
     );
     return ChargePlanDTO.fromDTO(dto);
   }
-
-  @override
-  Future<ChargePlanEntity> updateChargePlan(
-    int customerId,
-    int chargePlanId,
-    String status,
-  ) {
-    // TODO: implement updateChargePlan
-    throw UnimplementedError();
-  }
 }
-
-final chargeRepositoryProvider = Provider<ChargeRepositoryInterface>((ref) {
-  final chargePlanRepository = ChargeRepository(
-    api: SmartGridApi(),
-    requestHelper: HttpRequestHelper(),
-  );
-  return chargePlanRepository;
-});

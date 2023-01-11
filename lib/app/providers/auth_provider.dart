@@ -130,6 +130,35 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
     }
   }
 
+  Future<void> updateCustomer(CustomerCreationDTO creationDTO) async {
+    try {
+      state = state.copyWith(
+        loading: true,
+        errorMessage: '',
+      );
+
+      final customer = await _service.updateCustomer(creationDTO);
+
+      final box = Hive.box(Constants.authStorageKey);
+      await box.put('user', json.encode(creationDTO.toJson()));
+
+      state = state.copyWith(
+        accessToken: "",
+        user: customer,
+        status: AuthStatus.authenticated,
+        errorMessage: '',
+      );
+    } catch (e) {
+      state = state.copyWith(
+        errorMessage: e.toString(),
+      );
+    } finally {
+      state = state.copyWith(
+        loading: false,
+      );
+    }
+  }
+
   Future<void> signOut() async {
     state = state.copyWith(
       loading: true,

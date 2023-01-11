@@ -7,9 +7,13 @@ import 'package:smartgrid/data/repositories/test/test_customer_repository.dart';
 import 'package:smartgrid/domain/entities/charge_plan_entity.dart';
 import 'package:smartgrid/domain/entities/charge_request_entity.dart';
 import 'package:smartgrid/domain/entities/customer_entity.dart';
-import 'package:smartgrid/domain/repositories/auth_repository.dart';
+import 'package:smartgrid/domain/repositories/auth_repository_interface.dart';
 import 'package:smartgrid/domain/repositories/charge_repository_interface.dart';
 import 'package:smartgrid/utils/constants.dart';
+
+final chargePlanServiceProvider = Provider<ChargePlanService>((ref) {
+  return ChargePlanService(ref);
+});
 
 class ChargePlanService {
   ChargePlanService(this.ref);
@@ -65,7 +69,3 @@ class ChargePlanService {
     return chargePlanEntity;
   }
 }
-
-final chargePlanServiceProvider = Provider<ChargePlanService>((ref) {
-  return ChargePlanService(ref);
-});
