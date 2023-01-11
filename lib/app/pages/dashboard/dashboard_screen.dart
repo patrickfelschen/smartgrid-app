@@ -34,29 +34,41 @@ class DashboardScreen extends ConsumerWidget {
           horizontal: 12.0,
         ),
         children: [
-          Icon(
-            Icons.electric_bolt,
-            size: 200.0,
-            color: Theme.of(context).primaryColor,
-          ),
-          const SizedBox(
-            height: 12.0,
-          ),
-          const Text("Übersicht"),
+          //const Text("Übersicht"),
           Card(
-            child: ListTile(
-              leading: Icon(
-                Icons.gas_meter,
-                size: 32,
-                color: Theme.of(context).primaryColor,
-              ),
-              title: Text(totalCo2SavingValueController.text),
-              subtitle: const Text("Emissionen mit SmartGrid"),
-              trailing: const Text("g/kWh"),
+            elevation: 8,
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(children: [
+                Icon(
+                  Icons.cloud_done,
+                  size: 128.0,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+                const SizedBox(
+                  height: 12.0,
+                ),
+                Text(
+                  "Du hast bisher",
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                Text(
+                  "${totalCo2SavingValueController.text} Gramm",
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineLarge!
+                      .copyWith(color: Theme.of(context).colorScheme.primary),
+                ),
+                Text(
+                  "Treibhausgase pro Kilowattstunde eingespart!",
+                  style: Theme.of(context).textTheme.titleLarge,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(
+                  height: 12.0,
+                ),
+              ]),
             ),
-          ),
-          const SizedBox(
-            height: 12.0,
           ),
           const SizedBox(
             height: 12.0,
@@ -65,8 +77,8 @@ class DashboardScreen extends ConsumerWidget {
           const SizedBox(
             height: 12.0,
           ),
-          const Text("Aktionen"),
           Card(
+            elevation: 8,
             child: ListTile(
               leading: Icon(
                 Icons.add_chart,
@@ -85,7 +97,11 @@ class DashboardScreen extends ConsumerWidget {
               },
             ),
           ),
+          const SizedBox(
+            height: 12.0,
+          ),
           Card(
+            elevation: 8,
             child: ListTile(
               leading: Icon(
                 Icons.history,
