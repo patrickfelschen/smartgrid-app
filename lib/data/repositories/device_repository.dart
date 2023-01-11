@@ -15,6 +15,13 @@ class DeviceRepository implements DeviceRepositoryInterface {
     // TODO: implement getAllDevices
     throw UnimplementedError();
   }
+
+  @override
+  Future<DeviceEntity> createDevice(
+      int deviceId, String description, double maxPower) {
+    // TODO: implement createDevice
+    throw UnimplementedError();
+  }
 }
 
 final deviceRepositoryProvider = Provider<DeviceRepositoryInterface>((ref) {
