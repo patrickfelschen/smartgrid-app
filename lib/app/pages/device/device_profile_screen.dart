@@ -91,9 +91,10 @@ class DeviceProfileScreen extends ConsumerWidget {
     Widget updateBody() {
       switch (state.status) {
         case StateStatus.initial:
-          deviceController.text = state.selectedDevice!.description;
-          descriptionController.text = state.selectedDevice!.description;
-          maxPowerController.text = state.selectedDevice!.maxPower.toString();
+          deviceController.text = state.selectedDevice!.description.trim();
+          descriptionController.text = state.selectedDevice!.description.trim();
+          maxPowerController.text =
+              state.selectedDevice!.maxPower.toString().trim();
           return ListView(
             padding: const EdgeInsets.symmetric(
               vertical: 12.0,
@@ -141,7 +142,7 @@ class DeviceProfileScreen extends ConsumerWidget {
                         decimal: true,
                       ),
                       validator: (value) {
-                        return isNumeric(value.toString())
+                        return isFloat(value.toString())
                             ? null
                             : 'Gib eine Nummer ein';
                       },
