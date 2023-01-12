@@ -53,7 +53,7 @@ class HttpRequestHelper {
           const status = HttpStatusCode.ok;
           print("\n$method\n$uri\n$status\n$body\n$data\n");
           return builder(status, data);
-        case 400:
+        case 500:
           final data = response.data;
           const status = HttpStatusCode.error;
           print("\n$method\n$uri\n$status\n$body\n$data\n");
