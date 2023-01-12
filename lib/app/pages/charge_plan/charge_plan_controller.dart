@@ -6,31 +6,6 @@ import 'package:smartgrid/domain/entities/charge_plan_entity.dart';
 
 part 'charge_plan_controller.freezed.dart';
 
-class ChargePlanController extends StateNotifier<ChargePlanState> {
-  ChargePlanController({required this.chargePlanService})
-      : super(const ChargePlanState()) {
-    getChargePlan();
-  }
-
-  final ChargePlanService chargePlanService;
-
-  void getChargePlan() async {
-    state = state.copyWith(status: StateStatus.loading);
-    print(state.status);
-    ChargePlanEntity chargePlan = await chargePlanService.getChargePlan(1);
-    if (chargePlan != null) {
-      state = state.copyWith(
-        status: StateStatus.success,
-        chargePlan: chargePlan,
-      );
-      print(state.status);
-    } else {
-      state = state.copyWith(status: StateStatus.failure);
-      print(state.status);
-    }
-  }
-}
-
 @freezed
 class ChargePlanState with _$ChargePlanState {
   const factory ChargePlanState({
@@ -47,3 +22,28 @@ final chargePlanControllerProvider =
     chargePlanService: ref.watch(chargePlanServiceProvider),
   ),
 );
+
+class ChargePlanController extends StateNotifier<ChargePlanState> {
+  ChargePlanController({required this.chargePlanService})
+      : super(const ChargePlanState());
+
+  final ChargePlanService chargePlanService;
+
+  void getChargePlan(int chargePlanId) async {
+    state = state.copyWith(status: StateStatus.loading);
+    print(state.status);
+    ChargePlanEntity chargePlan = await chargePlanService.getChargePlan(
+      chargePlanId,
+    );
+    if (chargePlan != null) {
+      state = state.copyWith(
+        status: StateStatus.success,
+        chargePlan: chargePlan,
+      );
+      print(state.status);
+    } else {
+      state = state.copyWith(status: StateStatus.failure);
+      print(state.status);
+    }
+  }
+}
