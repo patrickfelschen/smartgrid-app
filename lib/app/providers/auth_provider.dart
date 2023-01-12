@@ -55,7 +55,17 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
     if (userData != null && userData.toString().isNotEmpty) {
       Map<String, dynamic> userJson = json.decode(userData);
       CustomerDTO customerDTO = CustomerDTO.fromJson(userJson);
-      await _service.signIn(customerDTO.id);
+
+      try {
+        await _service.signIn(customerDTO.id);
+      } catch (e) {
+        state = state.copyWith(
+          status: AuthStatus.unauthenticated,
+          errorMessage: e.toString(),
+          loading: false,
+        );
+        return;
+      }
 
       state = state.copyWith(
         status: AuthStatus.authenticated,

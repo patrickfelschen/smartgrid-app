@@ -29,12 +29,13 @@ class DashboardRepository implements DashboardRepositoryInterface {
       uri: api.dashboard(customerId),
       method: HttpMethod.get,
       builder: (status, data) {
-        if (status == HttpStatusCode.ok) {
+        if (status == HttpStatusCode.ok && data != null) {
           return DashboardInfoDTO.fromJson(data);
         }
         throw Exception(data);
       },
     );
+
     return DashboardInfoDTO.fromDTO(dto);
   }
 }

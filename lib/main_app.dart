@@ -26,6 +26,11 @@ class MainApp extends StatelessWidget {
             minimumSize: MaterialStateProperty.all<Size>(const Size(10, 50)),
           ),
         ),
+        outlinedButtonTheme: OutlinedButtonThemeData(
+          style: ButtonStyle(
+            minimumSize: MaterialStateProperty.all<Size>(const Size(10, 50)),
+          ),
+        ),
         //useMaterial3: true,
         //colorSchemeSeed: Colors.green,
       ),

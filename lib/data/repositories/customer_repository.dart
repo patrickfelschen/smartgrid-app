@@ -27,7 +27,7 @@ class CustomerAuthRepository implements AuthRepositoryInterface {
 
   @override
   Future<CustomerEntity?> getCurrentUser() async {
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(microseconds: 1));
     return _currentUser;
   }
 
@@ -54,14 +54,17 @@ class CustomerAuthRepository implements AuthRepositoryInterface {
       method: HttpMethod.post,
       body: customerCreationDTO.toJson(),
       builder: (status, data) {
-        if (status == HttpStatusCode.ok) {
+        print(data);
+        if (status == HttpStatusCode.ok && data != null) {
           return CustomerDTO.fromJson(data);
         }
         throw Exception(data);
       },
     );
 
-    return CustomerDTO.fromDTO(customerDTO);
+    CustomerEntity entity = CustomerDTO.fromDTO(customerDTO);
+    _currentUser = entity;
+    return entity;
   }
 
   @override
@@ -87,35 +90,40 @@ class CustomerAuthRepository implements AuthRepositoryInterface {
       method: HttpMethod.patch,
       body: updateDTO.toJson(),
       builder: (status, data) {
-        if (status == HttpStatusCode.ok) {
+        if (status == HttpStatusCode.ok && data != null) {
           return CustomerDTO.fromJson(data);
         }
         throw Exception(data);
       },
     );
-
-    return CustomerDTO.fromDTO(customerDTO);
+    CustomerEntity entity = CustomerDTO.fromDTO(customerDTO);
+    _currentUser = entity;
+    return entity;
   }
 
   @override
   Future<CustomerEntity> signIn(int customerId) async {
+    print("CUSTOMER_REPOSITORY::signIn::$customerId");
     CustomerDTO customerDTO = await requestHelper.sendRequest(
       uri: api.customer(customerId),
       method: HttpMethod.get,
       builder: (status, data) {
-        if (status == HttpStatusCode.ok) {
+        if (status == HttpStatusCode.ok && data != null) {
           return CustomerDTO.fromJson(data);
         }
         throw Exception(data);
       },
     );
 
-    return CustomerDTO.fromDTO(customerDTO);
+    print(customerDTO);
+    CustomerEntity entity = CustomerDTO.fromDTO(customerDTO);
+    _currentUser = entity;
+    return entity;
   }
 
   @override
   Future<void> signOut() async {
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(microseconds: 1));
     _currentUser = null;
   }
 }

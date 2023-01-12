@@ -56,6 +56,7 @@ class CustomerService {
   }
 
   Future<CustomerEntity> signIn(int customerId) async {
+    print("CUSTOMER_SERVICE::signIn::$customerId");
     CustomerEntity entity = await ref.read(_authRepository).signIn(customerId);
     return entity;
   }

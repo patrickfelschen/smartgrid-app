@@ -1,15 +1,15 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:http/http.dart' as http;
-import 'package:http/http.dart';
+import 'package:dio/dio.dart';
 
 enum HttpStatusCode { ok, error, noInternet, unknown }
 
 enum HttpMethod { get, post, patch, delete }
 
 class HttpRequestHelper {
-  final http.Client client = http.Client();
+  //final http.Client client = http.Client();
+  final Dio client = Dio();
 
   Future<T> sendRequest<T>({
     required Uri uri,
@@ -19,37 +19,41 @@ class HttpRequestHelper {
   }) async {
     try {
       Response response;
+      print("HTTP_REQUEST_HELPER::sendRequest::$method::body::$body");
       switch (method) {
         case HttpMethod.get:
-          response = await client.get(uri);
+          response = await client.get(uri.toString());
           break;
         case HttpMethod.post:
+          print("POST");
           response = await client.post(
-            uri,
-            body: body,
+            uri.toString(),
+            data: body,
+            //headers: {"Content-Type": "application/json"},
           );
+          print(response);
           break;
         case HttpMethod.patch:
           response = await client.patch(
-            uri,
-            body: body,
+            uri.toString(),
+            data: body,
           );
           break;
         case HttpMethod.delete:
           response = await client.delete(
-            uri,
-            body: body,
+            uri.toString(),
+            data: body,
           );
           break;
       }
       switch (response.statusCode) {
         case 200:
-          final data = json.decode(response.body);
+          final data = json.decode(response.data);
           const status = HttpStatusCode.ok;
           print("\n$method\n$uri\n$status\n$body\n$data\n");
           return builder(status, data);
         case 400:
-          final data = json.decode(response.body);
+          final data = json.decode(response.data);
           const status = HttpStatusCode.error;
           print("\n$method\n$uri\n$status\n$body\n$data\n");
           return builder(status, data);

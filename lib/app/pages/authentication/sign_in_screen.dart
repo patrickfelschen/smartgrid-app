@@ -68,6 +68,9 @@ class SignInScreen extends ConsumerWidget {
               ],
             ),
           ),
+          const SizedBox(
+            height: 12.0,
+          ),
           ElevatedButton(
             onPressed: auth.loading ? null : () => signIn(),
             child: auth.loading
@@ -77,6 +80,9 @@ class SignInScreen extends ConsumerWidget {
                     child: CircularProgressIndicator(),
                   )
                 : const Text("Anmelden"),
+          ),
+          const SizedBox(
+            height: 12.0,
           ),
           OutlinedButton(
             onPressed: auth.loading ? null : () => signUp(),
