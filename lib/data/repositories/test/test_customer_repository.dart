@@ -37,7 +37,7 @@ class TestCustomerRepository implements AuthRepositoryInterface {
   @override
   Future<CustomerEntity> signUp(
     int id,
-    int hubId,
+    // int hubId,
     String street,
     String number,
     String postalcode,
@@ -61,7 +61,7 @@ class TestCustomerRepository implements AuthRepositoryInterface {
   @override
   Future<CustomerEntity> updateCustomer(
     int id,
-    int hubid,
+    // int hubid,
     String street,
     String number,
     String postalcode,
