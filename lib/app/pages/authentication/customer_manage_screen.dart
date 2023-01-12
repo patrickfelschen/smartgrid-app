@@ -22,12 +22,12 @@ class CustomerManageScreen extends ConsumerWidget {
     final formKey = GlobalKey<FormState>();
 
     if (editMode) {
-      customerIdController.text = auth.user!.id.toString();
-      hubIdController.text = auth.user!.hubid.toString();
-      streetController.text = auth.user!.street.toString();
-      numberController.text = auth.user!.number.toString();
-      postalcodeController.text = auth.user!.postalcode.toString();
-      cityController.text = auth.user!.city.toString();
+      customerIdController.text = auth.user!.id.toString().trim();
+      hubIdController.text = auth.user!.hubid.toString().trim();
+      streetController.text = auth.user!.street.toString().trim();
+      numberController.text = auth.user!.number.toString().trim();
+      postalcodeController.text = auth.user!.postalcode.toString().trim();
+      cityController.text = auth.user!.city.toString().trim();
     }
 
     void done() {

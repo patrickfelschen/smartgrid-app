@@ -11,4 +11,9 @@ class ChargePlanTimeEntity {
     required this.gCO2eqPerkWh,
     required this.powerGridCapacity,
   });
+
+  @override
+  String toString() {
+    return "$time $power $gCO2eqPerkWh $powerGridCapacity";
+  }
 }

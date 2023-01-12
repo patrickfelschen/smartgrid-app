@@ -36,8 +36,10 @@ class DeviceController extends StateNotifier<DeviceProfileState> {
   Future<void> initialize() async {
     state = state.copyWith(status: StateStatus.loading);
     List<DeviceEntity> devices = await deviceService.getAllDevices();
+    //DeviceEntity selectedDevice = devices.first;
     state = state.copyWith(
       devices: devices,
+      //selectedDevice: selectedDevice,
       status: StateStatus.initial,
     );
   }
