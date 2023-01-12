@@ -34,7 +34,7 @@ class CustomerAuthRepository implements AuthRepositoryInterface {
   @override
   Future<CustomerEntity> signUp(
     int id,
-    int hubid,
+    // int hubid,
     String street,
     String number,
     String postalcode,
@@ -42,7 +42,7 @@ class CustomerAuthRepository implements AuthRepositoryInterface {
   ) async {
     CustomerCreationDTO customerCreationDTO = CustomerCreationDTO(
       id: id,
-      hubid: hubid,
+      // hubid: hubid,
       street: street,
       number: number,
       postalcode: postalcode,
@@ -70,7 +70,7 @@ class CustomerAuthRepository implements AuthRepositoryInterface {
   @override
   Future<CustomerEntity> updateCustomer(
     int id,
-    int hubid,
+    // int hubid,
     String street,
     String number,
     String postalcode,
@@ -78,7 +78,7 @@ class CustomerAuthRepository implements AuthRepositoryInterface {
   ) async {
     CustomerCreationDTO updateDTO = CustomerCreationDTO(
       id: id,
-      hubid: hubid,
+      // hubid: hubid,
       street: street,
       number: number,
       postalcode: postalcode,

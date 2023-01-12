@@ -5,7 +5,7 @@ abstract class AuthRepositoryInterface {
 
   Future<CustomerEntity> signUp(
     int id,
-    int hubid,
+    // int hubid,
     String street,
     String number,
     String postalcode,
@@ -14,7 +14,7 @@ abstract class AuthRepositoryInterface {
 
   Future<CustomerEntity> updateCustomer(
     int id,
-    int hubid,
+    // int hubid,
     String street,
     String number,
     String postalcode,

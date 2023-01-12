@@ -44,7 +44,7 @@ class CustomerManageScreen extends ConsumerWidget {
 
         CustomerCreationDTO creationDTO = CustomerCreationDTO(
           id: customerId,
-          hubid: hubid,
+          // hubid: hubid,
           street: streetText,
           number: numberText,
           postalcode: postalcodeText,
@@ -100,31 +100,7 @@ class CustomerManageScreen extends ConsumerWidget {
                 const SizedBox(
                   height: 12.0,
                 ),
-                TextFormField(
-                  readOnly: editMode,
-                  controller: hubIdController,
-                  keyboardType: TextInputType.number,
-                  validator: (value) {
-                    return isNumeric(value.toString())
-                        ? null
-                        : 'Gib eine Nummer ein';
-                  },
-                  decoration: const InputDecoration(
-                    suffixIcon: Icon(Icons.numbers),
-                    border: OutlineInputBorder(),
-                    label: Text(
-                      "HUB-Nummer",
-                    ),
-                    hintText: "3427",
-                  ),
-                ),
-                const SizedBox(
-                  height: 12.0,
-                ),
                 const Divider(),
-                const SizedBox(
-                  height: 12.0,
-                ),
                 TextFormField(
                   controller: streetController,
                   validator: (value) {

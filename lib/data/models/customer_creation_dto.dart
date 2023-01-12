@@ -7,7 +7,7 @@ part 'customer_creation_dto.g.dart';
 class CustomerCreationDTO with _$CustomerCreationDTO {
   factory CustomerCreationDTO({
     required int id,
-    required int hubid,
+    // required int hubid,
     required String street,
     required String number,
     required String postalcode,

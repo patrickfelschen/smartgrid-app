@@ -21,10 +21,10 @@ CustomerCreationDTO _$CustomerCreationDTOFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$CustomerCreationDTO {
   int get id => throw _privateConstructorUsedError;
-  set id(int value) => throw _privateConstructorUsedError;
-  int get hubid => throw _privateConstructorUsedError;
-  set hubid(int value) => throw _privateConstructorUsedError;
-  String get street => throw _privateConstructorUsedError;
+  set id(int value) =>
+      throw _privateConstructorUsedError; // required int hubid,
+  String get street =>
+      throw _privateConstructorUsedError; // required int hubid,
   set street(String value) => throw _privateConstructorUsedError;
   String get number => throw _privateConstructorUsedError;
   set number(String value) => throw _privateConstructorUsedError;
@@ -46,12 +46,7 @@ abstract class $CustomerCreationDTOCopyWith<$Res> {
       _$CustomerCreationDTOCopyWithImpl<$Res, CustomerCreationDTO>;
   @useResult
   $Res call(
-      {int id,
-      int hubid,
-      String street,
-      String number,
-      String postalcode,
-      String city});
+      {int id, String street, String number, String postalcode, String city});
 }
 
 /// @nodoc
@@ -68,7 +63,6 @@ class _$CustomerCreationDTOCopyWithImpl<$Res, $Val extends CustomerCreationDTO>
   @override
   $Res call({
     Object? id = null,
-    Object? hubid = null,
     Object? street = null,
     Object? number = null,
     Object? postalcode = null,
@@ -78,10 +72,6 @@ class _$CustomerCreationDTOCopyWithImpl<$Res, $Val extends CustomerCreationDTO>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      hubid: null == hubid
-          ? _value.hubid
-          : hubid // ignore: cast_nullable_to_non_nullable
               as int,
       street: null == street
           ? _value.street
@@ -112,12 +102,7 @@ abstract class _$$_CustomerCreationDTOCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id,
-      int hubid,
-      String street,
-      String number,
-      String postalcode,
-      String city});
+      {int id, String street, String number, String postalcode, String city});
 }
 
 /// @nodoc
@@ -132,7 +117,6 @@ class __$$_CustomerCreationDTOCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? hubid = null,
     Object? street = null,
     Object? number = null,
     Object? postalcode = null,
@@ -142,10 +126,6 @@ class __$$_CustomerCreationDTOCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      hubid: null == hubid
-          ? _value.hubid
-          : hubid // ignore: cast_nullable_to_non_nullable
               as int,
       street: null == street
           ? _value.street
@@ -172,7 +152,6 @@ class __$$_CustomerCreationDTOCopyWithImpl<$Res>
 class _$_CustomerCreationDTO implements _CustomerCreationDTO {
   _$_CustomerCreationDTO(
       {required this.id,
-      required this.hubid,
       required this.street,
       required this.number,
       required this.postalcode,
@@ -183,8 +162,7 @@ class _$_CustomerCreationDTO implements _CustomerCreationDTO {
 
   @override
   int id;
-  @override
-  int hubid;
+// required int hubid,
   @override
   String street;
   @override
@@ -196,7 +174,7 @@ class _$_CustomerCreationDTO implements _CustomerCreationDTO {
 
   @override
   String toString() {
-    return 'CustomerCreationDTO(id: $id, hubid: $hubid, street: $street, number: $number, postalcode: $postalcode, city: $city)';
+    return 'CustomerCreationDTO(id: $id, street: $street, number: $number, postalcode: $postalcode, city: $city)';
   }
 
   @JsonKey(ignore: true)
@@ -217,7 +195,6 @@ class _$_CustomerCreationDTO implements _CustomerCreationDTO {
 abstract class _CustomerCreationDTO implements CustomerCreationDTO {
   factory _CustomerCreationDTO(
       {required int id,
-      required int hubid,
       required String street,
       required String number,
       required String postalcode,
@@ -229,11 +206,8 @@ abstract class _CustomerCreationDTO implements CustomerCreationDTO {
   @override
   int get id;
   set id(int value);
-  @override
-  int get hubid;
-  set hubid(int value);
-  @override
-  String get street;
+  @override // required int hubid,
+  String get street; // required int hubid,
   set street(String value);
   @override
   String get number;

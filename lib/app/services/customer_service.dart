@@ -34,7 +34,7 @@ class CustomerService {
   Future<CustomerEntity> signUp(CustomerCreationDTO creationDTO) async {
     CustomerEntity entity = await ref.read(_authRepository).signUp(
           creationDTO.id,
-          creationDTO.hubid,
+          // creationDTO.hubid,
           creationDTO.street,
           creationDTO.number,
           creationDTO.postalcode,
@@ -46,7 +46,7 @@ class CustomerService {
   Future<CustomerEntity> updateCustomer(CustomerCreationDTO creationDTO) async {
     CustomerEntity entity = await ref.read(_authRepository).updateCustomer(
           creationDTO.id,
-          creationDTO.hubid,
+          // creationDTO.hubid,
           creationDTO.street,
           creationDTO.number,
           creationDTO.postalcode,
