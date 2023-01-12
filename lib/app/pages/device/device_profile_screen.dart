@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smartgrid/app/enums/state_status.dart';
 import 'package:smartgrid/app/pages/device/device_profile_controller.dart';
-import 'package:smartgrid/app/widgets/device_bottom_sheet.dart';
 import 'package:validators/validators.dart';
 
 class DeviceProfileScreen extends ConsumerWidget {
@@ -18,22 +17,6 @@ class DeviceProfileScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final formKey = GlobalKey<FormState>();
     final DeviceProfileState state = ref.watch(deviceControllerProvider);
-
-    void openDeviceSelection() {
-      showModalBottomSheet(
-        context: context,
-        builder: (context) {
-          return DeviceBottomSheet(
-            devices: state.devices!,
-            onDeviceSelected: (selectedDevice) {
-              ref
-                  .read(deviceControllerProvider.notifier)
-                  .selectDevice(selectedDevice);
-            },
-          );
-        },
-      );
-    }
 
     void updateSelectedDevice() {
       if (formKey.currentState!.validate()) {}
@@ -122,24 +105,6 @@ class DeviceProfileScreen extends ConsumerWidget {
                 size: 200.0,
                 color: Colors.green,
               ),
-              const SizedBox(
-                height: 12.0,
-              ),
-              TextFormField(
-                readOnly: true,
-                controller: deviceController,
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.electrical_services),
-                  border: OutlineInputBorder(),
-                  label: Text(
-                    "HUB-Anschluss",
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 12.0,
-              ),
-              const Divider(),
               const SizedBox(
                 height: 12.0,
               ),

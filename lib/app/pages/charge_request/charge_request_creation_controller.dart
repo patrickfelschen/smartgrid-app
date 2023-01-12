@@ -27,7 +27,7 @@ class ChargeRequestCreationController
     state = state.copyWith(
       status: StateStatus.initial,
       devices: devices,
-      selectedDevice: devices.first,
+      // selectedDevice: devices.first,
       deadline: DateTime.now(),
     );
   }
