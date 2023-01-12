@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:smartgrid/data/models/device_creation_dto.dart';
 import 'package:smartgrid/data/models/device_update_dto.dart';
 import 'package:smartgrid/data/repositories/customer_repository.dart';
 import 'package:smartgrid/data/repositories/device_repository.dart';
@@ -48,6 +49,22 @@ class DeviceService {
           deviceId,
           updateDTO.description,
           updateDTO.maxPower,
+        );
+    return deviceEntity;
+  }
+
+  Future<DeviceEntity> createDevice(
+    int deviceId,
+    DeviceCreationDTO creationDTO,
+  ) async {
+    final CustomerEntity? customer =
+        await ref.read(_authRepository).getCurrentUser();
+
+    DeviceEntity deviceEntity = await ref.read(_deviceRepository).createDevice(
+          customer!.id,
+          deviceId,
+          creationDTO.description,
+          creationDTO.maxPower,
         );
     return deviceEntity;
   }

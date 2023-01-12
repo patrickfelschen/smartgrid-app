@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smartgrid/app/enums/state_status.dart';
 import 'package:smartgrid/app/pages/device/device_profile_controller.dart';
+import 'package:smartgrid/data/models/device_update_dto.dart';
 import 'package:validators/validators.dart';
 
 class DeviceProfileScreen extends ConsumerWidget {
@@ -19,7 +20,17 @@ class DeviceProfileScreen extends ConsumerWidget {
     final DeviceProfileState state = ref.watch(deviceControllerProvider);
 
     void updateSelectedDevice() {
-      if (formKey.currentState!.validate()) {}
+      if (formKey.currentState!.validate()) {
+        DeviceUpdateDTO updateDTO = DeviceUpdateDTO(
+          description: descriptionController.text,
+          maxPower: double.parse(maxPowerController.text),
+        );
+        ref.read(deviceControllerProvider.notifier).updateDevice(
+              state.selectedDevice!.id,
+              updateDTO,
+            );
+        _deviceSelected = false;
+      }
     }
 
     Widget gridBody() {
@@ -195,6 +206,16 @@ class DeviceProfileScreen extends ConsumerWidget {
       child: Scaffold(
           appBar: AppBar(
             title: const Text("Geräte Profil"),
+            actions: const [
+              /*IconButton(
+                onPressed: () {
+                  _creationMode = true;
+                },
+                icon: const Icon(
+                  Icons.add,
+                ),
+              )*/
+            ],
           ),
           body: _deviceSelected ? updateBody() : gridBody()),
     );

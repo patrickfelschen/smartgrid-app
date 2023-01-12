@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:smartgrid/app/enums/state_status.dart';
 import 'package:smartgrid/app/services/device_service.dart';
+import 'package:smartgrid/data/models/device_creation_dto.dart';
 import 'package:smartgrid/data/models/device_update_dto.dart';
 import 'package:smartgrid/domain/entities/device_entity.dart';
 
@@ -28,12 +29,12 @@ class DeviceProfileState with _$DeviceProfileState {
 class DeviceController extends StateNotifier<DeviceProfileState> {
   DeviceController({required this.deviceService})
       : super(const DeviceProfileState()) {
-    initialize();
+    loadAllDevices();
   }
 
   final DeviceService deviceService;
 
-  Future<void> initialize() async {
+  Future<void> loadAllDevices() async {
     state = state.copyWith(status: StateStatus.loading);
     List<DeviceEntity> devices = await deviceService.getAllDevices();
     //DeviceEntity selectedDevice = devices.first;
@@ -45,11 +46,20 @@ class DeviceController extends StateNotifier<DeviceProfileState> {
   }
 
   Future<void> updateDevice(int deviceId, DeviceUpdateDTO updateDTO) async {
-    //state = const AsyncLoading<void>();
-    //state = await AsyncValue.guard<void>(
-    //  () => deviceService.updateDevice(deviceId, updateDTO),
-    //);
-    //TODO:
+    DeviceEntity de = await deviceService.updateDevice(deviceId, updateDTO);
+    state = state.copyWith(
+      selectedDevice: de,
+      status: StateStatus.initial,
+    );
+    loadAllDevices();
+  }
+
+  Future<void> createDevice(int deviceId, DeviceCreationDTO creationDTO) async {
+    DeviceEntity de = await deviceService.createDevice(deviceId, creationDTO);
+    state = state.copyWith(
+      selectedDevice: de,
+      status: StateStatus.initial,
+    );
   }
 
   void selectDevice(DeviceEntity? selectedDevice) {
