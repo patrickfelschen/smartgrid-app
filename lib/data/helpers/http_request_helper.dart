@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -19,10 +18,12 @@ class HttpRequestHelper {
   }) async {
     try {
       Response response;
-      print("HTTP_REQUEST_HELPER::sendRequest::$method::body::$body");
+
       switch (method) {
         case HttpMethod.get:
+          print("HTTP_REQUEST_HELPER::sendRequest::GET::$uri");
           response = await client.get(uri.toString());
+          print(response);
           break;
         case HttpMethod.post:
           print("POST");
@@ -48,12 +49,12 @@ class HttpRequestHelper {
       }
       switch (response.statusCode) {
         case 200:
-          final data = json.decode(response.data);
+          final data = response.data;
           const status = HttpStatusCode.ok;
           print("\n$method\n$uri\n$status\n$body\n$data\n");
           return builder(status, data);
         case 400:
-          final data = json.decode(response.data);
+          final data = response.data;
           const status = HttpStatusCode.error;
           print("\n$method\n$uri\n$status\n$body\n$data\n");
           return builder(status, data);
