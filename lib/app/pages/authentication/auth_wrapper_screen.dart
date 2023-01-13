@@ -25,8 +25,6 @@ class AuthWrapperScreen extends ConsumerWidget {
         return SignInScreen();
       case AuthStatus.authenticated:
         return DashboardScreen();
-      case AuthStatus.error:
-        return SignInScreen();
     }
   }
 }
