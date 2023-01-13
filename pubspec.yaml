@@ -51,6 +51,7 @@ dependencies:
   fl_chart: ^0.55.2
   expandable: ^5.0.1
   font_awesome_flutter: ^10.3.0
+  flutter_native_splash: ^2.2.16
 
 dev_dependencies:
   flutter_test:
@@ -87,6 +88,11 @@ flutter_icons:
   macos:
     generate: true
     image_path: "assets/images/ios/AppIcon~ios-marketing.png"
+
+flutter_native_splash:
+  # background_image: "assets/images/android/res/mipmap-xxxhdpi/ic_launcher_background.png"
+  color: "#4CAF50"
+  image: "assets/images/android/res/mipmap-xxxhdpi/ic_launcher_foreground.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
