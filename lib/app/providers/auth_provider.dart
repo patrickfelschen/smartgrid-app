@@ -119,14 +119,15 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
         errorMessage: '',
       );
 
-      final customer = await _service.signUp(creationDTO);
-
+      CustomerEntity customerEntity = await _service.signUp(creationDTO);
       final box = Hive.box(Constants.authStorageKey);
-      await box.put('user', json.encode(creationDTO.toJson()));
+
+      CustomerDTO dto = CustomerDTO.toDTO(customerEntity);
+      await box.put('user', json.encode(dto.toJson()));
 
       state = state.copyWith(
         accessToken: "",
-        user: customer,
+        user: customerEntity,
         status: AuthStatus.authenticated,
         errorMessage: '',
       );
@@ -148,14 +149,16 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
         errorMessage: '',
       );
 
-      final customer = await _service.updateCustomer(creationDTO);
-
+      CustomerEntity customerEntity =
+          await _service.updateCustomer(creationDTO);
       final box = Hive.box(Constants.authStorageKey);
-      await box.put('user', json.encode(creationDTO.toJson()));
+
+      CustomerDTO dto = CustomerDTO.toDTO(customerEntity);
+      await box.put('user', json.encode(dto.toJson()));
 
       state = state.copyWith(
         accessToken: "",
-        user: customer,
+        user: customerEntity,
         status: AuthStatus.authenticated,
         errorMessage: '',
       );

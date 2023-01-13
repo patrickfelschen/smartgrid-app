@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'device_update_dto.freezed.dart';
 part 'device_update_dto.g.dart';
 
-@unfreezed
+@freezed
 class DeviceUpdateDTO with _$DeviceUpdateDTO {
   factory DeviceUpdateDTO({
     required String description,

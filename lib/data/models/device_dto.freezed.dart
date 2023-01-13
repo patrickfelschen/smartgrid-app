@@ -21,11 +21,8 @@ DeviceDTO _$DeviceDTOFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$DeviceDTO {
   int get id => throw _privateConstructorUsedError;
-  set id(int value) => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
-  set description(String value) => throw _privateConstructorUsedError;
   double get maxPower => throw _privateConstructorUsedError;
-  set maxPower(double value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -127,16 +124,32 @@ class _$_DeviceDTO implements _DeviceDTO {
       _$$_DeviceDTOFromJson(json);
 
   @override
-  int id;
+  final int id;
   @override
-  String description;
+  final String description;
   @override
-  double maxPower;
+  final double maxPower;
 
   @override
   String toString() {
     return 'DeviceDTO(id: $id, description: $description, maxPower: $maxPower)';
   }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_DeviceDTO &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.maxPower, maxPower) ||
+                other.maxPower == maxPower));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, description, maxPower);
 
   @JsonKey(ignore: true)
   @override
@@ -154,22 +167,19 @@ class _$_DeviceDTO implements _DeviceDTO {
 
 abstract class _DeviceDTO implements DeviceDTO {
   factory _DeviceDTO(
-      {required int id,
-      required String description,
-      required double maxPower}) = _$_DeviceDTO;
+      {required final int id,
+      required final String description,
+      required final double maxPower}) = _$_DeviceDTO;
 
   factory _DeviceDTO.fromJson(Map<String, dynamic> json) =
       _$_DeviceDTO.fromJson;
 
   @override
   int get id;
-  set id(int value);
   @override
   String get description;
-  set description(String value);
   @override
   double get maxPower;
-  set maxPower(double value);
   @override
   @JsonKey(ignore: true)
   _$$_DeviceDTOCopyWith<_$_DeviceDTO> get copyWith =>

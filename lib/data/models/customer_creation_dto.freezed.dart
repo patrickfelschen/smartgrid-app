@@ -20,18 +20,11 @@ CustomerCreationDTO _$CustomerCreationDTOFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CustomerCreationDTO {
-  int get id => throw _privateConstructorUsedError;
-  set id(int value) =>
-      throw _privateConstructorUsedError; // required int hubid,
-  String get street =>
-      throw _privateConstructorUsedError; // required int hubid,
-  set street(String value) => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError; // required int hubid,
+  String get street => throw _privateConstructorUsedError;
   String get number => throw _privateConstructorUsedError;
-  set number(String value) => throw _privateConstructorUsedError;
   String get postalcode => throw _privateConstructorUsedError;
-  set postalcode(String value) => throw _privateConstructorUsedError;
   String get city => throw _privateConstructorUsedError;
-  set city(String value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -161,21 +154,39 @@ class _$_CustomerCreationDTO implements _CustomerCreationDTO {
       _$$_CustomerCreationDTOFromJson(json);
 
   @override
-  int id;
+  final int id;
 // required int hubid,
   @override
-  String street;
+  final String street;
   @override
-  String number;
+  final String number;
   @override
-  String postalcode;
+  final String postalcode;
   @override
-  String city;
+  final String city;
 
   @override
   String toString() {
     return 'CustomerCreationDTO(id: $id, street: $street, number: $number, postalcode: $postalcode, city: $city)';
   }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_CustomerCreationDTO &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.street, street) || other.street == street) &&
+            (identical(other.number, number) || other.number == number) &&
+            (identical(other.postalcode, postalcode) ||
+                other.postalcode == postalcode) &&
+            (identical(other.city, city) || other.city == city));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, id, street, number, postalcode, city);
 
   @JsonKey(ignore: true)
   @override
@@ -194,30 +205,25 @@ class _$_CustomerCreationDTO implements _CustomerCreationDTO {
 
 abstract class _CustomerCreationDTO implements CustomerCreationDTO {
   factory _CustomerCreationDTO(
-      {required int id,
-      required String street,
-      required String number,
-      required String postalcode,
-      required String city}) = _$_CustomerCreationDTO;
+      {required final int id,
+      required final String street,
+      required final String number,
+      required final String postalcode,
+      required final String city}) = _$_CustomerCreationDTO;
 
   factory _CustomerCreationDTO.fromJson(Map<String, dynamic> json) =
       _$_CustomerCreationDTO.fromJson;
 
   @override
   int get id;
-  set id(int value);
   @override // required int hubid,
-  String get street; // required int hubid,
-  set street(String value);
+  String get street;
   @override
   String get number;
-  set number(String value);
   @override
   String get postalcode;
-  set postalcode(String value);
   @override
   String get city;
-  set city(String value);
   @override
   @JsonKey(ignore: true)
   _$$_CustomerCreationDTOCopyWith<_$_CustomerCreationDTO> get copyWith =>

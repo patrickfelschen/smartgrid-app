@@ -21,7 +21,6 @@ ChargePlanUpdateDTO _$ChargePlanUpdateDTOFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ChargePlanUpdateDTO {
   String get status => throw _privateConstructorUsedError;
-  set status(String value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -104,12 +103,24 @@ class _$_ChargePlanUpdateDTO implements _ChargePlanUpdateDTO {
       _$$_ChargePlanUpdateDTOFromJson(json);
 
   @override
-  String status;
+  final String status;
 
   @override
   String toString() {
     return 'ChargePlanUpdateDTO(status: $status)';
   }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ChargePlanUpdateDTO &&
+            (identical(other.status, status) || other.status == status));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, status);
 
   @JsonKey(ignore: true)
   @override
@@ -127,7 +138,7 @@ class _$_ChargePlanUpdateDTO implements _ChargePlanUpdateDTO {
 }
 
 abstract class _ChargePlanUpdateDTO implements ChargePlanUpdateDTO {
-  factory _ChargePlanUpdateDTO({required String status}) =
+  factory _ChargePlanUpdateDTO({required final String status}) =
       _$_ChargePlanUpdateDTO;
 
   factory _ChargePlanUpdateDTO.fromJson(Map<String, dynamic> json) =
@@ -135,7 +146,6 @@ abstract class _ChargePlanUpdateDTO implements ChargePlanUpdateDTO {
 
   @override
   String get status;
-  set status(String value);
   @override
   @JsonKey(ignore: true)
   _$$_ChargePlanUpdateDTOCopyWith<_$_ChargePlanUpdateDTO> get copyWith =>

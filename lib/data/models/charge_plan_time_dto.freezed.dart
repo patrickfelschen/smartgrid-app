@@ -21,13 +21,9 @@ ChargePlanTimeDTO _$ChargePlanTimeDTOFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ChargePlanTimeDTO {
   DateTime get time => throw _privateConstructorUsedError;
-  set time(DateTime value) => throw _privateConstructorUsedError;
   double get power => throw _privateConstructorUsedError;
-  set power(double value) => throw _privateConstructorUsedError;
   double get gCO2eqPerkWh => throw _privateConstructorUsedError;
-  set gCO2eqPerkWh(double value) => throw _privateConstructorUsedError;
   double get powerGridCapacity => throw _privateConstructorUsedError;
-  set powerGridCapacity(double value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -152,18 +148,36 @@ class _$_ChargePlanTimeDTO implements _ChargePlanTimeDTO {
       _$$_ChargePlanTimeDTOFromJson(json);
 
   @override
-  DateTime time;
+  final DateTime time;
   @override
-  double power;
+  final double power;
   @override
-  double gCO2eqPerkWh;
+  final double gCO2eqPerkWh;
   @override
-  double powerGridCapacity;
+  final double powerGridCapacity;
 
   @override
   String toString() {
     return 'ChargePlanTimeDTO(time: $time, power: $power, gCO2eqPerkWh: $gCO2eqPerkWh, powerGridCapacity: $powerGridCapacity)';
   }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ChargePlanTimeDTO &&
+            (identical(other.time, time) || other.time == time) &&
+            (identical(other.power, power) || other.power == power) &&
+            (identical(other.gCO2eqPerkWh, gCO2eqPerkWh) ||
+                other.gCO2eqPerkWh == gCO2eqPerkWh) &&
+            (identical(other.powerGridCapacity, powerGridCapacity) ||
+                other.powerGridCapacity == powerGridCapacity));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, time, power, gCO2eqPerkWh, powerGridCapacity);
 
   @JsonKey(ignore: true)
   @override
@@ -182,26 +196,22 @@ class _$_ChargePlanTimeDTO implements _ChargePlanTimeDTO {
 
 abstract class _ChargePlanTimeDTO implements ChargePlanTimeDTO {
   factory _ChargePlanTimeDTO(
-      {required DateTime time,
-      required double power,
-      required double gCO2eqPerkWh,
-      required double powerGridCapacity}) = _$_ChargePlanTimeDTO;
+      {required final DateTime time,
+      required final double power,
+      required final double gCO2eqPerkWh,
+      required final double powerGridCapacity}) = _$_ChargePlanTimeDTO;
 
   factory _ChargePlanTimeDTO.fromJson(Map<String, dynamic> json) =
       _$_ChargePlanTimeDTO.fromJson;
 
   @override
   DateTime get time;
-  set time(DateTime value);
   @override
   double get power;
-  set power(double value);
   @override
   double get gCO2eqPerkWh;
-  set gCO2eqPerkWh(double value);
   @override
   double get powerGridCapacity;
-  set powerGridCapacity(double value);
   @override
   @JsonKey(ignore: true)
   _$$_ChargePlanTimeDTOCopyWith<_$_ChargePlanTimeDTO> get copyWith =>
