@@ -48,6 +48,7 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
         status: AuthStatus.authenticated,
         user: customer,
         loading: false,
+        errorMessage: null,
       );
     } catch (e) {
       state = state.copyWith(
@@ -71,6 +72,7 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
         user: customer,
         status: AuthStatus.authenticated,
         loading: false,
+        errorMessage: null,
       );
     } catch (e) {
       state = state.copyWith(
@@ -95,6 +97,7 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
         user: customer,
         status: AuthStatus.authenticated,
         loading: false,
+        errorMessage: null,
       );
     } catch (e) {
       state = state.copyWith(
@@ -119,6 +122,7 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
         user: customer,
         //status: AuthStatus.authenticated,
         loading: false,
+        errorMessage: null,
       );
     } catch (e) {
       state = state.copyWith(
@@ -143,6 +147,7 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
         accessToken: null,
         status: AuthStatus.unauthenticated,
         loading: false,
+        errorMessage: null,
       );
     } catch (e) {
       state = state.copyWith(
@@ -150,6 +155,7 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
         accessToken: null,
         status: AuthStatus.unauthenticated,
         loading: false,
+        errorMessage: null,
       );
     }
   }
