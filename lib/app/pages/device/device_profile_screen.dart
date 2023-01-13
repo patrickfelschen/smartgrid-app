@@ -52,35 +52,42 @@ class DeviceProfileScreen extends ConsumerWidget {
                           .selectDevice(device);
                       _deviceSelected = true;
                     },
-                    child: SizedBox(
-                      width: 150,
-                      height: 250,
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Column(children: [
-                          const Icon(
-                            Icons.electrical_services,
-                            size: 32,
-                            color: Colors.green,
+                    child: Center(
+                      child: SizedBox(
+                        width: double.infinity,
+                        height: double.infinity,
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              const Icon(
+                                Icons.electrical_services,
+                                size: 128,
+                                color: Colors.green,
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                device.description.trim(),
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                "Maximale Leistung: ${device.maxPower} kW",
+                                style: TextStyle(
+                                  color: Colors.grey[600],
+                                ),
+                              )
+                            ],
                           ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            device.description,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "Maximale Leistung: ${device.maxPower} kW",
-                            style: TextStyle(color: Colors.grey[600]),
-                          )
-                        ]),
+                        ),
                       ),
                     ),
                   ),
