@@ -40,7 +40,7 @@ class CustomerManageScreen extends ConsumerWidget {
         String cityText = cityController.text.trim();
 
         int customerId = int.parse(customerIdText);
-        int hubid = int.parse(hubIdText);
+        int hubid = 0;
 
         CustomerCreationDTO creationDTO = CustomerCreationDTO(
           id: customerId,

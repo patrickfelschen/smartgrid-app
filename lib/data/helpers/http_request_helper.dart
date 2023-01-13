@@ -22,8 +22,14 @@ class HttpRequestHelper {
       switch (method) {
         case HttpMethod.get:
           print("HTTP_REQUEST_HELPER::sendRequest::GET::$uri");
-          response = await client.get(uri.toString());
-          print("HTTP_REQUEST_HELPER::sendRequest::Response: $response");
+          try {
+            response = await client.get(uri.toString());
+            print("HTTP_REQUEST_HELPER::sendRequest::Response: $response");
+          } catch (e) {
+            print(e);
+            response = await client.get(uri.toString());
+          }
+
           break;
         case HttpMethod.post:
           print("POST");
