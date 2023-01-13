@@ -101,6 +101,9 @@ class CustomerManageScreen extends ConsumerWidget {
                   height: 12.0,
                 ),
                 const Divider(),
+                const SizedBox(
+                  height: 12.0,
+                ),
                 TextFormField(
                   controller: streetController,
                   validator: (value) {
