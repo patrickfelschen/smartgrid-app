@@ -1,14 +1,9 @@
-import 'dart:convert';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:smartgrid/app/enums/auth_status.dart';
-import 'package:smartgrid/app/services/customer_service.dart';
+import 'package:smartgrid/app/services/auth_customer_service.dart';
 import 'package:smartgrid/data/models/customer_creation_dto.dart';
-import 'package:smartgrid/data/models/customer_dto.dart';
 import 'package:smartgrid/domain/entities/customer_entity.dart';
-import 'package:smartgrid/utils/constants.dart';
 
 part 'auth_provider.freezed.dart';
 
@@ -28,7 +23,7 @@ class AuthState with _$AuthState {
 final authNotifierProvider =
     StateNotifierProvider<AuthStateNotifier, AuthState>(
   (ref) {
-    final service = ref.watch(customerServiceProvider);
+    final service = ref.watch(authCustomerServiceProvider);
     return AuthStateNotifier(service);
   },
 );
@@ -39,139 +34,97 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
     checkAuthStatus();
   }
 
-  final CustomerService _service;
+  final AuthCustomerService _service;
 
   Future<void> checkAuthStatus() async {
     state = state.copyWith(
       loading: true,
     );
-    await Hive.openBox(Constants.authStorageKey);
-    // check storage for existing token/user
-    final box = Hive.box(Constants.authStorageKey);
-    //final token = box.get('token');
-    dynamic userData = box.get('user');
-
-    // if authenticated, update state accordingly
-    if (userData != null && userData.toString().isNotEmpty) {
-      Map<String, dynamic> userJson = json.decode(userData);
-      CustomerDTO customerDTO = CustomerDTO.fromJson(userJson);
-
-      try {
-        await _service.signIn(customerDTO.id);
-      } catch (e) {
-        state = state.copyWith(
-          status: AuthStatus.unauthenticated,
-          errorMessage: e.toString(),
-          loading: false,
-        );
-        return;
-      }
-
-      state = state.copyWith(
-        status: AuthStatus.authenticated,
-        user: CustomerDTO.fromDTO(customerDTO),
-        loading: false,
-      );
-      return;
-    }
-
-    state = state.copyWith(
-      status: AuthStatus.unauthenticated,
-      loading: false,
-    );
-  }
-
-  Future<CustomerEntity?> signIn(int customerId) async {
-    CustomerEntity? customer;
     try {
-      state = state.copyWith(
-        loading: true,
-        errorMessage: '',
-      );
-
-      customer = await _service.signIn(customerId);
-      print("AuthProvider:SignIn:Customer: $customer");
-      CustomerDTO customerDTO = CustomerDTO.toDTO(customer);
-
-      final box = Hive.box(Constants.authStorageKey);
-      await box.put('user', json.encode(customerDTO.toJson()));
+      CustomerEntity customer = await _service.getLocalCustomer();
+      await _service.signIn(customer.id);
 
       state = state.copyWith(
-        accessToken: "",
-        user: customer,
         status: AuthStatus.authenticated,
-        errorMessage: '',
+        user: customer,
+        loading: false,
       );
     } catch (e) {
       state = state.copyWith(
-        status: AuthStatus.error,
+        status: AuthStatus.unauthenticated,
         errorMessage: e.toString(),
-      );
-    } finally {
-      state = state.copyWith(
         loading: false,
       );
-      print("AuthProvider:SignIn:Customer: $customer");
     }
-    return customer;
+  }
+
+  Future<void> signIn(int customerId) async {
+    state = state.copyWith(
+      loading: true,
+    );
+
+    try {
+      CustomerEntity customer = await _service.signIn(customerId);
+      print("AuthProvider:SignIn:Customer: $customer");
+
+      state = state.copyWith(
+        user: customer,
+        status: AuthStatus.authenticated,
+        loading: false,
+      );
+    } catch (e) {
+      state = state.copyWith(
+        user: null,
+        status: AuthStatus.unauthenticated,
+        errorMessage: e.toString(),
+        loading: false,
+      );
+    }
   }
 
   Future<void> signUp(CustomerCreationDTO creationDTO) async {
+    state = state.copyWith(
+      loading: true,
+    );
+
     try {
-      state = state.copyWith(
-        loading: true,
-        errorMessage: '',
-      );
-
-      CustomerEntity customerEntity = await _service.signUp(creationDTO);
-      final box = Hive.box(Constants.authStorageKey);
-
-      CustomerDTO dto = CustomerDTO.toDTO(customerEntity);
-      await box.put('user', json.encode(dto.toJson()));
+      CustomerEntity customer = await _service.signUp(creationDTO);
+      print("AuthProvider:SignUp:Customer: $customer");
 
       state = state.copyWith(
-        accessToken: "",
-        user: customerEntity,
+        user: customer,
         status: AuthStatus.authenticated,
-        errorMessage: '',
+        loading: false,
       );
     } catch (e) {
       state = state.copyWith(
+        user: null,
+        status: AuthStatus.unauthenticated,
         errorMessage: e.toString(),
-      );
-    } finally {
-      state = state.copyWith(
         loading: false,
       );
     }
   }
 
   Future<void> updateCustomer(CustomerCreationDTO creationDTO) async {
+    state = state.copyWith(
+      loading: true,
+    );
+
     try {
-      state = state.copyWith(
-        loading: true,
-        errorMessage: '',
-      );
-
-      CustomerEntity customerEntity =
-          await _service.updateCustomer(creationDTO);
-      final box = Hive.box(Constants.authStorageKey);
-
-      CustomerDTO dto = CustomerDTO.toDTO(customerEntity);
-      await box.put('user', json.encode(dto.toJson()));
+      CustomerEntity customer = await _service.updateCustomer(creationDTO);
+      print("AuthProvider:updateCustomer:Customer: $customer");
 
       state = state.copyWith(
-        accessToken: "",
-        user: customerEntity,
-        status: AuthStatus.authenticated,
-        errorMessage: '',
+        user: customer,
+        //status: AuthStatus.authenticated,
+        loading: false,
       );
     } catch (e) {
       state = state.copyWith(
+        user: null,
+        //status: AuthStatus.unauthenticated,
         errorMessage: e.toString(),
-      );
-    } finally {
-      state = state.copyWith(
         loading: false,
       );
     }
@@ -180,20 +133,24 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
   Future<void> signOut() async {
     state = state.copyWith(
       loading: true,
-      errorMessage: '',
     );
 
-    // do some API stuff
-    await Future.delayed(const Duration(milliseconds: 300));
+    try {
+      await _service.signOut();
 
-    final box = Hive.box(Constants.authStorageKey);
-    await box.delete('user');
-
-    state = state.copyWith(
-      user: null,
-      accessToken: null,
-      status: AuthStatus.unauthenticated,
-      loading: false,
-    );
+      state = state.copyWith(
+        user: null,
+        accessToken: null,
+        status: AuthStatus.unauthenticated,
+        loading: false,
+      );
+    } catch (e) {
+      state = state.copyWith(
+        user: null,
+        accessToken: null,
+        status: AuthStatus.unauthenticated,
+        loading: false,
+      );
+    }
   }
 }

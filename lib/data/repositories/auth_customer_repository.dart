@@ -6,16 +6,16 @@ import 'package:smartgrid/data/models/customer_dto.dart';
 import 'package:smartgrid/domain/entities/customer_entity.dart';
 import 'package:smartgrid/domain/repositories/auth_repository_interface.dart';
 
-final customerRepositoryProvider = Provider<AuthRepositoryInterface>((ref) {
-  final customerAuthRepository = CustomerAuthRepository(
+final authCustomerRepositoryProvider = Provider<AuthRepositoryInterface>((ref) {
+  final customerAuthRepository = AuthCustomerRepository(
     api: SmartGridApi(),
     requestHelper: HttpRequestHelper(),
   );
   return customerAuthRepository;
 });
 
-class CustomerAuthRepository implements AuthRepositoryInterface {
-  CustomerAuthRepository({
+class AuthCustomerRepository implements AuthRepositoryInterface {
+  AuthCustomerRepository({
     required this.api,
     required this.requestHelper,
   });

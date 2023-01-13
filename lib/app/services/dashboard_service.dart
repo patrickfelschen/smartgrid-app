@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:smartgrid/data/repositories/customer_repository.dart';
+import 'package:smartgrid/data/repositories/auth_customer_repository.dart';
 import 'package:smartgrid/data/repositories/dashboard_repository.dart';
 import 'package:smartgrid/data/repositories/test/test_customer_repository.dart';
 import 'package:smartgrid/data/repositories/test/test_dashboard_repository.dart';
@@ -25,7 +25,7 @@ class DashboardService {
 
   final Provider<AuthRepositoryInterface> _authRepository = Constants.testMode
       ? testCustomerRepositoryProvider
-      : customerRepositoryProvider;
+      : authCustomerRepositoryProvider;
 
   Future<DashboardInfoEntity> getDashboardInfo() async {
     final CustomerEntity? customer =

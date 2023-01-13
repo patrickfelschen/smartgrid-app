@@ -1,11 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:smartgrid/app/services/customer_service.dart';
+import 'package:smartgrid/app/services/auth_customer_service.dart';
 
 class OptionController extends StateNotifier<AsyncValue<void>> {
   OptionController({required this.customerService})
       : super(const AsyncData<void>(null));
 
-  final CustomerService customerService;
+  final AuthCustomerService customerService;
 
   Future<void> signOut() async {
     state = const AsyncLoading<void>();
@@ -19,6 +19,6 @@ final optionControllerProvider =
     StateNotifierProvider.autoDispose<OptionController, AsyncValue<void>>(
         (ref) {
   return OptionController(
-    customerService: ref.watch(customerServiceProvider),
+    customerService: ref.watch(authCustomerServiceProvider),
   );
 });
