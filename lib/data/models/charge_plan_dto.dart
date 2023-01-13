@@ -7,7 +7,7 @@ import 'package:smartgrid/domain/entities/charge_plan_entity.dart';
 part 'charge_plan_dto.freezed.dart';
 part 'charge_plan_dto.g.dart';
 
-@unfreezed
+@freezed
 class ChargePlanDTO with _$ChargePlanDTO {
   factory ChargePlanDTO({
     required int id,

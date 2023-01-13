@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'device_creation_dto.freezed.dart';
 part 'device_creation_dto.g.dart';
 
-@unfreezed
+@freezed
 class DeviceCreationDTO with _$DeviceCreationDTO {
   factory DeviceCreationDTO({
     required int id,

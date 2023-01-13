@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'charge_request_creation_dto.freezed.dart';
 part 'charge_request_creation_dto.g.dart';
 
-@unfreezed
+@freezed
 class ChargeRequestCreationDTO with _$ChargeRequestCreationDTO {
   factory ChargeRequestCreationDTO({
     required double maxRequiredPower,

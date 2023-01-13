@@ -4,7 +4,7 @@ import 'package:smartgrid/domain/entities/dashboard_info_entity.dart';
 part 'dashboard_info_dto.freezed.dart';
 part 'dashboard_info_dto.g.dart';
 
-@unfreezed
+@freezed
 class DashboardInfoDTO with _$DashboardInfoDTO {
   factory DashboardInfoDTO({
     required double totalCo2SavingValue,

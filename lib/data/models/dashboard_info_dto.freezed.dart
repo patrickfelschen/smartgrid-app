@@ -21,7 +21,6 @@ DashboardInfoDTO _$DashboardInfoDTOFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$DashboardInfoDTO {
   double get totalCo2SavingValue => throw _privateConstructorUsedError;
-  set totalCo2SavingValue(double value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -104,12 +103,25 @@ class _$_DashboardInfoDTO implements _DashboardInfoDTO {
       _$$_DashboardInfoDTOFromJson(json);
 
   @override
-  double totalCo2SavingValue;
+  final double totalCo2SavingValue;
 
   @override
   String toString() {
     return 'DashboardInfoDTO(totalCo2SavingValue: $totalCo2SavingValue)';
   }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_DashboardInfoDTO &&
+            (identical(other.totalCo2SavingValue, totalCo2SavingValue) ||
+                other.totalCo2SavingValue == totalCo2SavingValue));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, totalCo2SavingValue);
 
   @JsonKey(ignore: true)
   @override
@@ -126,7 +138,7 @@ class _$_DashboardInfoDTO implements _DashboardInfoDTO {
 }
 
 abstract class _DashboardInfoDTO implements DashboardInfoDTO {
-  factory _DashboardInfoDTO({required double totalCo2SavingValue}) =
+  factory _DashboardInfoDTO({required final double totalCo2SavingValue}) =
       _$_DashboardInfoDTO;
 
   factory _DashboardInfoDTO.fromJson(Map<String, dynamic> json) =
@@ -134,7 +146,6 @@ abstract class _DashboardInfoDTO implements DashboardInfoDTO {
 
   @override
   double get totalCo2SavingValue;
-  set totalCo2SavingValue(double value);
   @override
   @JsonKey(ignore: true)
   _$$_DashboardInfoDTOCopyWith<_$_DashboardInfoDTO> get copyWith =>
