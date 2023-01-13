@@ -81,14 +81,16 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
     );
   }
 
-  Future<void> signIn(int customerId) async {
+  Future<CustomerEntity?> signIn(int customerId) async {
+    CustomerEntity? customer;
     try {
       state = state.copyWith(
         loading: true,
         errorMessage: '',
       );
 
-      CustomerEntity customer = await _service.signIn(customerId);
+      customer = await _service.signIn(customerId);
+      print("AuthProvider:SignIn:Customer: $customer");
       CustomerDTO customerDTO = CustomerDTO.toDTO(customer);
 
       final box = Hive.box(Constants.authStorageKey);
@@ -109,7 +111,9 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
       state = state.copyWith(
         loading: false,
       );
+      print("AuthProvider:SignIn:Customer: $customer");
     }
+    return customer;
   }
 
   Future<void> signUp(CustomerCreationDTO creationDTO) async {

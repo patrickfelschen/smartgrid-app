@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smartgrid/app/pages/authentication/customer_manage_screen.dart';
 import 'package:smartgrid/app/providers/auth_provider.dart';
+import 'package:smartgrid/domain/entities/customer_entity.dart';
 import 'package:validators/validators.dart';
 
 class SignInScreen extends ConsumerWidget {
@@ -14,11 +15,24 @@ class SignInScreen extends ConsumerWidget {
     final auth = ref.watch(authNotifierProvider);
     final formKey = GlobalKey<FormState>();
 
-    void signIn() {
+    void showError(String msg) {
+      final scaffold = ScaffoldMessenger.of(context);
+      scaffold.showSnackBar(
+        SnackBar(
+          content: Text(msg),
+        ),
+      );
+    }
+
+    void signIn() async {
       if (formKey.currentState!.validate()) {
         final customerIdText = customerIdController.text;
         int customerId = int.parse(customerIdText);
-        ref.read(authNotifierProvider.notifier).signIn(customerId);
+        CustomerEntity? customer =
+            await ref.read(authNotifierProvider.notifier).signIn(customerId);
+        if (customer == null) {
+          showError("Anmeldung fehlgeschlagen");
+        }
       }
     }
 
