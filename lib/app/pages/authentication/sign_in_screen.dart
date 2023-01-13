@@ -25,7 +25,7 @@ class SignInScreen extends ConsumerWidget {
 
     ref.listen(authNotifierProvider, (previous, next) {
       if (previous != next && next.errorMessage != null) {
-        showError("Anmeldung fehlgeschlagen");
+        //showError("Anmeldung fehlgeschlagen");
       }
     });
 
