@@ -38,7 +38,10 @@ class ChargeRequestCreationScreen extends ConsumerWidget {
     ref.listen(chargeRequestCreationControllerProvider, (previous, next) {
       if (next.status == StateStatus.failure) {
         ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("Fehler beim erstellen!")));
+          const SnackBar(
+            content: Text("Fehler beim erstellen!"),
+          ),
+        );
         Navigator.of(context).pop();
       }
       if (next.status == StateStatus.success) {
@@ -65,11 +68,21 @@ class ChargeRequestCreationScreen extends ConsumerWidget {
         context: context,
         initialDate: DateTime.now(),
         firstDate: DateTime.now(),
-        lastDate: DateTime.now().add(const Duration(days: 30)),
+        lastDate: DateTime.now().add(
+          const Duration(
+            days: 30,
+          ),
+        ),
       );
 
-      TimeOfDay? time =
-          await showTimePicker(context: context, initialTime: TimeOfDay.now());
+      DateTime a = DateTime.now().add(
+        const Duration(minutes: 30),
+      );
+
+      TimeOfDay? time = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay.fromDateTime(a),
+      );
 
       if (date != null && time != null) {
         DateTime finalDeadline =

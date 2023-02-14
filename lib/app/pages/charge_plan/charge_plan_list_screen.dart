@@ -13,6 +13,7 @@ class ChargePlanListScreen extends ConsumerWidget {
     Navigator.of(context).push(
       MaterialPageRoute<ChargePlanScreen>(
         builder: (_) => ChargePlanScreen(chargePlan: selected),
+        fullscreenDialog: true,
       ),
     );
   }

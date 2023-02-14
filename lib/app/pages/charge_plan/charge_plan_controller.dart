@@ -46,4 +46,20 @@ class ChargePlanController extends StateNotifier<ChargePlanState> {
       print(state.status);
     }
   }
+
+  void updateChargePlan(int chargePlanId) async {
+    state = state.copyWith(status: StateStatus.loading);
+    try {
+      await chargePlanService.updateChargePlan(chargePlanId);
+      state = state.copyWith(
+        status: StateStatus.success,
+        chargePlan: null,
+      );
+    } catch (e) {
+      state = state.copyWith(
+        status: StateStatus.failure,
+        chargePlan: null,
+      );
+    }
+  }
 }

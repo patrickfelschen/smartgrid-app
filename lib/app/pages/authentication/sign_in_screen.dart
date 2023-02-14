@@ -44,6 +44,7 @@ class SignInScreen extends ConsumerWidget {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (_) => CustomerManageScreen(),
+          fullscreenDialog: true,
         ),
       );
     }

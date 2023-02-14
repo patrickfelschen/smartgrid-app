@@ -60,10 +60,10 @@ class HttpRequestHelper {
           print("\n$method\n$uri\n$status\n$body\n$data\n");
           return builder(status, data);
         case 500:
-          final data = response.data;
+          //final data = response.data;
           const status = HttpStatusCode.error;
-          print("\n$method\n$uri\n$status\n$body\n$data\n");
-          return builder(status, data);
+          print("\n$method\n$uri\n$status\n$body\n");
+          return builder(status, null);
         default:
           const status = HttpStatusCode.unknown;
           print("\n$method\n$uri\n$status\n$body\n");

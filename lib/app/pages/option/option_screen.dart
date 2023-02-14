@@ -30,6 +30,7 @@ class OptionScreen extends ConsumerWidget {
                     builder: (_) => CustomerManageScreen(
                       editMode: true,
                     ),
+                    fullscreenDialog: true,
                   ),
                 );
               },
@@ -49,6 +50,7 @@ class OptionScreen extends ConsumerWidget {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (_) => DeviceProfileScreen(),
+                    fullscreenDialog: true,
                   ),
                 );
               },

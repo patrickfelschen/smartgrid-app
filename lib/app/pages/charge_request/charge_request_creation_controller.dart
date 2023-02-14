@@ -28,7 +28,9 @@ class ChargeRequestCreationController
       status: StateStatus.initial,
       devices: devices,
       // selectedDevice: devices.first,
-      deadline: DateTime.now(),
+      deadline: DateTime.now().add(
+        const Duration(minutes: 30),
+      ),
     );
   }
 

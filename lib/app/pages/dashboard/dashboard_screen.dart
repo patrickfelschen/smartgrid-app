@@ -92,6 +92,7 @@ class DashboardScreen extends ConsumerWidget {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (_) => ChargeRequestCreationScreen(),
+                    fullscreenDialog: true,
                   ),
                 );
               },
@@ -115,6 +116,7 @@ class DashboardScreen extends ConsumerWidget {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (_) => const ChargePlanListScreen(),
+                    fullscreenDialog: true,
                   ),
                 );
               },

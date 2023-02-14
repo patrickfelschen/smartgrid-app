@@ -68,4 +68,13 @@ class ChargePlanService {
             );
     return chargePlanEntity;
   }
+
+  Future<void> updateChargePlan(int chargePlanId) async {
+    CustomerEntity? currentCustomer =
+        await ref.read(_authRepository).getCurrentUser();
+
+    await ref
+        .read(_chargeRepository)
+        .updateChargePlan(currentCustomer!.id, chargePlanId, "");
+  }
 }

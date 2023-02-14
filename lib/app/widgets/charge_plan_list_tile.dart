@@ -16,12 +16,12 @@ class ChargePlanListTile extends StatelessWidget {
     return Card(
       child: ListTile(
         onTap: () => onTap(chargePlanEntity),
-        trailing: Text("${chargePlanEntity.id}"),
+        //trailing: Text("${chargePlanEntity.id}"),
         title: const Text("Ladeplan"),
         subtitle: Text(chargePlanEntity.device.description),
         leading: CircleAvatar(
           child: Icon(
-            chargePlanEntity.status == "active"
+            chargePlanEntity.status == "offen"
                 ? Icons.hourglass_empty
                 : Icons.check,
           ),

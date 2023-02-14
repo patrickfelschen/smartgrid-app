@@ -53,7 +53,7 @@ class ChargePlanScreen extends ConsumerWidget {
             child: ListTile(
               trailing: CircleAvatar(
                 child: Icon(
-                  chargePlan.status == "active"
+                  chargePlan.status == "offen"
                       ? Icons.hourglass_empty
                       : Icons.check,
                 ),
@@ -87,7 +87,12 @@ class ChargePlanScreen extends ConsumerWidget {
             height: 12.0,
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              ref.read(chargePlanControllerProvider.notifier).updateChargePlan(
+                    chargePlan.id,
+                  );
+              Navigator.of(context).pop();
+            },
             child: const Text(
               "Abbrechen",
             ),
@@ -101,7 +106,7 @@ class ChargePlanScreen extends ConsumerWidget {
     );
 
     Widget bodyError = const Center(
-      child: Text("Error"),
+      child: Text("Unerwartete Antwort vom Server"),
     );
 
     Widget body() {
