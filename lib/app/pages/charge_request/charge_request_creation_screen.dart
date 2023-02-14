@@ -163,7 +163,7 @@ class ChargeRequestCreationScreen extends ConsumerWidget {
                   },
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
-                    suffixText: "kW/h",
+                    suffixText: "kWh",
                     suffixIcon: Icon(Icons.electric_bolt),
                     border: OutlineInputBorder(),
                     label: Text("Benötigte Kapazität"),

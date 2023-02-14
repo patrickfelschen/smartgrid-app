@@ -53,14 +53,14 @@ class DashboardScreen extends ConsumerWidget {
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 Text(
-                  "${totalCo2SavingValueController.text} Gramm",
+                  "${totalCo2SavingValueController.text} Kilogramm",
                   style: Theme.of(context)
                       .textTheme
                       .headlineLarge!
                       .copyWith(color: Theme.of(context).colorScheme.primary),
                 ),
                 Text(
-                  "Treibhausgase pro Kilowattstunde eingespart!",
+                  "Treibhausgase eingespart!",
                   style: Theme.of(context).textTheme.titleLarge,
                   textAlign: TextAlign.center,
                 ),
