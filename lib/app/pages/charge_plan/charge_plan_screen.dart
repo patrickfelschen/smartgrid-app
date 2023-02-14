@@ -40,7 +40,7 @@ class ChargePlanScreen extends ConsumerWidget {
                 ),
               ),
               title: Text(
-                "${chargePlan.request.requiredCapacity} kW/h",
+                "${chargePlan.request.requiredCapacity} kWh",
               ),
               subtitle: Text(
                 DateFormat('dd.MM.yyyy - kk:mm').format(
