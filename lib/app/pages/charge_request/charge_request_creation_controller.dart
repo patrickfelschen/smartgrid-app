@@ -39,23 +39,30 @@ class ChargeRequestCreationController
     print("ChargeRequestDTO: $chargeRequestCreationDTO");
     state = state.copyWith(status: StateStatus.loading);
     print("ChargeRequestCreationState::Loading");
-    ChargeRequestEntity chargeRequest =
-        await chargePlanService.createChargeRequest(
-      state.selectedDevice!.id,
-      chargeRequestCreationDTO,
-    );
-    if (chargeRequest != null) {
-      state = state.copyWith(
-        status: StateStatus.success,
+    try {
+      ChargeRequestEntity chargeRequest =
+          await chargePlanService.createChargeRequest(
+        state.selectedDevice!.id,
+        chargeRequestCreationDTO,
       );
 
-      print("ChargeRequestCreationState::Success");
-    } else {
+      if (chargeRequest != null) {
+        state = state.copyWith(
+          status: StateStatus.success,
+        );
+        print("ChargeRequestCreationState::Success");
+      } else {
+        state = state.copyWith(
+          status: StateStatus.failure,
+          error: "Could not create charge request",
+        );
+        print("ChargeRequestCreationState::Error");
+      }
+    } catch (e) {
       state = state.copyWith(
         status: StateStatus.failure,
         error: "Could not create charge request",
       );
-      print("ChargeRequestCreationState::Error");
     }
   }
 

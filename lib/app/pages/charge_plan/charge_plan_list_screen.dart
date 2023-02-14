@@ -41,8 +41,8 @@ class ChargePlanListScreen extends ConsumerWidget {
   Widget onError(Object error, StackTrace stackTrace) {
     print(stackTrace);
     return const Center(
-      child: Icon(
-        Icons.warning,
+      child: Text(
+        "Unerwartete Antwort vom Server!",
       ),
     );
   }

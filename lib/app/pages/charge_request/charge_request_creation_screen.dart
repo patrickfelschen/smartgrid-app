@@ -36,6 +36,11 @@ class ChargeRequestCreationScreen extends ConsumerWidget {
     }
 
     ref.listen(chargeRequestCreationControllerProvider, (previous, next) {
+      if (next.status == StateStatus.failure) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Fehler beim erstellen!")));
+        Navigator.of(context).pop();
+      }
       if (next.status == StateStatus.success) {
         Navigator.of(context).pop();
       }
@@ -163,7 +168,7 @@ class ChargeRequestCreationScreen extends ConsumerWidget {
                   },
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
-                    suffixText: "kW/h",
+                    suffixText: "kWh",
                     suffixIcon: Icon(Icons.electric_bolt),
                     border: OutlineInputBorder(),
                     label: Text("Benötigte Kapazität"),

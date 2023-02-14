@@ -63,13 +63,14 @@ class DeviceProfileScreen extends ConsumerWidget {
                             children: [
                               const Icon(
                                 Icons.electrical_services,
-                                size: 128,
+                                size: 80,
                                 color: Colors.green,
                               ),
                               const SizedBox(
                                 height: 10,
                               ),
                               Text(
+                                overflow: TextOverflow.ellipsis,
                                 device.description.trim(),
                                 style: const TextStyle(
                                   fontSize: 16,
@@ -80,7 +81,8 @@ class DeviceProfileScreen extends ConsumerWidget {
                                 height: 10,
                               ),
                               Text(
-                                "Maximale Leistung: ${device.maxPower} kW",
+                                overflow: TextOverflow.ellipsis,
+                                "Leistung: ${device.maxPower} kW",
                                 style: TextStyle(
                                   color: Colors.grey[600],
                                 ),
@@ -127,7 +129,7 @@ class DeviceProfileScreen extends ConsumerWidget {
               const SizedBox(
                 height: 12.0,
               ),
-              const Text("Bearbeiten"),
+              //const Text("Bearbeiten"),
               const SizedBox(
                 height: 24.0,
               ),
