@@ -18,8 +18,11 @@ class DashboardScreen extends ConsumerWidget {
     final DashboardState state = ref.watch(dashboardControllerProvider);
 
     if (state.status == StateStatus.success) {
-      totalCo2SavingValueController.text =
-          state.dashboardInfo!.totalCo2SavingValue.toString();
+      double value = 0;
+      if (state.dashboardInfo!.totalCo2SavingValue > 0) {
+        value = state.dashboardInfo!.totalCo2SavingValue;
+      }
+      totalCo2SavingValueController.text = value.toString();
     }
 
     Future refresh() async {

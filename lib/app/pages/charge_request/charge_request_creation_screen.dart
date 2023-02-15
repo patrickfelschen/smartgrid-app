@@ -39,7 +39,7 @@ class ChargeRequestCreationScreen extends ConsumerWidget {
       if (next.status == StateStatus.failure) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text("Fehler beim erstellen!"),
+            content: Text("Server: Fehler beim erstellen!"),
           ),
         );
         Navigator.of(context).pop();

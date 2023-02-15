@@ -86,17 +86,7 @@ class ChargePlanScreen extends ConsumerWidget {
           const SizedBox(
             height: 12.0,
           ),
-          ElevatedButton(
-            onPressed: () {
-              ref.read(chargePlanControllerProvider.notifier).updateChargePlan(
-                    chargePlan.id,
-                  );
-              Navigator.of(context).pop();
-            },
-            child: const Text(
-              "Abbrechen",
-            ),
-          ),
+          removeButton(ref, context),
         ],
       );
     }
@@ -128,6 +118,27 @@ class ChargePlanScreen extends ConsumerWidget {
       ),
       body: body(),
     );
+  }
+
+  Widget removeButton(WidgetRef ref, BuildContext context) {
+    if (chargePlan.status == "offen") {
+      return ElevatedButton(
+        onPressed: () {
+          ref.read(chargePlanControllerProvider.notifier).updateChargePlan(
+                chargePlan.id,
+              );
+          Navigator.of(context).pop();
+          Navigator.of(context).pop();
+        },
+        child: const Text(
+          "Abbrechen",
+        ),
+      );
+    } else {
+      return const SizedBox(
+        height: 0,
+      );
+    }
   }
 
   Stack lineChart() {

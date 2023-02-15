@@ -32,7 +32,7 @@ class HttpRequestHelper {
 
           break;
         case HttpMethod.post:
-          print("POST");
+          print("HTTP_REQUEST_HELPER::sendRequest::POST::$body");
           response = await client.post(
             uri.toString(),
             data: body,
