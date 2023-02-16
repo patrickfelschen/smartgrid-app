@@ -44,7 +44,7 @@ class ChargePlanScreen extends ConsumerWidget {
               ),
               subtitle: Text(
                 DateFormat('dd.MM.yyyy - kk:mm').format(
-                  chargePlan.request.deadline,
+                  chargePlan.request.deadline.add(const Duration(hours: 1)),
                 ),
               ),
             ),
