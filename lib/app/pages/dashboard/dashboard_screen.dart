@@ -20,9 +20,9 @@ class DashboardScreen extends ConsumerWidget {
     if (state.status == StateStatus.success) {
       double value = 0;
       if (state.dashboardInfo!.totalCo2SavingValue > 0) {
-        value = state.dashboardInfo!.totalCo2SavingValue;
+        value = state.dashboardInfo!.totalCo2SavingValue / 1000;
       }
-      totalCo2SavingValueController.text = value.toString();
+      totalCo2SavingValueController.text = value.toStringAsFixed(2);
     }
 
     Future refresh() async {
